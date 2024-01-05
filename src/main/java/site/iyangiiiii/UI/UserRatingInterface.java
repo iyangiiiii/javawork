@@ -13,7 +13,7 @@ public class UserRatingInterface extends JPanel {
     private Image backgroundImage;
     public UserRatingInterface(String username) {
 
-        ImageIcon backgroundIcon = new ImageIcon("S:\\project\\ideajava\\Java_Library_Management_System\\img\\comment.jpg");
+        ImageIcon backgroundIcon = new ImageIcon("S:\\project\\ideajava\\javawork\\src\\main\\java\\site\\iyangiiiii\\img\\comment.jpg");
         backgroundImage = backgroundIcon.getImage(); // 将图标转换为图像
 
         setLayout(new BorderLayout());

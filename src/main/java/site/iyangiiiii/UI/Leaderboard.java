@@ -60,7 +60,7 @@ public class Leaderboard extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         // 加载图片
-        ImageIcon imageIcon = new ImageIcon("S:\\project\\ideajava\\Java_Library_Management_System\\img\\rank.jpg");
+        ImageIcon imageIcon = new ImageIcon("S:\\project\\ideajava\\javawork\\src\\main\\java\\site\\iyangiiiii\\img\\rank.jpg");
         Image image = imageIcon.getImage();
 
         // 绘制背景图片

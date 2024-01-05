@@ -37,7 +37,7 @@ public class MainInterface extends JFrame{
 
 		
 		// 改变背景图片
-		ImageIcon icon = new ImageIcon("/img/login.jpg");
+		ImageIcon icon = new ImageIcon("S:\\project\\ideajava\\javawork\\src\\main\\java\\site\\iyangiiiii\\img\\login.jpg");
 		Image img = icon.getImage();
 		Image scaledImg = img.getScaledInstance(1500, 800, Image.SCALE_SMOOTH);
 		ImageIcon scaledIcon = new ImageIcon(scaledImg);

@@ -62,7 +62,7 @@ public class Register {
 
 		addEvent();
 
-		ImageIcon originalIcon  = new ImageIcon("S:\\project\\ideajava\\Java_Library_Management_System\\img\\register.jpg");
+		ImageIcon originalIcon  = new ImageIcon("S:\\project\\ideajava\\javawork\\src\\main\\java\\site\\iyangiiiii\\img\\register.jpg");
 		Image originalImage = originalIcon.getImage();
 		Image scaledImage = originalImage.getScaledInstance(750, 550, Image.SCALE_SMOOTH);
 		ImageIcon scaledIcon = new ImageIcon(scaledImage);

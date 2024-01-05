@@ -80,7 +80,7 @@ public class Land {
 		addEvent();
 
 		// 改变背景图片
-		ImageIcon originalIcon  = new ImageIcon("S:\\project\\ideajava\\Java_Library_Management_System\\img\\login.jpg");
+		ImageIcon originalIcon  = new ImageIcon("S:\\project\\ideajava\\javawork\\src\\main\\java\\site\\iyangiiiii\\img\\login.jpg");
 		Image originalImage = originalIcon.getImage();
 		Image scaledImage = originalImage.getScaledInstance(750, 550, Image.SCALE_SMOOTH);
 		ImageIcon scaledIcon = new ImageIcon(scaledImage);
