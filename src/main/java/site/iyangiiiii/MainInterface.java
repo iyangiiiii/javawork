@@ -10,7 +10,7 @@ import java.awt.Font;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 /**
- * Ö÷½çÃæ
+ * ä¸»ç•Œé¢
  * @author K.X
  * 
  * */
@@ -21,22 +21,22 @@ import javax.swing.JTabbedPane;
 
 public class MainInterface extends JFrame{
 	/*
-	 * Ñ¡Ïî¿¨     Ö÷½çÃæ       Í¼Êé²éÑ¯          Í¼Êé½è»¹       ÕËºÅ¹ÜÀí
+	 * é€‰é¡¹å¡     ä¸»ç•Œé¢       å›¾ä¹¦æŸ¥è¯¢          å›¾ä¹¦å€Ÿè¿˜       è´¦å·ç®¡ç†
 	 * 
 	 * */
-	//Ñ¡Ïî¿¨
+	//é€‰é¡¹å¡
 	public  JTabbedPane jTabbedPane = new JTabbedPane();
-	//Ö÷½çÃæÃæ°å
+	//ä¸»ç•Œé¢é¢æ¿
 	private JPanel jPanel = new JPanel();
-	//±êÇ©
-	// ×ÖÌå
-	private Font font2 = new Font("ËÎÌå", Font.BOLD, 20);
+	//æ ‡ç­¾
+	// å­—ä½“
+	private Font font2 = new Font("å®‹ä½“", Font.BOLD, 20);
 	
 	private Container con = getContentPane();
 	public MainInterface(String user) {
 
 		
-		// ¸Ä±ä±³¾°Í¼Æ¬
+		// æ”¹å˜èƒŒæ™¯å›¾ç‰‡
 		ImageIcon icon = new ImageIcon("S:\\project\\ideajava\\Java_Library_Management_System\\img\\login.jpg");
 		Image img = icon.getImage();
 		Image scaledImg = img.getScaledInstance(1500, 800, Image.SCALE_SMOOTH);
@@ -44,30 +44,30 @@ public class MainInterface extends JFrame{
 
 		JLabel label = new JLabel(scaledIcon);
 		label.setBounds(0, 0, 1500, 800);
-		jPanel.setLayout(null); // ÇëÈ·±£ jPanel ÒÑÕıÈ·³õÊ¼»¯1
+		jPanel.setLayout(null); // è¯·ç¡®ä¿ jPanel å·²æ­£ç¡®åˆå§‹åŒ–1
 		jPanel.add(label);
 
 		jTabbedPane.setFont(font2);
-		jTabbedPane.add("Ö÷ ½ç Ãæ", jPanel);
+		jTabbedPane.add("ä¸» ç•Œ é¢", jPanel);
 
 		CommoditySearch search = new CommoditySearch();
-		jTabbedPane.add("¶©µ¥¹ÜÀí",search.jLayeredPane);
+		jTabbedPane.add("è®¢å•ç®¡ç†",search.jLayeredPane);
 
 		ChatFrame chatFrame = new ChatFrame();
-		jTabbedPane.add("¿Í·ş¹µÍ¨", chatFrame.createChatPanel());
+		jTabbedPane.add("å®¢æœæ²Ÿé€š", chatFrame.createChatPanel());
 
 		UserRatingInterface ratingPanel = new UserRatingInterface("123456");
-		jTabbedPane.add("ÓÃ»§ÆÀ¼Û", ratingPanel);
+		jTabbedPane.add("ç”¨æˆ·è¯„ä»·", ratingPanel);
 
 		Leaderboard leaderboardFrame = new Leaderboard();
 		leaderboardFrame.setVisible(true);
-		jTabbedPane.add("ÅÅĞĞ°ñ", leaderboardFrame);
+		jTabbedPane.add("æ’è¡Œæ¦œ", leaderboardFrame);
 
 		
 		con.add(jTabbedPane);
-		// ²»¿ÉÒÔ¸Ä±ä´°ÌåµÄ´óĞ¡
+		// ä¸å¯ä»¥æ”¹å˜çª—ä½“çš„å¤§å°
 		setResizable(false);
-		setTitle("Íøµê¹ÜÀíÏµÍ³");
+		setTitle("ç½‘åº—ç®¡ç†ç³»ç»Ÿ");
 		setSize(1500, 800);
 		setLocationRelativeTo(null);
 		setVisible(true);

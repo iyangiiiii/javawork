@@ -1,7 +1,7 @@
 package site.iyangiiiii.Service;
 
 /**
- * Í¼Êé²éÑ¯½çÃæ
+ * å›¾ä¹¦æŸ¥è¯¢ç•Œé¢
  * @author K.X
  * 
  * */
@@ -27,35 +27,35 @@ import javax.swing.table.JTableHeader;
 
 public class CommoditySearch {
 	/*
-	 * Ò»¸ö´ó±êÇ©
+	 * ä¸€ä¸ªå¤§æ ‡ç­¾
 	 * 
-	 * Ò»¸öÏÂÀ­¿ò Ò»¸öÎÄ±¾¿ò Ò»¸ö°´Å¥
+	 * ä¸€ä¸ªä¸‹æ‹‰æ¡† ä¸€ä¸ªæ–‡æœ¬æ¡† ä¸€ä¸ªæŒ‰é’®
 	 * 
-	 * Ò»¸ö±í¸ñ
+	 * ä¸€ä¸ªè¡¨æ ¼
 	 */
-	// ·Ö²ã´°¸ñ
+	// åˆ†å±‚çª—æ ¼
 	public JLayeredPane jLayeredPane = new JLayeredPane();
-	// ±êÇ©
-	private JLabel jLabel2 = new JLabel("ÇëÑ¡Ôñ²éÑ¯·½Ê½£º");
-	// ÎÄ±¾¿ò
+	// æ ‡ç­¾
+	private JLabel jLabel2 = new JLabel("è¯·é€‰æ‹©æŸ¥è¯¢æ–¹å¼ï¼š");
+	// æ–‡æœ¬æ¡†
 	private JTextField field = new JTextField(25);
-	// ´óĞ¡
+	// å¤§å°
 	private Dimension dimension = new Dimension(220, 30);
-	// ÏÂÀ­¿ò
+	// ä¸‹æ‹‰æ¡†
 	private JComboBox<String> box = new JComboBox<String>();
-	// °´Å¥
-	private JButton button = new JButton("ËÑË÷");
-	// ±í¸ñ
+	// æŒ‰é’®
+	private JButton button = new JButton("æœç´¢");
+	// è¡¨æ ¼
 	public DefaultTableModel model = new DefaultTableModel();
-	private Font font1 = new Font("ËÎÌå", Font.BOLD, 25);
-	private Font font2 = new Font("ËÎÌå", Font.BOLD, 20);
-	// ´æ´¢ÏÂÀ­Ñ¡Ïî
+	private Font font1 = new Font("å®‹ä½“", Font.BOLD, 25);
+	private Font font2 = new Font("å®‹ä½“", Font.BOLD, 20);
+	// å­˜å‚¨ä¸‹æ‹‰é€‰é¡¹
 	private String s;
 	private String commodity;
 	private int id;
 
 	public CommoditySearch() {
-		// ¸Ä±ä±³¾°Í¼Æ¬
+		// æ”¹å˜èƒŒæ™¯å›¾ç‰‡
 		ImageIcon icon = new ImageIcon("S:\\project\\ideajava\\Java_Library_Management_System\\img\\commoditysearch.png");
 		Image img = icon.getImage();
 		Image scaledImg = img.getScaledInstance(1500, 800, Image.SCALE_SMOOTH);
@@ -63,25 +63,25 @@ public class CommoditySearch {
 
 		JLabel label = new JLabel(scaledIcon);
 		label.setBounds(0, 0, 1500, 800);
-		// ±êÇ©
+		// æ ‡ç­¾
 
 		jLabel2.setFont(font1);
 		jLabel2.setBounds(350, 130, 250, 30);
 		jLabel2.setForeground(Color.cyan);
 
-		// ÏÂÀ­¿ò
+		// ä¸‹æ‹‰æ¡†
 		box.setSize(dimension);
-		box.addItem("°´ÕÕ±àºÅ²éÕÒ");
-		box.addItem("°´ÕÕÀà±ğ²éÕÒ");
-		box.addItem("°´ÕÕÉÌÆ·Ãû²éÕÒ");
-		box.addItem("°´ÕÕÉÌÆ·×´Ì¬²éÕÒ");
-		box.addItem("°´ÕÕ³§¼Ò²éÕÒ");
+		box.addItem("æŒ‰ç…§ç¼–å·æŸ¥æ‰¾");
+		box.addItem("æŒ‰ç…§ç±»åˆ«æŸ¥æ‰¾");
+		box.addItem("æŒ‰ç…§å•†å“åæŸ¥æ‰¾");
+		box.addItem("æŒ‰ç…§å•†å“çŠ¶æ€æŸ¥æ‰¾");
+		box.addItem("æŒ‰ç…§å‚å®¶æŸ¥æ‰¾");
 		box.setFont(font2);
 		box.setBounds(350, 185, 200, 40);
 		// box.setBackground(Color.cyan);
 		box.setOpaque(false);
 
-		// ÎÄ±¾¿ò
+		// æ–‡æœ¬æ¡†
 		field.setFont(font2);
 		field.setSize(dimension);
 		field.setBackground(Color.cyan);
@@ -89,19 +89,19 @@ public class CommoditySearch {
 		field.setForeground(Color.cyan);
 		field.setOpaque(false);
 
-		// °´Å¥
+		// æŒ‰é’®
 		button.setFont(font1);
 		button.setBounds(880, 185, 100, 40);
 		button.setForeground(Color.cyan);
 		button.setBackground(Color.cyan);
 		button.setOpaque(false);
 
-		// ±í¸ñ
-		model.addColumn("±àºÅ", new Vector<Integer>());
-		model.addColumn("Àà±ğ", new Vector<Integer>());
-		model.addColumn("ÉÌÆ·Ãû", new Vector<Integer>());
-		model.addColumn("³§¼Ò", new Vector<Integer>());
-		model.addColumn("×´Ì¬", new Vector<Integer>());
+		// è¡¨æ ¼
+		model.addColumn("ç¼–å·", new Vector<Integer>());
+		model.addColumn("ç±»åˆ«", new Vector<Integer>());
+		model.addColumn("å•†å“å", new Vector<Integer>());
+		model.addColumn("å‚å®¶", new Vector<Integer>());
+		model.addColumn("çŠ¶æ€", new Vector<Integer>());
 		JTable jTable = new JTable(model);
 
 		JScrollPane pane = new JScrollPane(jTable);
@@ -113,25 +113,25 @@ public class CommoditySearch {
 		FindCommodity.allcommodity(model);
 
 		JTableHeader head = jTable.getTableHeader();
-		// ÉèÖÃ±íÍ·µÄ´óĞ¡
+		// è®¾ç½®è¡¨å¤´çš„å¤§å°
 		head.setPreferredSize(new Dimension(head.getWidth(), 30));
-		// ÉèÖÃ±íÍ·×ÖÌå´óĞ¡
-		head.setFont(new Font("ËÎÌå", Font.BOLD, 20));
+		// è®¾ç½®è¡¨å¤´å­—ä½“å¤§å°
+		head.setFont(new Font("å®‹ä½“", Font.BOLD, 20));
 		// head.setForeground(Color.cyan);
 		head.setBackground(Color.cyan);
-		// ÉèÖÃ±í¸ñµÄĞĞ¿í
+		// è®¾ç½®è¡¨æ ¼çš„è¡Œå®½
 		jTable.setRowHeight(30);
-		// ÉèÖÃ±í¸ñĞĞÖĞ×ÖÌå´óĞ¡
-		jTable.setFont(new Font("ËÎÌå", Font.ROMAN_BASELINE, 17));
-		/* ÉèÖÃ±í¸ñÖĞµÄÄÚÈİ¾ÓÖĞ */
+		// è®¾ç½®è¡¨æ ¼è¡Œä¸­å­—ä½“å¤§å°
+		jTable.setFont(new Font("å®‹ä½“", Font.ROMAN_BASELINE, 17));
+		/* è®¾ç½®è¡¨æ ¼ä¸­çš„å†…å®¹å±…ä¸­ */
 		DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
 		renderer.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
 		jTable.setDefaultRenderer(Object.class, renderer);
 
-		// Ìí¼ÓÊÂ¼ş
+		// æ·»åŠ äº‹ä»¶
 		addEvent();
 
-		// ¼ÓÈë·Ö²ã´°¿Ú
+		// åŠ å…¥åˆ†å±‚çª—å£
 		jLayeredPane.add(label, Integer.valueOf(0), 0);
 		jLayeredPane.add(jLabel2, Integer.valueOf(100), 2);
 		jLayeredPane.add(box, Integer.valueOf(100), 3);
@@ -142,8 +142,8 @@ public class CommoditySearch {
 
 	private void addEvent() {
 
-		// »ñÈ¡ÏÂÀ­ÁĞ±íÖµ
-		s = "°´ÕÕ±àºÅ²éÕÒ";
+		// è·å–ä¸‹æ‹‰åˆ—è¡¨å€¼
+		s = "æŒ‰ç…§ç¼–å·æŸ¥æ‰¾";
 		box.addItemListener(new ItemListener() {
 
 			@Override
@@ -155,27 +155,27 @@ public class CommoditySearch {
 			}
 		});
 
-		// Ìí¼ÓËÑË÷°´Å¥ÊÂ¼ş
+		// æ·»åŠ æœç´¢æŒ‰é’®äº‹ä»¶
 		button.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				model.setRowCount(0);
-				if (s.equals("°´ÕÕ±àºÅ²éÕÒ")) {
+				if (s.equals("æŒ‰ç…§ç¼–å·æŸ¥æ‰¾")) {
 					commodity = field.getText().trim();
 					id = Integer.parseInt(commodity);
 					FindCommodity.findcomid(model, id);
-				} else if (s.equals("°´ÕÕÉÌÆ·Ãû²éÕÒ")) {
+				} else if (s.equals("æŒ‰ç…§å•†å“åæŸ¥æ‰¾")) {
 					commodity = field.getText().trim();
 					FindCommodity.findcommodityname(model, commodity);
-				} else if (s.equals("°´ÕÕÉÌÆ·×´Ì¬²éÕÒ")) {
+				} else if (s.equals("æŒ‰ç…§å•†å“çŠ¶æ€æŸ¥æ‰¾")) {
 					commodity = field.getText().trim();
 					FindCommodity.findstatus(model, commodity);
-				}else if (s.equals("°´ÕÕÀà±ğ²éÕÒ")){
+				}else if (s.equals("æŒ‰ç…§ç±»åˆ«æŸ¥æ‰¾")){
 					commodity = field.getText().trim();
 					FindCommodity.findtype(model, commodity);
-				} else if (s.equals("°´ÕÕ³§¼Ò²éÕÒ")) {
+				} else if (s.equals("æŒ‰ç…§å‚å®¶æŸ¥æ‰¾")) {
 					try {
 						commodity = field.getText().trim();
 						FindCommodity.findmanufacturer(model, commodity);

@@ -32,12 +32,12 @@ public class Adduser {
 			con.close();
 			return true;
 		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, "用户名已存在", "警告", JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog(null, "鐢ㄦ埛鍚嶅凡瀛樺湪", "璀﹀憡", JOptionPane.WARNING_MESSAGE);
 			return false;
 		}
 	}
 
-	//判断用户是否存在
+	//鍒ゆ柇鐢ㄦ埛鏄惁瀛樺湪
 	public static boolean userlist() {
 		Connection con = ConnectDatabase.connectDB();
 

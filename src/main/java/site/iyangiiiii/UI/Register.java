@@ -20,26 +20,26 @@ import javax.swing.JTextField;
 
 public class Register {
 
-	private JLabel jLabel2 = new JLabel("ÓÃ »§ Ãû£º");
-	private JLabel jLabel5 = new JLabel(" ÃÜ  Âë£º");
-	private JLabel jLabel6 = new JLabel("È·ÈÏÃÜÂë:");
-	private JLabel jLabel7 = new JLabel("                                       ÃÜÂë³¤¶È£º6~16Î»£¬²»ÄÜº¬ÓĞ¿Õ¸ñ ");
+	private JLabel jLabel2 = new JLabel("ç”¨ æˆ· åï¼š");
+	private JLabel jLabel5 = new JLabel(" å¯†  ç ï¼š");
+	private JLabel jLabel6 = new JLabel("ç¡®è®¤å¯†ç :");
+	private JLabel jLabel7 = new JLabel("                                       å¯†ç é•¿åº¦ï¼š6~16ä½ï¼Œä¸èƒ½å«æœ‰ç©ºæ ¼ ");
 
 	private String user;
 	private String password;
 	private String password2;
 
-	private Font font2 = new Font("ËÎÌå", Font.BOLD, 25);
-	private Font font3 = new Font("ËÎÌå", Font.BOLD, 20);
-	private Font font4 = new Font("Ğ¡×­", Font.ITALIC, 13);
-	private Font font5 = new Font("ËÎÌå", Font.BOLD, 17);
+	private Font font2 = new Font("å®‹ä½“", Font.BOLD, 25);
+	private Font font3 = new Font("å®‹ä½“", Font.BOLD, 20);
+	private Font font4 = new Font("å°ç¯†", Font.ITALIC, 13);
+	private Font font5 = new Font("å®‹ä½“", Font.BOLD, 17);
 
 	private JTextField field = new JTextField(18);
 	private JPasswordField field4 = new JPasswordField(18);
 	private JPasswordField field5 = new JPasswordField(18);
 
-	private JButton button = new JButton("×¢ ²á");
-	private JButton button2 = new JButton("·µ»Ø");
+	private JButton button = new JButton("æ³¨ å†Œ");
+	private JButton button2 = new JButton("è¿”å›");
 
 	private Dimension dimension = new Dimension(350, 40);
 
@@ -49,7 +49,7 @@ public class Register {
 	private JPanel jPanel6 = new JPanel();
 	private JPanel jPanel7 = new JPanel();
 
-	private JFrame frame = new JFrame("×¢²á");
+	private JFrame frame = new JFrame("æ³¨å†Œ");
 
 	public Register() {
 		frame.setSize(750, 550);
@@ -144,17 +144,17 @@ public class Register {
 				password = field4.getText().trim();
 				password2 = field5.getText().trim();
 				if (user.length() == 0) {
-					JOptionPane.showMessageDialog(null, "ÓÃ»§Ãû²»ÄÜÎª¿Õ", "¾¯¸æ", JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog(null, "ç”¨æˆ·åä¸èƒ½ä¸ºç©º", "è­¦å‘Š", JOptionPane.WARNING_MESSAGE);
 					empty();
 				} else if (password.length() < 6 || password.length() > 12) {
-					JOptionPane.showMessageDialog(null, "ÃÜÂëÊäÈë²»ÕıÈ·", "¾¯¸æ", JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog(null, "å¯†ç è¾“å…¥ä¸æ­£ç¡®", "è­¦å‘Š", JOptionPane.WARNING_MESSAGE);
 					empty();
 				} else if (!(password.equals(password2))) {
-					JOptionPane.showMessageDialog(null, "Á½´ÎÊäÈëÃÜÂë²»ÏàÍ¬", "¾¯¸æ", JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog(null, "ä¸¤æ¬¡è¾“å…¥å¯†ç ä¸ç›¸åŒ", "è­¦å‘Š", JOptionPane.WARNING_MESSAGE);
 					empty();
 				} else {
 					if (Adduser.adduser(user, password)) {
-						JOptionPane.showMessageDialog(null, "×¢²á³É¹¦");
+						JOptionPane.showMessageDialog(null, "æ³¨å†ŒæˆåŠŸ");
 						frame.dispose();
 						new Land();
 					} else {

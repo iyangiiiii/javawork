@@ -18,7 +18,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 /**
- * µÇÂ½½çÃæ
+ * ç™»é™†ç•Œé¢
  *
  * @author K.X
  *
@@ -27,33 +27,33 @@ import javax.swing.JTextField;
 public class Land {
 
 	/*
-	 * ¶¨Òå´°Ìå Ò»¸ö´ó±êÇ© Á½¸öĞ¡±êÇ© Á½¸öÎÄ±¾¿ò Á½¸ö°´Å¥ Îå¸öÃæ°å
+	 * å®šä¹‰çª—ä½“ ä¸€ä¸ªå¤§æ ‡ç­¾ ä¸¤ä¸ªå°æ ‡ç­¾ ä¸¤ä¸ªæ–‡æœ¬æ¡† ä¸¤ä¸ªæŒ‰é’® äº”ä¸ªé¢æ¿
 	 */
-	// ±êÇ©
-	private JLabel jLabel2 = new JLabel("ÓÃ»§Ãû£º ");
-	private JLabel jLabel3 = new JLabel("ÃÜ  Âë£º ");
+	// æ ‡ç­¾
+	private JLabel jLabel2 = new JLabel("ç”¨æˆ·åï¼š ");
+	private JLabel jLabel3 = new JLabel("å¯†  ç ï¼š ");
 
-	// ×ÖÌå
-	private Font font2 = new Font("ËÎÌå", Font.BOLD, 25);
-	private Font font3 = new Font("ËÎÌå", Font.BOLD, 20);
+	// å­—ä½“
+	private Font font2 = new Font("å®‹ä½“", Font.BOLD, 25);
+	private Font font3 = new Font("å®‹ä½“", Font.BOLD, 20);
 
-	// ÎÄ±¾¿ò
+	// æ–‡æœ¬æ¡†
 	private JTextField field = new JTextField(22);
 	private JPasswordField field2 = new JPasswordField(22);
 
-	// °´Å¥
-	private JButton button = new JButton("µÇÂ½");
-	private JButton button2 = new JButton("×¢²á");
+	// æŒ‰é’®
+	private JButton button = new JButton("ç™»é™†");
+	private JButton button2 = new JButton("æ³¨å†Œ");
 
-	// Ãæ°å
+	// é¢æ¿
 	private JPanel jPanel = new JPanel();
 	private JPanel jPanel2 = new JPanel();
 	private JPanel jPanel3 = new JPanel();
 	private JPanel jPanel4 = new JPanel();
 	private JPanel jPanel5 = new JPanel();
-	// ´°Ìå
-	private JFrame frame = new JFrame("µÇÂ½");
-	// ´óĞ¡
+	// çª—ä½“
+	private JFrame frame = new JFrame("ç™»é™†");
+	// å¤§å°
 	private Dimension dimension = new Dimension(30, 30);
 	private Dimension dimension2 = new Dimension(100, 50);
 
@@ -62,24 +62,24 @@ public class Land {
 
 	public Land() {
 
-		frame.setTitle("µÇÂ½");
-		// ÉèÖÃ´óĞ¡
+		frame.setTitle("ç™»é™†");
+		// è®¾ç½®å¤§å°
 		frame.setSize(750, 550);
-		// ¾ÓÖĞ
+		// å±…ä¸­
 		frame.setLocationRelativeTo(null);
-		// ²¼¾ÖÎª¿Õ
+		// å¸ƒå±€ä¸ºç©º
 		frame.setLayout(null);
 
-		// Ìí¼Ó×é¼ş
+		// æ·»åŠ ç»„ä»¶
 		addassembly();
 
-		// ÉèÖÃÍ¸Ã÷
+		// è®¾ç½®é€æ˜
 		transparent();
 
-		// Ìí¼ÓÊÂ¼ş
+		// æ·»åŠ äº‹ä»¶
 		addEvent();
 
-		// ¸Ä±ä±³¾°Í¼Æ¬
+		// æ”¹å˜èƒŒæ™¯å›¾ç‰‡
 		ImageIcon originalIcon  = new ImageIcon("S:\\project\\ideajava\\Java_Library_Management_System\\img\\login.jpg");
 		Image originalImage = originalIcon.getImage();
 		Image scaledImage = originalImage.getScaledInstance(750, 550, Image.SCALE_SMOOTH);
@@ -88,16 +88,16 @@ public class Land {
 		JLabel backgroundLabel = new JLabel(scaledIcon);
 		backgroundLabel.setBounds(0, 0, 750, 550);
 		frame.add(backgroundLabel);
-		// ²»¿ÉÒÔ¸Ä±ä´°ÌåµÄ´óĞ¡
+		// ä¸å¯ä»¥æ”¹å˜çª—ä½“çš„å¤§å°
 		frame.setResizable(false);
-		// ´°¿Ú¹Ø±Õ
+		// çª—å£å…³é—­
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		// ´°¿Ú¿É¼û
+		// çª—å£å¯è§
 		frame.setVisible(true);
 	}
 
 	private void addassembly() {
-		// Ìí¼Ó×ÖÌå
+		// æ·»åŠ å­—ä½“
 		jLabel2.setFont(font2);
 		jLabel3.setFont(font2);
 		button.setFont(font3);
@@ -133,7 +133,7 @@ public class Land {
 	}
 
 	private void transparent() {
-		// ÉèÖÃÍ¸Ã÷
+		// è®¾ç½®é€æ˜
 		jLabel2.setOpaque(false);
 		jLabel3.setOpaque(false);
 		field.setOpaque(false);
@@ -157,7 +157,7 @@ public class Land {
 				user = field.getText().trim();
 				password = field2.getText().trim();
 				if(Landing.test(user, password)) {
-//					JOptionPane.showMessageDialog(null, "µÇÂ½³É¹¦");
+//					JOptionPane.showMessageDialog(null, "ç™»é™†æˆåŠŸ");
 					frame.dispose();
 					new MainInterface(user);
 				}else {

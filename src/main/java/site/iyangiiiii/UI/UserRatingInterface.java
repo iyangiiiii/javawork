@@ -14,10 +14,10 @@ public class UserRatingInterface extends JPanel {
     public UserRatingInterface(String username) {
 
         ImageIcon backgroundIcon = new ImageIcon("S:\\project\\ideajava\\Java_Library_Management_System\\img\\comment.jpg");
-        backgroundImage = backgroundIcon.getImage(); // ½«Í¼±ê×ª»»ÎªÍ¼Ïñ
+        backgroundImage = backgroundIcon.getImage(); // å°†å›¾æ ‡è½¬æ¢ä¸ºå›¾åƒ
 
         setLayout(new BorderLayout());
-        setOpaque(false); // ÉèÖÃµ±Ç°Ãæ°åÎªÍ¸Ã÷
+        setOpaque(false); // è®¾ç½®å½“å‰é¢æ¿ä¸ºé€æ˜
 
         JPanel ratingPanel = new JPanel();
         ratingPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -26,11 +26,11 @@ public class UserRatingInterface extends JPanel {
         inputField.setPreferredSize(new Dimension(200, 30));
         ratingPanel.add(inputField);
 
-        String[] ratings = {"1ĞÇ", "2ĞÇ", "3ĞÇ", "4ĞÇ", "5ĞÇ"};
+        String[] ratings = {"1æ˜Ÿ", "2æ˜Ÿ", "3æ˜Ÿ", "4æ˜Ÿ", "5æ˜Ÿ"};
         ratingComboBox = new JComboBox<>(ratings);
         ratingPanel.add(ratingComboBox);
 
-        JButton submitButton = new JButton("Ìá½»");
+        JButton submitButton = new JButton("æäº¤");
         submitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -44,32 +44,32 @@ public class UserRatingInterface extends JPanel {
         add(ratingPanel, BorderLayout.SOUTH);
         ratingPanel.setOpaque(false);
 
-        // ´´½¨ÓÃÓÚÏÔÊ¾ÆÀ¼ÛµÄ±í¸ñ
-        String[] columnNames = {"ÓÃ»§Ãû", "ÆÀ¼Û", "ÆÀ·Ö"};
+        // åˆ›å»ºç”¨äºæ˜¾ç¤ºè¯„ä»·çš„è¡¨æ ¼
+        String[] columnNames = {"ç”¨æˆ·å", "è¯„ä»·", "è¯„åˆ†"};
         tableModel = new DefaultTableModel(columnNames, 0);
 //        tableModel.setRowCount(0);
         JTable reviewTable = new JTable(tableModel);
         JScrollPane scrollPane = new JScrollPane(reviewTable);
-        scrollPane.getViewport().setBackground(Color.WHITE); // ÉèÖÃ±í¸ñ±³¾°ÑÕÉ«Îª°×É«
-        scrollPane.setBorder(BorderFactory.createEmptyBorder()); // È¥³ı¹ö¶¯Ãæ°åµÄ±ß¿ò
+        scrollPane.getViewport().setBackground(Color.WHITE); // è®¾ç½®è¡¨æ ¼èƒŒæ™¯é¢œè‰²ä¸ºç™½è‰²
+        scrollPane.setBorder(BorderFactory.createEmptyBorder()); // å»é™¤æ»šåŠ¨é¢æ¿çš„è¾¹æ¡†
         add(scrollPane, BorderLayout.CENTER);
 
-        reviewTable.setFont(new Font("·ÂËÎ", Font.PLAIN, 20));
-        reviewTable.getColumnModel().getColumn(0).setMinWidth(20); // µÚÒ»ÁĞµÄ¿í¶ÈÎª200ÏñËØ
-        reviewTable.getColumnModel().getColumn(1).setMinWidth(600); // µÚ¶şÁĞµÄ¿í¶ÈÎª100ÏñËØ
-        reviewTable.getColumnModel().getColumn(1).setMinWidth(20); // µÚ¶şÁĞµÄ¿í¶ÈÎª100ÏñËØ
+        reviewTable.setFont(new Font("ä»¿å®‹", Font.PLAIN, 20));
+        reviewTable.getColumnModel().getColumn(0).setMinWidth(20); // ç¬¬ä¸€åˆ—çš„å®½åº¦ä¸º200åƒç´ 
+        reviewTable.getColumnModel().getColumn(1).setMinWidth(600); // ç¬¬äºŒåˆ—çš„å®½åº¦ä¸º100åƒç´ 
+        reviewTable.getColumnModel().getColumn(1).setMinWidth(20); // ç¬¬äºŒåˆ—çš„å®½åº¦ä¸º100åƒç´ 
 
         reviewTable.setOpaque(false);
         reviewTable.getTableHeader().setOpaque(false);
         scrollPane.setOpaque(false);
         scrollPane.getViewport().setOpaque(false);
 
-        reviewTable.setRowHeight(30); // ÉèÖÃĞĞ¸ßÎª30ÏñËØ
+        reviewTable.setRowHeight(30); // è®¾ç½®è¡Œé«˜ä¸º30åƒç´ 
     }
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        // »æÖÆ±³¾°Í¼Æ¬
+        // ç»˜åˆ¶èƒŒæ™¯å›¾ç‰‡
         if (backgroundImage != null) {
             g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
         }

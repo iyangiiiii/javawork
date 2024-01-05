@@ -8,31 +8,31 @@ public class Leaderboard extends JPanel {
     private JTable leaderboardTable;
     public Leaderboard() {
 
-        // ´´½¨±íÍ·ºÍÊı¾İ
-        String[] columns = {"ÉÌÆ·", "ÏúÁ¿", "¼Û¸ñ"};
+        // åˆ›å»ºè¡¨å¤´å’Œæ•°æ®
+        String[] columns = {"å•†å“", "é”€é‡", "ä»·æ ¼"};
         Object[][] data = {
-                {"ÉÌÆ·1", 100, 800},
-                {"ÉÌÆ·2", 90, 447},
-                {"ÉÌÆ·3", 80, 123},
-                {"ÉÌÆ·4", 70, 89},
-                {"ÉÌÆ·5", 60, 98154}
+                {"å•†å“1", 100, 800},
+                {"å•†å“2", 90, 447},
+                {"å•†å“3", 80, 123},
+                {"å•†å“4", 70, 89},
+                {"å•†å“5", 60, 98154}
         };
 
         setOpaque(false);
 
-        // ´´½¨Ä¬ÈÏ±í¸ñÄ£ĞÍ
+        // åˆ›å»ºé»˜è®¤è¡¨æ ¼æ¨¡å‹
         DefaultTableModel model = new DefaultTableModel(data, columns);
         leaderboardTable = new JTable(model);
 
-        Font headerFont = new Font("·ÂËÎ", Font.BOLD, 24); // ×ÖÌå¡¢·ç¸ñ¡¢×ÖºÅ
+        Font headerFont = new Font("ä»¿å®‹", Font.BOLD, 24); // å­—ä½“ã€é£æ ¼ã€å­—å·
         leaderboardTable.getTableHeader().setFont(headerFont);
-        // ÉèÖÃ±í¸ñ×ÖÌåºÍ´óĞ¡
-        Font tableFont = new Font("·ÂËÎ", Font.PLAIN, 24); // ×ÖÌå¡¢·ç¸ñ¡¢×ÖºÅ
+        // è®¾ç½®è¡¨æ ¼å­—ä½“å’Œå¤§å°
+        Font tableFont = new Font("ä»¿å®‹", Font.PLAIN, 24); // å­—ä½“ã€é£æ ¼ã€å­—å·
         leaderboardTable.setFont(tableFont);
 
-        // ÉèÖÃĞĞ¸ß¶ÈºÍÁĞ¿í¶È
-        int rowHeight = 40; // ÉèÖÃĞĞ¸ß¶ÈÎª40
-        int columnWidth = 200; // ÉèÖÃÁĞ¿í¶ÈÎª200
+        // è®¾ç½®è¡Œé«˜åº¦å’Œåˆ—å®½åº¦
+        int rowHeight = 40; // è®¾ç½®è¡Œé«˜åº¦ä¸º40
+        int columnWidth = 200; // è®¾ç½®åˆ—å®½åº¦ä¸º200
         leaderboardTable.setRowHeight(rowHeight);
         for (int i = 0; i < leaderboardTable.getColumnCount(); i++) {
             leaderboardTable.getColumnModel().getColumn(i).setPreferredWidth(columnWidth);
@@ -40,17 +40,17 @@ public class Leaderboard extends JPanel {
 
         JScrollPane scrollPane = new JScrollPane(leaderboardTable);
 
-        // ÉèÖÃ±í¸ñºÍ¹ö¶¯Ãæ°åµÄ´óĞ¡
-        int tableWidth = (int) (1500 * 0.9); // ±í¸ñ¿í¶ÈÎªÖ÷½çÃæ¿í¶ÈµÄ80%
-        int tableHeight = (int) (800 * 0.8); // ±í¸ñ¸ß¶ÈÎªÖ÷½çÃæ¸ß¶ÈµÄ60%
+        // è®¾ç½®è¡¨æ ¼å’Œæ»šåŠ¨é¢æ¿çš„å¤§å°
+        int tableWidth = (int) (1500 * 0.9); // è¡¨æ ¼å®½åº¦ä¸ºä¸»ç•Œé¢å®½åº¦çš„80%
+        int tableHeight = (int) (800 * 0.8); // è¡¨æ ¼é«˜åº¦ä¸ºä¸»ç•Œé¢é«˜åº¦çš„60%
 
-        // ÉèÖÃ±í¸ñ´óĞ¡
+        // è®¾ç½®è¡¨æ ¼å¤§å°
         leaderboardTable.setPreferredScrollableViewportSize(new Dimension(tableWidth, tableHeight));
 
-        // ÉèÖÃ¹ö¶¯Ãæ°å´óĞ¡ÒÔÊÊÓ¦±í¸ñ
+        // è®¾ç½®æ»šåŠ¨é¢æ¿å¤§å°ä»¥é€‚åº”è¡¨æ ¼
         scrollPane.setPreferredSize(new Dimension(tableWidth, tableHeight));
 
-        add(scrollPane); // ½«±í¸ñ¹ö¶¯Ãæ°åÌí¼Óµ½ÅÅĞĞ°ñÃæ°åÖĞ
+        add(scrollPane); // å°†è¡¨æ ¼æ»šåŠ¨é¢æ¿æ·»åŠ åˆ°æ’è¡Œæ¦œé¢æ¿ä¸­
         leaderboardTable.setOpaque(false);
         leaderboardTable.getTableHeader().setOpaque(false);
         scrollPane.setOpaque(false);
@@ -59,11 +59,11 @@ public class Leaderboard extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        // ¼ÓÔØÍ¼Æ¬
+        // åŠ è½½å›¾ç‰‡
         ImageIcon imageIcon = new ImageIcon("S:\\project\\ideajava\\Java_Library_Management_System\\img\\rank.jpg");
         Image image = imageIcon.getImage();
 
-        // »æÖÆ±³¾°Í¼Æ¬
+        // ç»˜åˆ¶èƒŒæ™¯å›¾ç‰‡
         g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
     }
 }

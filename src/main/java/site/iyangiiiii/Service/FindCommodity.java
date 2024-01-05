@@ -15,7 +15,7 @@ public class FindCommodity {
 	FindCommodity() {
 	}
 
-	// ÏÔÊ¾ËùÓĞÉÌÆ·
+	// æ˜¾ç¤ºæ‰€æœ‰å•†å“
 	public static void allcommodity(DefaultTableModel model) {
 
 		Connection con = ConnectDatabase.connectDB();
@@ -38,7 +38,7 @@ public class FindCommodity {
 		}
 	}
 
-	// °´Àà±ğ²éÕÒÉÌÆ·
+	// æŒ‰ç±»åˆ«æŸ¥æ‰¾å•†å“
 	public static void findcomid(DefaultTableModel model, Integer id) {
 		Connection con = ConnectDatabase.connectDB();
 		PreparedStatement preSql;
@@ -60,14 +60,14 @@ public class FindCommodity {
 				model.addRow(new Vector<>(Arrays.asList(comid, type, name, manufacturer, status)));
 			}
 			if (!flag) {
-				JOptionPane.showMessageDialog(null, "ÉÌÆ·²»´æÔÚ", "¾¯¸æ", JOptionPane.WARNING_MESSAGE);
+				JOptionPane.showMessageDialog(null, "å•†å“ä¸å­˜åœ¨", "è­¦å‘Š", JOptionPane.WARNING_MESSAGE);
 			}
 			con.close();
 		} catch (SQLException e) {
 		}
 	}
 
-	// °´ÊéÃû²éÕÒÉÌÆ·
+	// æŒ‰ä¹¦åæŸ¥æ‰¾å•†å“
 	public static void findcommodityname(DefaultTableModel model, String commodityname) {
 		Connection con = ConnectDatabase.connectDB();
 		PreparedStatement preSql;
@@ -89,14 +89,14 @@ public class FindCommodity {
 				model.addRow(new Vector<>(Arrays.asList(comid, type, name, manufacturer, status)));
 			}
 			if (!flag) {
-				JOptionPane.showMessageDialog(null, "ÉÌÆ·²»´æÔÚ", "¾¯¸æ", JOptionPane.WARNING_MESSAGE);
+				JOptionPane.showMessageDialog(null, "å•†å“ä¸å­˜åœ¨", "è­¦å‘Š", JOptionPane.WARNING_MESSAGE);
 			}
 			con.close();
 		} catch (SQLException e) {
 		}
 	}
 
-	// °´×÷Õß²éÕÒÉÌÆ·
+	// æŒ‰ä½œè€…æŸ¥æ‰¾å•†å“
 	public static void findmanufacturer(DefaultTableModel model, String Manufacturer) {
 		Connection con = ConnectDatabase.connectDB();
 		PreparedStatement preSql;
@@ -118,14 +118,14 @@ public class FindCommodity {
 				model.addRow(new Vector<>(Arrays.asList(comid, type, name, manufacturer, status)));
 			}
 			if (!flag) {
-				JOptionPane.showMessageDialog(null, "ÉÌÆ·²»´æÔÚ", "¾¯¸æ", JOptionPane.WARNING_MESSAGE);
+				JOptionPane.showMessageDialog(null, "å•†å“ä¸å­˜åœ¨", "è­¦å‘Š", JOptionPane.WARNING_MESSAGE);
 			}
 			con.close();
 		} catch (SQLException e) {
 		}
 	}
 
-	// °´ÊéºÅ²éÕÒÉÌÆ·
+	// æŒ‰ä¹¦å·æŸ¥æ‰¾å•†å“
 	public static void findstatus(DefaultTableModel model, String Status) {
 		Connection con = ConnectDatabase.connectDB();
 		PreparedStatement preSql;
@@ -146,7 +146,7 @@ public class FindCommodity {
 				model.addRow(new Vector<>(Arrays.asList(comid, type, commodityname, manufacturer, status)));
 			}
 			if (!flag) {
-				JOptionPane.showMessageDialog(null, "ÉÌÆ·²»´æÔÚ", "¾¯¸æ", JOptionPane.WARNING_MESSAGE);
+				JOptionPane.showMessageDialog(null, "å•†å“ä¸å­˜åœ¨", "è­¦å‘Š", JOptionPane.WARNING_MESSAGE);
 			}
 			con.close();
 		} catch (SQLException e) {
@@ -172,7 +172,7 @@ public class FindCommodity {
 				model.addRow(new Vector<>(Arrays.asList(comid, type, name, manufacturer, status)));
 			}
 			if (!flag) {
-				JOptionPane.showMessageDialog(null, "ÉÌÆ·²»´æÔÚ", "¾¯¸æ", JOptionPane.WARNING_MESSAGE);
+				JOptionPane.showMessageDialog(null, "å•†å“ä¸å­˜åœ¨", "è­¦å‘Š", JOptionPane.WARNING_MESSAGE);
 			}
 			con.close();
 		} catch (SQLException e) {

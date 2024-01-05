@@ -22,31 +22,31 @@ public class Landing {
 			rs = preSql.executeQuery();
 			boolean userExists = false;
 
-			// ¼ì²éÓÃ»§ÃûÊÇ·ñ´æÔÚ²¢ÑéÖ¤ÃÜÂë
+			// æ£€æŸ¥ç”¨æˆ·åæ˜¯å¦å­˜åœ¨å¹¶éªŒè¯å¯†ç 
 			while (rs.next()) {
 				String passwordFromDB = rs.getString("password");
 
 				if (password.equals(passwordFromDB)) {
 					userExists = true;
-					break; // ÕÒµ½Æ¥ÅäµÄÃÜÂë£¬Ìø³öÑ­»·
+					break; // æ‰¾åˆ°åŒ¹é…çš„å¯†ç ï¼Œè·³å‡ºå¾ªç¯
 				}
 			}
 
-			// ¼ì²éÓÃ»§ÃûÊÇ·ñ´æÔÚ
+			// æ£€æŸ¥ç”¨æˆ·åæ˜¯å¦å­˜åœ¨
 			if (!userExists) {
-				JOptionPane.showMessageDialog(null, "ÓÃ»§Ãû»òÃÜÂë´íÎó", "¾¯¸æ", JOptionPane.WARNING_MESSAGE);
+				JOptionPane.showMessageDialog(null, "ç”¨æˆ·åæˆ–å¯†ç é”™è¯¯", "è­¦å‘Š", JOptionPane.WARNING_MESSAGE);
 				return false;
 			}
 
 			con.close();
-			return true; // ÓÃ»§ÃûºÍÃÜÂëÑéÖ¤³É¹¦
+			return true; // ç”¨æˆ·åå’Œå¯†ç éªŒè¯æˆåŠŸ
 		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, "Êı¾İ¿âÁ¬½Ó´íÎó", "¾¯¸æ", JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog(null, "æ•°æ®åº“è¿æ¥é”™è¯¯", "è­¦å‘Š", JOptionPane.WARNING_MESSAGE);
 			return false;
 		}
 	}
 
-	//È·¶¨ÊÇ·ñÎª¹ÜÀíÔ±
+	//ç¡®å®šæ˜¯å¦ä¸ºç®¡ç†å‘˜
 	public static boolean sureadmin(String user) {
 		Connection con = ConnectDatabase.connectDB();
 		PreparedStatement preSql;
