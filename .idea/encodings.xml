@@ -2,6 +2,17 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/site/iyangiiiii/MainInterface.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/site/iyangiiiii/Service/Adduser.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/site/iyangiiiii/Service/CommoditySearch.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/site/iyangiiiii/Service/ConnectDatabase.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/site/iyangiiiii/Service/FindCommodity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/site/iyangiiiii/Service/Landing.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/site/iyangiiiii/UI/Land.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/site/iyangiiiii/UI/Leaderboard.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/site/iyangiiiii/UI/Rank.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/site/iyangiiiii/UI/Register.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/site/iyangiiiii/UI/UserRatingInterface.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
     <file url="PROJECT" charset="GBK" />
   </component>

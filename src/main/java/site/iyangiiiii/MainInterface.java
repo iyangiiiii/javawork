@@ -31,13 +31,13 @@ public class MainInterface extends JFrame{
 	//标签
 	// 字体
 	private Font font2 = new Font("宋体", Font.BOLD, 20);
-	
+
 	private Container con = getContentPane();
 	public MainInterface(String user) {
 
 		
 		// 改变背景图片
-		ImageIcon icon = new ImageIcon("S:\\project\\ideajava\\Java_Library_Management_System\\img\\login.jpg");
+		ImageIcon icon = new ImageIcon("/img/login.jpg");
 		Image img = icon.getImage();
 		Image scaledImg = img.getScaledInstance(1500, 800, Image.SCALE_SMOOTH);
 		ImageIcon scaledIcon = new ImageIcon(scaledImg);
