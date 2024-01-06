@@ -16,11 +16,12 @@ public class Adduser {
 		PreparedStatement preSql;
 
 		String sqlStr=null;
-		
+
+		int manager = 0;
 		if(userlist()) {
-			sqlStr = "insert into users(username, password) values (?,?)";
+			sqlStr = "insert into users(username, password, manager) values (?,?,?)";
 		}else {
-			sqlStr = "insert into users(username, password) values (?,?)";
+			sqlStr = "insert into users(username, password, manager) values (?,?,?)";
 		}
 
 		try {
@@ -28,6 +29,7 @@ public class Adduser {
 			preSql = con.prepareStatement(sqlStr);
 			preSql.setString(1, user);
 			preSql.setString(2, password);
+			preSql.setInt(3,manager);
 			int ok = preSql.executeUpdate();
 			con.close();
 			return true;

@@ -12,9 +12,6 @@ import javax.swing.table.DefaultTableModel;
 
 public class FindCommodity {
 
-	FindCommodity() {
-	}
-
 	// 显示所有商品
 	public static void allcommodity(DefaultTableModel model) {
 

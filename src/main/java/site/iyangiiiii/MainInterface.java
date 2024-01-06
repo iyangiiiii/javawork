@@ -4,6 +4,7 @@ import site.iyangiiiii.Service.CommoditySearch;
 import site.iyangiiiii.UI.ChatFrame;
 import site.iyangiiiii.UI.Leaderboard;
 import site.iyangiiiii.UI.UserRatingInterface;
+import site.iyangiiiii.Service.Landing;
 
 import java.awt.Container;
 import java.awt.Font;
@@ -49,21 +50,29 @@ public class MainInterface extends JFrame{
 
 		jTabbedPane.setFont(font2);
 		jTabbedPane.add("主 界 面", jPanel);
+		if(Landing.sureadmin(user)) {
+			CommoditySearch search = new CommoditySearch();
+			jTabbedPane.add("订单管理",search.jLayeredPane);
+			UserRatingInterface ratingPanel = new UserRatingInterface("123456", Landing.sureadmin(user));
+			jTabbedPane.add("用户评价", ratingPanel);
 
-		CommoditySearch search = new CommoditySearch();
-		jTabbedPane.add("订单管理",search.jLayeredPane);
+		}else {
+			UserRatingInterface ratingPanel = new UserRatingInterface("123456", Landing.sureadmin(user));
+			jTabbedPane.add("用户评价", ratingPanel);
+		}
+
 
 		ChatFrame chatFrame = new ChatFrame();
 		jTabbedPane.add("客服沟通", chatFrame.createChatPanel());
 
-		UserRatingInterface ratingPanel = new UserRatingInterface("123456");
-		jTabbedPane.add("用户评价", ratingPanel);
+//		UserRatingInterface ratingPanel = new UserRatingInterface("123456", Landing.sureadmin(user));
+//		jTabbedPane.add("用户评价", ratingPanel);
 
 		Leaderboard leaderboardFrame = new Leaderboard();
 		leaderboardFrame.setVisible(true);
 		jTabbedPane.add("排行榜", leaderboardFrame);
 
-		
+
 		con.add(jTabbedPane);
 		// 不可以改变窗体的大小
 		setResizable(false);

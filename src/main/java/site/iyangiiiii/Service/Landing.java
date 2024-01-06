@@ -47,18 +47,18 @@ public class Landing {
 	}
 
 	//确定是否为管理员
-	public static boolean sureadmin(String user) {
+	public static boolean sureadmin(String username) {
 		Connection con = ConnectDatabase.connectDB();
 		PreparedStatement preSql;
 		ResultSet rs;
-		String sqlStr = "select * from usertable where user = ?";
+		String sqlStr = "select * from users where username = ?";
 		try {
 			preSql = con.prepareStatement(sqlStr);
-			preSql.setString(1, user);
+			preSql.setString(1, username);
 			rs = preSql.executeQuery();
 			while(rs.next()) {
-				int admin = rs.getInt(5);
-				if (admin==1) {
+				int manager = rs.getInt(4);
+				if (manager==1) {
 					return true;
 				}else {
 					return false;

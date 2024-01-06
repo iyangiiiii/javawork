@@ -56,7 +56,7 @@ public class CommoditySearch {
 
 	public CommoditySearch() {
 		// 改变背景图片
-		ImageIcon icon = new ImageIcon("S:\\project\\ideajava\\Java_Library_Management_System\\img\\commoditysearch.png");
+		ImageIcon icon = new ImageIcon("S:\\project\\ideajava\\javawork\\src\\main\\java\\site\\iyangiiiii\\img\\commoditysearch.png");
 		Image img = icon.getImage();
 		Image scaledImg = img.getScaledInstance(1500, 800, Image.SCALE_SMOOTH);
 		ImageIcon scaledIcon = new ImageIcon(scaledImg);
@@ -132,12 +132,12 @@ public class CommoditySearch {
 		addEvent();
 
 		// 加入分层窗口
-		jLayeredPane.add(label, Integer.valueOf(0), 0);
-		jLayeredPane.add(jLabel2, Integer.valueOf(100), 2);
-		jLayeredPane.add(box, Integer.valueOf(100), 3);
-		jLayeredPane.add(field, Integer.valueOf(100), 4);
-		jLayeredPane.add(button, Integer.valueOf(100), 5);
-		jLayeredPane.add(pane, Integer.valueOf(100), 6);
+		jLayeredPane.add(label, 0, 0);
+		jLayeredPane.add(jLabel2, 100, 2);
+		jLayeredPane.add(box, 100, 3);
+		jLayeredPane.add(field, 100, 4);
+		jLayeredPane.add(button, 100, 5);
+		jLayeredPane.add(pane, 100, 6);
 	}
 
 	private void addEvent() {
