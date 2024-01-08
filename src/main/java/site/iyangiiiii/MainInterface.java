@@ -4,6 +4,7 @@ import site.iyangiiiii.Service.CommoditySearch;
 import site.iyangiiiii.UI.ChatFrame;
 import site.iyangiiiii.UI.Leaderboard;
 import site.iyangiiiii.UI.UserRatingInterface;
+import site.iyangiiiii.utiles.Global;
 
 import java.awt.Container;
 import java.awt.Font;
@@ -34,10 +35,8 @@ public class MainInterface extends JFrame{
 
 	private Container con = getContentPane();
 	public MainInterface(String user) {
-
-		
 		// 改变背景图片
-		ImageIcon icon = new ImageIcon("S:\\project\\ideajava\\javawork\\src\\main\\java\\site\\iyangiiiii\\img\\login.jpg");
+		ImageIcon icon = new ImageIcon("src/main/java/site/iyangiiiii/img/login.jpg");
 		Image img = icon.getImage();
 		Image scaledImg = img.getScaledInstance(1500, 800, Image.SCALE_SMOOTH);
 		ImageIcon scaledIcon = new ImageIcon(scaledImg);

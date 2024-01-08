@@ -20,7 +20,7 @@ class ChatPanel extends JPanel {
 
 public class ChatFrame {
     public JPanel createChatPanel() {
-        ImageIcon icon = new ImageIcon("S:\\project\\ideajava\\javawork\\src\\main\\java\\site\\iyangiiiii\\img\\chatframe.jpg");
+        ImageIcon icon = new ImageIcon("src/main/java/site/iyangiiiii/img/chatframe.jpg");
         Image img = icon.getImage();
         Image scaledImg = img.getScaledInstance(1500, 695, Image.SCALE_SMOOTH);
         ImageIcon scaledIcon = new ImageIcon(scaledImg);
