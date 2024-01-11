@@ -13,7 +13,7 @@ public class UserRatingInterface extends JPanel {
     private JComboBox<String> ratingComboBox;
     private DefaultTableModel tableModel;
     private Image backgroundImage;
-    public UserRatingInterface(String username) {
+    public UserRatingInterface(String username, Boolean admin) {
 
         ImageIcon backgroundIcon = new ImageIcon(Global.getImgPath("comment.jpg"));
         backgroundImage = backgroundIcon.getImage(); // 将图标转换为图像
@@ -23,29 +23,29 @@ public class UserRatingInterface extends JPanel {
 
         JPanel ratingPanel = new JPanel();
         ratingPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+        if(!admin) {
+            inputField = new JTextField("", 100);
+            inputField.setPreferredSize(new Dimension(200, 30));
+            ratingPanel.add(inputField);
 
-        inputField = new JTextField("", 100);
-        inputField.setPreferredSize(new Dimension(200, 30));
-        ratingPanel.add(inputField);
+            String[] ratings = {"1星", "2星", "3星", "4星", "5星"};
+            ratingComboBox = new JComboBox<>(ratings);
+            ratingPanel.add(ratingComboBox);
 
-        String[] ratings = {"1星", "2星", "3星", "4星", "5星"};
-        ratingComboBox = new JComboBox<>(ratings);
-        ratingPanel.add(ratingComboBox);
+            JButton submitButton = new JButton("提交");
+            submitButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    String comment = inputField.getText();
+                    String selectedRating = (String) ratingComboBox.getSelectedItem();
+                    addReviewToTable(username, comment, selectedRating);
+                }
+            });
+            ratingPanel.add(submitButton);
 
-        JButton submitButton = new JButton("提交");
-        submitButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String comment = inputField.getText();
-                String selectedRating = (String) ratingComboBox.getSelectedItem();
-                addReviewToTable(username, comment, selectedRating);
-            }
-        });
-        ratingPanel.add(submitButton);
-
-        add(ratingPanel, BorderLayout.SOUTH);
-        ratingPanel.setOpaque(false);
-
+            add(ratingPanel, BorderLayout.SOUTH);
+            ratingPanel.setOpaque(false);
+        }
         // 创建用于显示评价的表格
         String[] columnNames = {"用户名", "评价", "评分"};
         tableModel = new DefaultTableModel(columnNames, 0);
