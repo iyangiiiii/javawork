@@ -14,20 +14,32 @@ public class User {
     @Column(length = 50)
     String username;
 
+    @Column(length = 64)
+    String passwordSha256;
+
     @Column(length = 50)
-    String password;
+    String passwordSalt;
 
     // 0代表普通用户
     // 1代表管理员
     UserType userType;
 
-    public User(String username, String password, UserType userType) {
+    public User(String username, String passwordSha256, String passwordSalt, UserType userType) {
         this.username = username;
-        this.password = password;
+        this.passwordSha256 = passwordSha256;
+        this.passwordSalt = passwordSalt;
         this.userType = userType;
     }
 
     public User() {
+    }
+
+    public String getPasswordSalt() {
+        return passwordSalt;
+    }
+
+    public void setPasswordSalt(String passwordSalt) {
+        this.passwordSalt = passwordSalt;
     }
 
     public int getUid() {
@@ -42,12 +54,12 @@ public class User {
         this.username = username;
     }
 
-    public String getPassword() {
-        return password;
+    public String getPasswordSha256() {
+        return passwordSha256;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPasswordSha256(String passwordSha256) {
+        this.passwordSha256 = passwordSha256;
     }
 
     public UserType getUserType() {

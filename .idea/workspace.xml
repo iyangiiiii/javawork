@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ca09a96f-d69f-4f6f-a374-0ffd686f2f42" name="更改" comment="重构数据库操作" />
+    <list default="true" id="ca09a96f-d69f-4f6f-a374-0ffd686f2f42" name="更改" comment="重构数据库操作">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/site/iyangiiiii/Service/Commodity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/site/iyangiiiii/UI/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/site/iyangiiiii/UI/MainFrame.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -106,7 +110,7 @@
       <workItem from="1704801150758" duration="2120000" />
       <workItem from="1704865122160" duration="4968000" />
       <workItem from="1704874079492" duration="7287000" />
-      <workItem from="1704937249431" duration="1277000" />
+      <workItem from="1704937249431" duration="2185000" />
     </task>
     <task id="LOCAL-00001" summary="更改图片绝对路径为相对路径">
       <option name="closed" value="true" />
@@ -124,7 +128,15 @@
       <option name="project" value="LOCAL" />
       <updated>1704938476047</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="重构数据库操作">
+      <option name="closed" value="true" />
+      <created>1704938592704</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1704938592704</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -132,6 +144,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="更改图片绝对路径为相对路径" />
+    <MESSAGE value="Merge remote-tracking branch 'origin/maven'&#10;&#10;# Conflicts:&#10;#&#9;.idea/misc.xml&#10;#&#9;src/main/java/site/iyangiiiii/Service/Adduser.java&#10;#&#9;src/main/java/site/iyangiiiii/Service/FindCommodity.java&#10;#&#9;src/main/java/site/iyangiiiii/Service/Landing.java&#10;#&#9;src/main/java/site/iyangiiiii/UI/CommoditySearch.java&#10;#&#9;src/main/java/site/iyangiiiii/UI/MainFrame.java" />
     <MESSAGE value="重构数据库操作" />
     <option name="LAST_COMMIT_MESSAGE" value="重构数据库操作" />
   </component>

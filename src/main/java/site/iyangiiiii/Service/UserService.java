@@ -1,6 +1,5 @@
 package site.iyangiiiii.Service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import site.iyangiiiii.DAO.UserRepository;
 import site.iyangiiiii.Entities.User;
@@ -44,7 +43,7 @@ public class UserService {
 		try {
 			User user = new User();
 			user.setUsername(username);
-			user.setPassword(password);
+			user.setPasswordSha256(password);
 			user.setUserType(userType);
 
 			user = userService.userRepository.save(user);
@@ -67,7 +66,7 @@ public class UserService {
 		try {
 			User user = userService.userRepository.findUserByUsername(username);
 			if(!user.getUsername().equals(username)) return -1;
-			if(!user.getPassword().equals(password)) return -1;
+			if(!user.getPasswordSha256().equals(password)) return -1;
 			return 0;
 		} catch (Exception e) {
 			logger.log(Level.SEVERE, "verify: ", e);

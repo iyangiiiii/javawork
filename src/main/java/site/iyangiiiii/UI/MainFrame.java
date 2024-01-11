@@ -51,7 +51,7 @@ public class MainFrame extends JFrame{
 		ChatFrame chatFrame = new ChatFrame();
 		jTabbedPane.add("客服沟通", chatFrame.createChatPanel());
 
-		UserRatingInterface ratingPanel = new UserRatingInterface("123456");
+		UserRatingInterface ratingPanel = new UserRatingInterface("123456", false);
 		jTabbedPane.add("用户评价", ratingPanel);
 
 		Leaderboard leaderboardFrame = new Leaderboard();
