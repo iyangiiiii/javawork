@@ -59,7 +59,7 @@ public class OrderService {
             List<OrderGoods> orderGoodsList = orderService.orderGoodsRepository.findOrderGoodsByGoods(goods);
             List<Order> ret = new ArrayList<>();
             for(OrderGoods orderGoods: orderGoodsList) {
-                ret.add(orderGoods.getOrder());
+                ret.add(orderGoods.getOrders());
             }
             return ret;
         }

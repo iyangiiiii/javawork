@@ -9,15 +9,15 @@ public class OrderGoods {
     int ogid;
 
     @ManyToOne
-    @JoinColumn(name = "order", referencedColumnName = "uid")
-    Order order;
+    @JoinColumn(name = "orders", referencedColumnName = "oid")
+    Order orders;
 
     @ManyToOne
     @JoinColumn(name = "goods", referencedColumnName = "gid")
     Goods goods;
 
-    public OrderGoods(Order order, Goods goods) {
-        this.order = order;
+    public OrderGoods(Order orders, Goods goods) {
+        this.orders = orders;
         this.goods = goods;
     }
 
@@ -27,12 +27,12 @@ public class OrderGoods {
     public int getOgid() {
         return ogid;
     }
-    public Order getOrder() {
-        return order;
+    public Order getOrders() {
+        return orders;
     }
 
-    public void setOrder(Order order) {
-        this.order = order;
+    public void setOrders(Order order) {
+        this.orders = order;
     }
 
     public Goods getGoods() {

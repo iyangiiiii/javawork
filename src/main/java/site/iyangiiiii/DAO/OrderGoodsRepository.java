@@ -9,6 +9,6 @@ import java.util.List;
 
 public interface OrderGoodsRepository extends JpaRepository<OrderGoods, Integer> {
     OrderGoods findOrderGoodsByOgid(int ogid);
-    List<OrderGoods> findOrderGoodsByOrder(Order oid);
+    List<OrderGoods> findOrderGoodsByOrders(Order oid);
     List<OrderGoods> findOrderGoodsByGoods(Goods gid);
 }
