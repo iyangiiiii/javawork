@@ -34,6 +34,8 @@ public class LoginFrame {
 	// 标签
 	private JLabel jLabel2 = new JLabel("用户名： ");
 	private JLabel jLabel3 = new JLabel("密  码： ");
+	private JLabel jLabel4 = new JLabel("验证码： ");
+	private JLabel CaptchaImage = new JLabel();
 
 	// 字体
 	private Font font2 = new Font("宋体", Font.BOLD, 25);
@@ -42,10 +44,12 @@ public class LoginFrame {
 	// 文本框
 	private JTextField field = new JTextField(22);
 	private JPasswordField field2 = new JPasswordField(22);
+	private JTextField field3 = new JTextField(12);
 
 	// 按钮
 	private final JButton buttonLogin = new JButton("登陆");
 	private final JButton buttonSignUp = new JButton("注册");
+//	private final JButton buttonRefreshCaptcha = new JButton("刷新");
 
 	// 面板
 	private JPanel jPanel = new JPanel();
@@ -53,11 +57,12 @@ public class LoginFrame {
 	private JPanel jPanel3 = new JPanel();
 	private JPanel jPanel4 = new JPanel();
 	private JPanel jPanel5 = new JPanel();
+	private JPanel jPanel6 = new JPanel();
 	// 窗体
 	private JFrame frame = new JFrame("登陆");
 	// 大小
 	private Dimension dimension = new Dimension(30, 30);
-	private Dimension dimension2 = new Dimension(100, 50);
+	private Dimension dimension2 = new Dimension(80, 40);
 
 	public LoginFrame() {
 
@@ -98,7 +103,7 @@ public class LoginFrame {
 		// 窗口可见
 		frame.setVisible(true);
 
-		return;
+		refreshCaptchaImage();
 	}
 
 	/**
@@ -108,12 +113,15 @@ public class LoginFrame {
 		// 添加字体
 		jLabel2.setFont(font2);
 		jLabel3.setFont(font2);
+		jLabel4.setFont(font2);
 		buttonLogin.setFont(font3);
 		buttonSignUp.setFont(font3);
 		field.setFont(font3);
 		field2.setFont(font3);
+		field3.setFont(font3);
 		field.setPreferredSize(dimension);
 		field2.setPreferredSize(dimension);
+		field3.setPreferredSize(dimension);
 		buttonLogin.setPreferredSize(dimension2);
 		buttonSignUp.setPreferredSize(dimension2);
 //		button.setBackground(Color.pink);
@@ -121,23 +129,33 @@ public class LoginFrame {
 
 		jPanel2.add(jLabel2);
 		jPanel2.add(field);
+		jPanel3.add(jLabel4);
+		jPanel3.add(field3);
+//		jPanel3.add(buttonRefreshCaptcha);
 		jPanel3.add(jLabel3);
 		jPanel3.add(field2);
 		jPanel4.add(buttonLogin);
 		jPanel5.add(buttonSignUp);
+		jPanel6.add(jLabel4);
+		jPanel6.add(field3);
+		jPanel6.add(CaptchaImage);
+//		jPanel6.add(buttonRefreshCaptcha);
+
 
 		jPanel.setBounds(0, 60, 550, 80);
 		jPanel2.setBounds(80, 170, 550, 80);
 		jPanel3.setBounds(80, 260, 550, 60);
-		jPanel4.setBounds(200, 320, 150, 80);
-		jPanel5.setBounds(375, 320, 150, 80);
+		jPanel4.setBounds(200, 380, 150, 80);
+		jPanel5.setBounds(375, 380, 150, 80);
+		jPanel6.setBounds(80, 320, 550, 60);
+
 
 		frame.add(jPanel);
 		frame.add(jPanel2);
 		frame.add(jPanel3);
 		frame.add(jPanel4);
 		frame.add(jPanel5);
-
+		frame.add(jPanel6);
 	}
 
 	/**
@@ -147,8 +165,10 @@ public class LoginFrame {
 		// 设置透明
 		jLabel2.setOpaque(false);
 		jLabel3.setOpaque(false);
+		jPanel4.setOpaque(false);
 		field.setOpaque(false);
 		field2.setOpaque(false);
+		field3.setOpaque(false);
 		// button.setOpaque(false);
 		// button2.setOpaque(false);
 		jPanel.setOpaque(false);
@@ -156,12 +176,27 @@ public class LoginFrame {
 		jPanel3.setOpaque(false);
 		jPanel4.setOpaque(false);
 		jPanel5.setOpaque(false);
-
+		jPanel6.setOpaque(false);
 	}
 
 	/**
 	 * 添加事件
 	 */
+	private void refreshCaptchaImage() {
+		// 从后端获取验证码图像的逻辑
+		ImageIcon captchaIcon = getCaptchaImage();
+		CaptchaImage.setIcon(captchaIcon);
+		CaptchaImage.repaint();
+	}
+
+	private ImageIcon getCaptchaImage() {
+		// TODO: 从后端获取验证码图像的逻辑，返回一个 ImageIcon
+		// 例如，你可以使用网络请求来获取验证码图像
+		// 注意：此处仅为示例，实际实现取决于你的后端实现方式
+		 ImageIcon captchaIcon = new ImageIcon(Global.getImgPath("test.png"));
+		 captchaIcon.setImage(captchaIcon.getImage().getScaledInstance(110, 50, Image.SCALE_SMOOTH));
+		 return captchaIcon;
+	}
 	private void addEvent() {
 
 		buttonLogin.addActionListener(new ActionListener() {
@@ -188,6 +223,11 @@ public class LoginFrame {
 				//frame.setVisible(false);
 				frame.dispose();
 				new Register();
+			}
+		});
+		CaptchaImage.addMouseListener(new java.awt.event.MouseAdapter() {
+			public void mouseClicked(java.awt.event.MouseEvent evt) {
+				refreshCaptchaImage();
 			}
 		});
 	}
