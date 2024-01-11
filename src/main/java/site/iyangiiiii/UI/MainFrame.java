@@ -1,10 +1,6 @@
-package site.iyangiiiii;
+package site.iyangiiiii.UI;
 
-import site.iyangiiiii.Service.CommoditySearch;
-import site.iyangiiiii.UI.ChatFrame;
-import site.iyangiiiii.UI.Leaderboard;
-import site.iyangiiiii.UI.UserRatingInterface;
-import site.iyangiiiii.utiles.Global;
+import site.iyangiiiii.Utils.Global;
 
 import java.awt.Container;
 import java.awt.Font;
@@ -20,7 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
-public class MainInterface extends JFrame{
+public class MainFrame extends JFrame{
 	/*
 	 * 选项卡     主界面       图书查询          图书借还       账号管理
 	 * 
@@ -34,9 +30,9 @@ public class MainInterface extends JFrame{
 	private Font font2 = new Font("宋体", Font.BOLD, 20);
 
 	private Container con = getContentPane();
-	public MainInterface(String user) {
+	public MainFrame(String user) {
 		// 改变背景图片
-		ImageIcon icon = new ImageIcon("src/main/java/site/iyangiiiii/img/login.jpg");
+		ImageIcon icon = new ImageIcon(Global.getImgPath("login.jpg"));
 		Image img = icon.getImage();
 		Image scaledImg = img.getScaledInstance(1500, 800, Image.SCALE_SMOOTH);
 		ImageIcon scaledIcon = new ImageIcon(scaledImg);
@@ -73,7 +69,7 @@ public class MainInterface extends JFrame{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	public static void main(String[] args) {
-		new MainInterface("123456");
+		new MainFrame("123456");
 	}
 }
 

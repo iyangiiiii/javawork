@@ -1,5 +1,7 @@
 package site.iyangiiiii.UI;
 
+import site.iyangiiiii.Utils.Global;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -13,7 +15,7 @@ public class UserRatingInterface extends JPanel {
     private Image backgroundImage;
     public UserRatingInterface(String username) {
 
-        ImageIcon backgroundIcon = new ImageIcon("src/main/java/site/iyangiiiii/img/comment.jpg");
+        ImageIcon backgroundIcon = new ImageIcon(Global.getImgPath("comment.jpg"));
         backgroundImage = backgroundIcon.getImage(); // 将图标转换为图像
 
         setLayout(new BorderLayout());

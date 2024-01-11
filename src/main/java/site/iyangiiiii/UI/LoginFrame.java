@@ -1,13 +1,14 @@
 package site.iyangiiiii.UI;
 
-import site.iyangiiiii.MainInterface;
-import site.iyangiiiii.Service.Landing;
+import org.springframework.stereotype.Component;
+import site.iyangiiiii.Utils.Global;
 
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -24,7 +25,8 @@ import javax.swing.JTextField;
  *
  */
 
-public class Land {
+@Component
+public class LoginFrame {
 
 	/*
 	 * 定义窗体 一个大标签 两个小标签 两个文本框 两个按钮 五个面板
@@ -42,8 +44,8 @@ public class Land {
 	private JPasswordField field2 = new JPasswordField(22);
 
 	// 按钮
-	private JButton button = new JButton("登陆");
-	private JButton button2 = new JButton("注册");
+	private final JButton buttonLogin = new JButton("登陆");
+	private final JButton buttonSignUp = new JButton("注册");
 
 	// 面板
 	private JPanel jPanel = new JPanel();
@@ -57,10 +59,7 @@ public class Land {
 	private Dimension dimension = new Dimension(30, 30);
 	private Dimension dimension2 = new Dimension(100, 50);
 
-	public String user;
-	private String password;
-
-	public Land() {
+	public LoginFrame() {
 
 		frame.setTitle("登陆");
 		// 设置大小
@@ -70,17 +69,21 @@ public class Land {
 		// 布局为空
 		frame.setLayout(null);
 
-		// 添加组件
+		initView();
+	}
+
+	/**
+	 * 初始化页面
+	 */
+	protected void initView() {
 		addassembly();
 
-		// 设置透明
 		transparent();
 
-		// 添加事件
 		addEvent();
 
 		// 改变背景图片
-		ImageIcon originalIcon  = new ImageIcon("src/main/java/site/iyangiiiii/img/login.jpg");
+		ImageIcon originalIcon  = new ImageIcon(Global.getImgPath("login.jpg"));
 		Image originalImage = originalIcon.getImage();
 		Image scaledImage = originalImage.getScaledInstance(750, 550, Image.SCALE_SMOOTH);
 		ImageIcon scaledIcon = new ImageIcon(scaledImage);
@@ -94,20 +97,25 @@ public class Land {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		// 窗口可见
 		frame.setVisible(true);
+
+		return;
 	}
 
+	/**
+	 * 添加组件
+	 */
 	private void addassembly() {
 		// 添加字体
 		jLabel2.setFont(font2);
 		jLabel3.setFont(font2);
-		button.setFont(font3);
-		button2.setFont(font3);
+		buttonLogin.setFont(font3);
+		buttonSignUp.setFont(font3);
 		field.setFont(font3);
 		field2.setFont(font3);
 		field.setPreferredSize(dimension);
 		field2.setPreferredSize(dimension);
-		button.setPreferredSize(dimension2);
-		button2.setPreferredSize(dimension2);
+		buttonLogin.setPreferredSize(dimension2);
+		buttonSignUp.setPreferredSize(dimension2);
 //		button.setBackground(Color.pink);
 //		button2.setBackground(Color.GRAY);
 
@@ -115,8 +123,8 @@ public class Land {
 		jPanel2.add(field);
 		jPanel3.add(jLabel3);
 		jPanel3.add(field2);
-		jPanel4.add(button);
-		jPanel5.add(button2);
+		jPanel4.add(buttonLogin);
+		jPanel5.add(buttonSignUp);
 
 		jPanel.setBounds(0, 60, 550, 80);
 		jPanel2.setBounds(80, 170, 550, 80);
@@ -132,6 +140,9 @@ public class Land {
 
 	}
 
+	/**
+	 * 设置透明
+	 */
 	private void transparent() {
 		// 设置透明
 		jLabel2.setOpaque(false);
@@ -148,26 +159,29 @@ public class Land {
 
 	}
 
+	/**
+	 * 添加事件
+	 */
 	private void addEvent() {
 
-		button.addActionListener(new ActionListener() {
+		buttonLogin.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+				String user;
+				char[] password;
 				user = field.getText().trim();
-				password = field2.getText().trim();
-				if(Landing.test(user, password)) {
-//					JOptionPane.showMessageDialog(null, "登陆成功");
-					frame.dispose();
-					new MainInterface(user);
-				}else {
-					empty();
-				}
+				password = field2.getPassword();
 
+				// TODO 验证用户
+				frame.dispose();
+				new MainFrame(user);
+
+				//清空内存,防止密码泄露
+                Arrays.fill(password, '\0');
 			}
 		});
 
-		button2.addActionListener(new ActionListener() {
+		buttonSignUp.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub

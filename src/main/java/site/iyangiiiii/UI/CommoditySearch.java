@@ -1,4 +1,4 @@
-package site.iyangiiiii.Service;
+package site.iyangiiiii.UI;
 
 /**
  * 图书查询界面
@@ -6,11 +6,16 @@ package site.iyangiiiii.Service;
  * 
  * */
 
+import site.iyangiiiii.Entities.Goods;
+import site.iyangiiiii.Service.GoodsService;
+import site.iyangiiiii.Utils.Global;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.List;
 import java.util.Vector;
 
 import javax.swing.ImageIcon;
@@ -55,8 +60,9 @@ public class CommoditySearch {
 	private int id;
 
 	public CommoditySearch() {
+		Color color = new Color(179, 206, 255);
 		// 改变背景图片
-		ImageIcon icon = new ImageIcon("S:\\project\\ideajava\\Java_Library_Management_System\\img\\commoditysearch.png");
+		ImageIcon icon = new ImageIcon(Global.getImgPath("commoditysearch.png"));
 		Image img = icon.getImage();
 		Image scaledImg = img.getScaledInstance(1500, 800, Image.SCALE_SMOOTH);
 		ImageIcon scaledIcon = new ImageIcon(scaledImg);
@@ -67,7 +73,7 @@ public class CommoditySearch {
 
 		jLabel2.setFont(font1);
 		jLabel2.setBounds(350, 130, 250, 30);
-		jLabel2.setForeground(Color.cyan);
+		jLabel2.setForeground(Color.BLACK);
 
 		// 下拉框
 		box.setSize(dimension);
@@ -84,16 +90,17 @@ public class CommoditySearch {
 		// 文本框
 		field.setFont(font2);
 		field.setSize(dimension);
-		field.setBackground(Color.cyan);
 		field.setBounds(600, 188, 250, 35);
-		field.setForeground(Color.cyan);
-		field.setOpaque(false);
+		field.setBackground(Color.WHITE);
+		field.setForeground(Color.BLACK);
+		field.setText("123");
+		field.setOpaque(true);
 
 		// 按钮
 		button.setFont(font1);
 		button.setBounds(880, 185, 100, 40);
-		button.setForeground(Color.cyan);
-		button.setBackground(Color.cyan);
+		button.setForeground(Color.BLACK);
+		button.setBackground(color);
 		button.setOpaque(false);
 
 		// 表格
@@ -102,15 +109,16 @@ public class CommoditySearch {
 		model.addColumn("商品名", new Vector<Integer>());
 		model.addColumn("厂家", new Vector<Integer>());
 		model.addColumn("状态", new Vector<Integer>());
-		JTable jTable = new JTable(model);
+		JTable jTable = new JTable(model) {
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false; // 设置单元格不可编辑
+			}
+		};
+		jTable.getTableHeader().setReorderingAllowed(false); // 设置列不可拖动
 
 		JScrollPane pane = new JScrollPane(jTable);
 		pane.setBounds(350, 265, 800, 400);
-
-		// for(int k = 0; k < 30; k++) {
-		// model.addRow(new Vector<Integer>());
-		// }
-		FindCommodity.allcommodity(model);
 
 		JTableHeader head = jTable.getTableHeader();
 		// 设置表头的大小
@@ -118,7 +126,7 @@ public class CommoditySearch {
 		// 设置表头字体大小
 		head.setFont(new Font("宋体", Font.BOLD, 20));
 		// head.setForeground(Color.cyan);
-		head.setBackground(Color.cyan);
+		head.setBackground(color);
 		// 设置表格的行宽
 		jTable.setRowHeight(30);
 		// 设置表格行中字体大小
@@ -132,12 +140,18 @@ public class CommoditySearch {
 		addEvent();
 
 		// 加入分层窗口
-		jLayeredPane.add(label, Integer.valueOf(0), 0);
-		jLayeredPane.add(jLabel2, Integer.valueOf(100), 2);
-		jLayeredPane.add(box, Integer.valueOf(100), 3);
-		jLayeredPane.add(field, Integer.valueOf(100), 4);
-		jLayeredPane.add(button, Integer.valueOf(100), 5);
-		jLayeredPane.add(pane, Integer.valueOf(100), 6);
+		jLayeredPane.add(label, 0, 0);
+		jLayeredPane.add(jLabel2, 100, 2);
+		jLayeredPane.add(box, 100, 3);
+		jLayeredPane.add(field, 100, 4);
+		jLayeredPane.add(button, 100, 5);
+		jLayeredPane.add(pane, 100, 6);
+
+		// TODO 在这里添加商品
+		List<Goods> goodsList = GoodsService.getAllGoods();
+		for(Goods goods: goodsList) {
+
+		}
 	}
 
 	private void addEvent() {
@@ -162,26 +176,26 @@ public class CommoditySearch {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				model.setRowCount(0);
-				if (s.equals("按照编号查找")) {
-					commodity = field.getText().trim();
-					id = Integer.parseInt(commodity);
-					FindCommodity.findcomid(model, id);
-				} else if (s.equals("按照商品名查找")) {
-					commodity = field.getText().trim();
-					FindCommodity.findcommodityname(model, commodity);
-				} else if (s.equals("按照商品状态查找")) {
-					commodity = field.getText().trim();
-					FindCommodity.findstatus(model, commodity);
-				}else if (s.equals("按照类别查找")){
-					commodity = field.getText().trim();
-					FindCommodity.findtype(model, commodity);
-				} else if (s.equals("按照厂家查找")) {
-					try {
-						commodity = field.getText().trim();
-						FindCommodity.findmanufacturer(model, commodity);
-					} catch (Exception e1) {
-					}
-				}
+//				if (s.equals("按照编号查找")) {
+//					commodity = field.getText().trim();
+//					id = Integer.parseInt(commodity);
+//					FindCommodity.findcomid(model, id);
+//				} else if (s.equals("按照商品名查找")) {
+//					commodity = field.getText().trim();
+//					FindCommodity.findcommodityname(model, commodity);
+//				} else if (s.equals("按照商品状态查找")) {
+//					commodity = field.getText().trim();
+//					FindCommodity.findstatus(model, commodity);
+//				}else if (s.equals("按照类别查找")){
+//					commodity = field.getText().trim();
+//					FindCommodity.findtype(model, commodity);
+//				} else if (s.equals("按照厂家查找")) {
+//					try {
+//						commodity = field.getText().trim();
+//						FindCommodity.findmanufacturer(model, commodity);
+//					} catch (Exception e1) {
+//					}
+//				}
 				field.setText("");
 			}
 		});

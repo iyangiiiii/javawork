@@ -1,9 +1,12 @@
 package site.iyangiiiii;
 
-import site.iyangiiiii.UI.Land;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+@SpringBootApplication
 public class Main {
 	public static void main(String[] args) {
-		new Land();
+		SpringApplicationBuilder builder = new SpringApplicationBuilder(Main.class);
+		builder.headless(false).run(args);
 	}
 }

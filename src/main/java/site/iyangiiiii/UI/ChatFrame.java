@@ -1,26 +1,14 @@
 package site.iyangiiiii.UI;
+import site.iyangiiiii.Utils.Global;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
 
-class ChatPanel extends JPanel {
-    private Image backgroundImage;
-
-    public ChatPanel(Image backgroundImage) {
-        this.backgroundImage = backgroundImage;
-    }
-
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
-    }
-}
-
 public class ChatFrame {
     public JPanel createChatPanel() {
-        ImageIcon icon = new ImageIcon("src/main/java/site/iyangiiiii/img/chatframe.jpg");
+        ImageIcon icon = new ImageIcon(Global.getImgPath("chatframe.jpg"));
         Image img = icon.getImage();
         Image scaledImg = img.getScaledInstance(1500, 695, Image.SCALE_SMOOTH);
         ImageIcon scaledIcon = new ImageIcon(scaledImg);

@@ -1,6 +1,6 @@
 package site.iyangiiiii.UI;
 
-import site.iyangiiiii.Service.Adduser;
+import site.iyangiiiii.Utils.Global;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -62,7 +62,7 @@ public class Register {
 
 		addEvent();
 
-		ImageIcon originalIcon  = new ImageIcon("src/main/java/site/iyangiiiii/img/register.jpg");
+		ImageIcon originalIcon  = new ImageIcon(Global.getImgPath("register.jpg"));
 		Image originalImage = originalIcon.getImage();
 		Image scaledImage = originalImage.getScaledInstance(750, 550, Image.SCALE_SMOOTH);
 		ImageIcon scaledIcon = new ImageIcon(scaledImage);
@@ -153,13 +153,13 @@ public class Register {
 					JOptionPane.showMessageDialog(null, "两次输入密码不相同", "警告", JOptionPane.WARNING_MESSAGE);
 					empty();
 				} else {
-					if (Adduser.adduser(user, password)) {
-						JOptionPane.showMessageDialog(null, "注册成功");
-						frame.dispose();
-						new Land();
-					} else {
-						empty();
-					}
+//					if (UserService.adduser(user, password)) {
+//						JOptionPane.showMessageDialog(null, "注册成功");
+//						frame.dispose();
+//						new Land();
+//					} else {
+//						empty();
+//					}
 
 				}
 			}
@@ -169,7 +169,7 @@ public class Register {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
-				new Land();
+				new LoginFrame();
 			}
 		});
 	}

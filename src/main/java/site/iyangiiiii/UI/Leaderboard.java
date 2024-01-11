@@ -1,5 +1,7 @@
 package site.iyangiiiii.UI;
 
+import site.iyangiiiii.Utils.Global;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -60,7 +62,7 @@ public class Leaderboard extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         // 加载图片
-        ImageIcon imageIcon = new ImageIcon("src/main/java/site/iyangiiiii/img/rank.jpg");
+        ImageIcon imageIcon = new ImageIcon(Global.getImgPath("rank.jpg"));
         Image image = imageIcon.getImage();
 
         // 绘制背景图片
