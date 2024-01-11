@@ -10,13 +10,13 @@ public class Appraise {
     int aid;
     // 评价的用户
     @ManyToOne
-    @JoinColumn(name = "uid", referencedColumnName = "uid")
-    User uid;
+    @JoinColumn(name = "user", referencedColumnName = "uid")
+    User user;
 
-    // 评价的订单
+    // 评价的商品
     @ManyToOne
-    @JoinColumn(name = "oid", referencedColumnName = "oid")
-    Order oid;
+    @JoinColumn(name = "goods", referencedColumnName = "gid")
+    Goods goods;
 
     // 评价的内容
     @Column(columnDefinition = "TEXT")
@@ -25,9 +25,9 @@ public class Appraise {
     // 评价的星级
     int stars;
 
-    public Appraise(User uid, Order oid, String content, int stars) {
-        this.uid = uid;
-        this.oid = oid;
+    public Appraise(User user, Goods goods, String content, int stars) {
+        this.user = user;
+        this.goods = goods;
         this.content = content;
         this.stars = stars;
     }
@@ -35,24 +35,24 @@ public class Appraise {
     public Appraise() {
     }
 
+    public Goods getGoods() {
+        return goods;
+    }
+
+    public void setGoods(Goods goods) {
+        this.goods = goods;
+    }
+
     public int getAid() {
         return aid;
     }
 
-    public User getUid() {
-        return uid;
+    public User getUser() {
+        return user;
     }
 
-    public void setUid(User uid) {
-        this.uid = uid;
-    }
-
-    public Order getOid() {
-        return oid;
-    }
-
-    public void setOid(Order oid) {
-        this.oid = oid;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getContent() {

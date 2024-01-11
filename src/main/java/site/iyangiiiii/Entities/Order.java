@@ -11,15 +11,10 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int oid;
 
-    // 商品id
-    @ManyToOne
-    @JoinColumn(name = "goods", referencedColumnName = "gid")
-    Goods gid;
-
     // 客户id
     @ManyToOne
-    @JoinColumn(name = "users", referencedColumnName = "uid")
-    User uid;
+    @JoinColumn(name = "user", referencedColumnName = "uid")
+    User user;
 
     // 状态
     String states;
@@ -27,9 +22,8 @@ public class Order {
     // 订单的时间
     Date saleDate;
 
-    public Order(Goods gid, User uid, String states, Date saleDate) {
-        this.gid = gid;
-        this.uid = uid;
+    public Order(User user, String states, Date saleDate) {
+        this.user = user;
         this.states = states;
         this.saleDate = saleDate;
     }
@@ -41,20 +35,16 @@ public class Order {
         return oid;
     }
 
-    public Goods getGid() {
-        return gid;
+    public void setOid(int oid) {
+        this.oid = oid;
     }
 
-    public void setGid(Goods gid) {
-        this.gid = gid;
+    public User getUser() {
+        return user;
     }
 
-    public User getUid() {
-        return uid;
-    }
-
-    public void setUid(User uid) {
-        this.uid = uid;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getStates() {
