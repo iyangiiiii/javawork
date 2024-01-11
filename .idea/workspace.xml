@@ -5,9 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ca09a96f-d69f-4f6f-a374-0ffd686f2f42" name="更改" comment="重构数据库操作">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/site/iyangiiiii/Service/Commodity.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/site/iyangiiiii/UI/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/site/iyangiiiii/UI/MainFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/site/iyangiiiii/UI/LoginFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/site/iyangiiiii/UI/LoginFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.example.properties" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,6 +54,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;maven&quot;,
     &quot;last_opened_file_path&quot;: &quot;D:/Documents/JavaProjects/JavaWork&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -111,6 +113,9 @@
       <workItem from="1704865122160" duration="4968000" />
       <workItem from="1704874079492" duration="7287000" />
       <workItem from="1704937249431" duration="2185000" />
+      <workItem from="1704972138785" duration="184000" />
+      <workItem from="1704972329667" duration="1357000" />
+      <workItem from="1704973695087" duration="1997000" />
     </task>
     <task id="LOCAL-00001" summary="更改图片绝对路径为相对路径">
       <option name="closed" value="true" />
