@@ -190,9 +190,7 @@ public class LoginFrame {
 	}
 
 	private ImageIcon getCaptchaImage() {
-		// TODO: 从后端获取验证码图像的逻辑，返回一个 ImageIcon
-		// 例如，你可以使用网络请求来获取验证码图像
-		// 注意：此处仅为示例，实际实现取决于你的后端实现方式
+
 		 ImageIcon captchaIcon = new ImageIcon(Global.getImgPath("test.png"));
 		 captchaIcon.setImage(captchaIcon.getImage().getScaledInstance(110, 50, Image.SCALE_SMOOTH));
 		 return captchaIcon;
