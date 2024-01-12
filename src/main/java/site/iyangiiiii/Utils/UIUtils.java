@@ -4,6 +4,11 @@ import javax.swing.*;
 import java.awt.*;
 
 public class UIUtils {
+    /**
+     * 在某个部件旁边显示一个含有文字的泡
+     * @param component 部件
+     * @param text 需要显示的文字
+     */
     public static void showTooltip(JComponent component, String text) {
         ToolTipManager toolTipManager = ToolTipManager.sharedInstance();
         toolTipManager.setInitialDelay(0);

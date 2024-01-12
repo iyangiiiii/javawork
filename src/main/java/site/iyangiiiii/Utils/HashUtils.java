@@ -8,6 +8,12 @@ import java.util.logging.Logger;
 
 public class HashUtils {
     protected static final Logger logger = Logger.getLogger("HashUtils");
+
+    /**
+     * 尝试哈希字符串
+     * @param input 要哈希的字符串
+     * @return 成功返回 字符串的sha256值, 否则返回null
+     */
     public static String calculateSHA256(String input) {
         try {
             // 获取 MessageDigest 实例，指定算法为 SHA-256
@@ -29,7 +35,7 @@ public class HashUtils {
             return hexStringBuilder.toString();
         } catch (NoSuchAlgorithmException e) {
             logger.log(Level.SEVERE, "SHA-256 algorithm not supported",e);
-            return "";
+            return null;
         }
     }
 }

@@ -1,29 +1,50 @@
 package site.iyangiiiii.API;
 
+import site.iyangiiiii.Utils.ErrorUtils;
+
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
 public class CaptchaAPI {
+    private static int width = 110, height = 50;
     protected static String curCaptcha;
     protected static Image captchaImage;
 
+    /**
+     * 获取验证码图像
+     * @return 验证码图像
+     */
     public static Image generateCaptcha() {
         curCaptcha = generateRandomText(4);
         captchaImage = generateCaptcha(curCaptcha);
         return captchaImage;
     }
 
+    /**
+     * 验证用户输入的验证码与上次生成的验证码是否相同
+     * 注意, 这个方法调用前一定要先调用generateCaptcha方法
+     * @param input 用户输入
+     * @return 相同返回true, 否则返回false
+     */
     public static boolean verify(String input) {
+        if(curCaptcha == null) {
+            ErrorUtils.setLastError(7, "在验证之前没有生成过验证码");
+            throw new RuntimeException("在验证之前没有生成过验证码");
+        }
         String inputStr = input.toLowerCase();
         String standardStr = curCaptcha.toLowerCase();
 
         return inputStr.equals(standardStr);
     }
 
+    /**
+     * 获取验证码图像
+     * @param captchaText 验证码文字
+     * @return 验证码图像
+     */
     protected static BufferedImage generateCaptcha(String captchaText) {
-        int width = 110, height = 50;
         Random random = new Random();
         BufferedImage captchaImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
         Graphics2D g2d = captchaImage.createGraphics();
@@ -70,6 +91,12 @@ public class CaptchaAPI {
         return captchaImage;
     }
 
+    /**
+     * 在指定画布上添加条纹
+     * @param g2d 画布
+     * @param width 画布宽
+     * @param height 画布高
+     */
     private static void addRandomStripes(Graphics2D g2d, int width, int height) {
         Random random = new Random();
 
@@ -88,6 +115,11 @@ public class CaptchaAPI {
         }
     }
 
+    /**
+     * 生成指定长度的验证码
+     * @param length 验证码长度
+     * @return 验证码
+     */
     private static String generateRandomText(int length) {
         String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
         StringBuilder captchaText = new StringBuilder();

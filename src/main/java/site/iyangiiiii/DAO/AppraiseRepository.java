@@ -14,4 +14,5 @@ public interface AppraiseRepository extends JpaRepository<Appraise, Integer> {
     List<Appraise> findAppraisesByGoods(Goods goods);
     List<Appraise> findAppraisesByStars(int stars);
     List<Appraise> findAppraisesByStarsBetween(int lhs, int rhs);
+    List<Appraise> findAppraisesByStarsAfterAndGoods(int limit, Goods goods);
 }

@@ -1,10 +1,9 @@
 package site.iyangiiiii.Utils;
 
 import site.iyangiiiii.API.CaptchaAPI;
-import site.iyangiiiii.Entities.Chat;
-import site.iyangiiiii.Entities.Goods;
-import site.iyangiiiii.Entities.Order;
-import site.iyangiiiii.Entities.User;
+import site.iyangiiiii.Bean.RankingInfo;
+import site.iyangiiiii.Entities.*;
+import site.iyangiiiii.Service.AppraiseService;
 import site.iyangiiiii.Service.ChatService;
 import site.iyangiiiii.Service.GoodsService;
 import site.iyangiiiii.Service.OrderService;
@@ -12,16 +11,28 @@ import site.iyangiiiii.Service.OrderService;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class APIUtils {
+    protected static Logger logger = Logger.getLogger("APIUtils");
     /**
      * 获取验证码图案
-     * @return 验证码图案
+     * @return 成功返回 验证码图案, 否则返回null
      */
     public static ImageIcon CaptchaImage() {
-        Image captcha = CaptchaAPI.generateCaptcha();
-        return new ImageIcon(captcha);
+        try {
+            Image captcha = CaptchaAPI.generateCaptcha();
+            return new ImageIcon(captcha);
+        }
+        catch (Exception e) {
+            ErrorUtils.setLastError(5, "生成验证码失败.");
+            logger.log(Level.SEVERE, "APIUtils: 生成验证码失败.", e);
+            return null;
+        }
     }
 
     /**
@@ -30,7 +41,17 @@ public class APIUtils {
      * @return 返回验证码是否正确
      */
     public static boolean verifyCaptcha(String captcha) {
-        return CaptchaAPI.verify(captcha);
+        try {
+            ErrorUtils.clearError();
+            return CaptchaAPI.verify(captcha);
+        }
+        catch (Exception e) {
+            logger.log(Level.SEVERE, "APIUtils: 验证验证码失败.", e);
+            if(!ErrorUtils.isError()) {
+                ErrorUtils.setLastError(9, "验证验证码失败.");
+            }
+            return false;
+        }
     }
 
     /**
@@ -157,11 +178,52 @@ public class APIUtils {
         }
     }
     /**
-     * 排行榜 从数据库中获取用于展示排行榜的数据
-     * @return 获取到的内容
+     * 获取排行榜的数据
+     * 有若干条数据, 每一条数据格式如下:
+     * 商品id, 商品名, 销量, 好评率, 价格
+     * @return 成功返回数据, 否则返回null
      */
-    public static int test6() {
-        return 1;
+    public static List<Vector<String>> getRanking() {
+        List<RankingInfo> temp = new ArrayList<>();
+        List<Vector<String>> ret = new ArrayList<>();
+        List<Goods> goodsList = GoodsService.getAllSoldGoods();
+        if (goodsList == null){
+            ErrorUtils.setLastError(3,"获取所有商品失败.");
+            return null;
+        }
+        for (Goods item : goodsList) {
+            RankingInfo info = new RankingInfo();
+            List<Order> orderList = OrderService.findAllOrdersContainsGoods(item.getGid());
+            if (orderList == null){
+                ErrorUtils.setLastError(3,"获取所有包含商品的订单失败.");
+                return null;
+            }
+            List<Appraise> appraiseList = AppraiseService.getApplauseList(item.getGid());
+            if (appraiseList == null){
+                ErrorUtils.setLastError(3,"获取所有商品的评论失败.");
+                return null;
+            }
+            info.setGoods(item);
+            info.setSalesVolume(orderList.size());
+            info.setSalesVolume(appraiseList.size());
+
+            temp.add(info);
+        }
+
+        temp.sort(new Comparator<RankingInfo>() {
+            @Override
+            public int compare(RankingInfo o1, RankingInfo o2) {
+                int t = Integer.compare(o1.getSalesVolume(), o2.getSalesVolume());
+                if(t != 0) return t;
+                return Double.compare(o1.getApplauseRate(), o2.getApplauseRate());
+            }
+        });
+
+        for(RankingInfo rankingInfo: temp) {
+            ret.add(rankingInfo.toVector());
+        }
+
+        return ret;
     }
     /**
      * 排行榜 从数据库中获取用于展示排行榜的数据

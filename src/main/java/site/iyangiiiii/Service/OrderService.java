@@ -172,4 +172,18 @@ public class OrderService {
             return null;
         }
     }
+
+    /**
+     * 查询所有存在的订单
+     * @return 成功返回 符合要求的所有订单, 否则返回null
+     */
+    public static List<Order> getAllOrders() {
+        try {
+            return orderService.orderGoodsRepository.findAllDistinctOrders();
+        }
+        catch (Exception e) {
+            logger.log(Level.SEVERE, "OrderService: ", e);
+            return null;
+        }
+    }
 }

@@ -14,10 +14,20 @@ public class Global {
 
     public static String IMAGE_PATH = RESOURCES_PATH + "/Image/";
 
+    /**
+     * 将相对路径转换为绝对路径
+     * @param relativePath 相对路径
+     * @return 绝对路径
+     */
     public static String getAbsolutePath(String relativePath) {
         return Paths.get(relativePath).toAbsolutePath().toString();
     }
 
+    /**
+     * 根据图片名获取图片路径
+     * @param imgName 图片名
+     * @return 图片路径
+     */
     public static String getImgPath(String imgName) {
         return IMAGE_PATH + imgName;
     }

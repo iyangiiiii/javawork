@@ -221,9 +221,28 @@ public class GoodsService {
         }
     }
 
+    /**
+     * 根据状态查询商品
+     * @param state 状态
+     * @return 成功返回 符合要求的所有商品, 否则返回null
+     */
     public static List<Goods> findGoodsByState(String state) {
         try {
             return goodsService.goodsRepository.findGoodsByState(state);
+        }
+        catch (Exception e) {
+            logger.log(Level.SEVERE, "GoodsService: ", e);
+            return null;
+        }
+    }
+
+    /**
+     * 查询所有销售过的商品
+     * @return 成功返回 符合要求的所有商品, 否则返回null
+     */
+    public static List<Goods> getAllSoldGoods() {
+        try {
+            return goodsService.orderGoodsRepository.findAllDistinctGoods();
         }
         catch (Exception e) {
             logger.log(Level.SEVERE, "GoodsService: ", e);
