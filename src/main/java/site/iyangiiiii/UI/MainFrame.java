@@ -6,6 +6,7 @@ import java.awt.Container;
 import java.awt.Font;
 import java.awt.Image;
 import javax.swing.ImageIcon;
+import java.awt.BorderLayout;
 /**
  * 主界面
  * @author K.X
@@ -18,7 +19,7 @@ import javax.swing.JTabbedPane;
 
 public class MainFrame extends JFrame{
 	/*
-	 * 选项卡     主界面       图书查询          图书借还       账号管理
+	 *
 	 * 
 	 * */
 	//选项卡
@@ -51,12 +52,16 @@ public class MainFrame extends JFrame{
 		ChatFrame chatFrame = new ChatFrame();
 		jTabbedPane.add("客服沟通", chatFrame.createChatPanel());
 
-		UserRatingInterface ratingPanel = new UserRatingInterface("123456", false);
+		UserRatingInterface ratingPanel = new UserRatingInterface("123456", true);
 		jTabbedPane.add("用户评价", ratingPanel);
 
 		Leaderboard leaderboardFrame = new Leaderboard();
 		leaderboardFrame.setVisible(true);
 		jTabbedPane.add("排行榜", leaderboardFrame);
+
+		Addcommodity addCommodity = new Addcommodity();
+		Addcommodity.AddCommodityPanel acPanel = addCommodity.new AddCommodityPanel();
+		jTabbedPane.add("商品管理", acPanel);
 
 		
 		con.add(jTabbedPane);
