@@ -7,6 +7,7 @@ import site.iyangiiiii.DAO.OrderGoodsRepository;
 import site.iyangiiiii.Entities.Goods;
 import site.iyangiiiii.Entities.Order;
 import site.iyangiiiii.Entities.OrderGoods;
+import site.iyangiiiii.Utils.Pair;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -110,6 +111,65 @@ public class GoodsService {
         try {
             goods = goodsService.goodsRepository.save(goods);
             return goods.getGid();
+        }
+        catch (Exception e) {
+            logger.log(Level.SEVERE, "GoodsService: ", e);
+            return -1;
+        }
+    }
+
+    /**
+     * 删除商品
+     * @param goods 需要删除的商品
+     * @return 成功返回0, 否则返回-1
+     */
+    public static int deleteGoods(Goods goods) {
+        try {
+            goodsService.goodsRepository.delete(goods);
+            return 0;
+        }
+        catch (Exception e) {
+            logger.log(Level.SEVERE, "GoodsService: ", e);
+            return -1;
+        }
+    }
+
+    /**
+     * 减少商品数量
+     * @param gid 需要减少的商品id
+     * @param num 需要减少的数量
+     * @return 成功返回0, 否则返回-1
+     */
+    public static int subGoods(int gid, int num) {
+        try {
+            Goods goods = goodsService.goodsRepository.findGoodsByGid(gid);
+            // 库存不够
+            if(goods.getInventory() < num) return -1;
+            goodsService.goodsRepository.save(goods);
+            return 0;
+        }
+        catch (Exception e) {
+            logger.log(Level.SEVERE, "GoodsService: ", e);
+            return -1;
+        }
+    }
+
+    /**
+     * 减少商品数量
+     * @param info 商品列表, first代表商品id, second代表商品出库数量
+     * @return 成功返回0, 否则返回-1
+     */
+    public static int subGoods(List<Pair<Integer, Integer>> info) {
+        try {
+            List<Goods> goodsList = new ArrayList<>();
+            for(Pair<Integer, Integer> item: info) {
+                Goods goods = goodsService.goodsRepository.findGoodsByGid(item.first());
+                if(goods.getInventory() < item.second()) return -1;
+                goods.setInventory(goods.getInventory()- item.second());
+                goodsList.add(goods);
+            }
+            goodsService.goodsRepository.saveAll(goodsList);
+            return 0;
         }
         catch (Exception e) {
             logger.log(Level.SEVERE, "GoodsService: ", e);
