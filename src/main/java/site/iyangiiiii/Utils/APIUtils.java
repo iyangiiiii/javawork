@@ -1,7 +1,10 @@
 package site.iyangiiiii.Utils;
 
 import site.iyangiiiii.API.CaptchaAPI;
+import site.iyangiiiii.Entities.Chat;
 import site.iyangiiiii.Entities.Goods;
+import site.iyangiiiii.Entities.User;
+import site.iyangiiiii.Service.ChatService;
 import site.iyangiiiii.Service.GoodsService;
 
 import javax.swing.*;
@@ -72,17 +75,19 @@ public class APIUtils {
 
     /**
      * 超级管理员 是否是超级管理员
-     * @return 是否是超级管理员
+     * @return 如果已登录返回 是否是超级管理员, 否则返回null
      */
-    public static boolean isAdmin() {
+    public static Boolean isAdmin() {
         return Global.curUser.isAdmin();
     }
     /**
-     * 客服沟通 分别从用户和商家两端进行对话
-     * @return 两端对话的内容
+     * 客服沟通 获取聊天记录
+     * @param lhs 左方
+     * @param rhs 右方
+     * @return 如果成功返回 双方的聊天记录(按照时间排序), 否则返回null
      */
-    public static int test4() {
-        return 1;
+    public static List<Chat> getHistory(int lhs, int rhs) {
+        return ChatService.getHistory(lhs, rhs);
     }
     /**
      * 订单查询 从数据库中展示数据并且通过一些标签查询订单
