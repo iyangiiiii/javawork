@@ -1,7 +1,10 @@
 package site.iyangiiiii.UI;
 
 import org.springframework.stereotype.Component;
+import site.iyangiiiii.Service.UserService;
+import site.iyangiiiii.Utils.APIUtils;
 import site.iyangiiiii.Utils.Global;
+import site.iyangiiiii.Utils.UIUtils;
 
 import java.awt.Dimension;
 import java.awt.Font;
@@ -10,13 +13,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
+import javax.swing.*;
 
 /**
  * 登陆界面
@@ -191,7 +188,7 @@ public class LoginFrame {
 
 	private ImageIcon getCaptchaImage() {
 
-		 ImageIcon captchaIcon = new ImageIcon(Global.getImgPath("test.png"));
+		 ImageIcon captchaIcon = APIUtils.CaptchaImage();
 		 captchaIcon.setImage(captchaIcon.getImage().getScaledInstance(110, 50, Image.SCALE_SMOOTH));
 		 return captchaIcon;
 	}
@@ -200,17 +197,30 @@ public class LoginFrame {
 		buttonLogin.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String user;
-				char[] password;
-				user = field.getText().trim();
-				password = field2.getPassword();
+				String captcha, username, password;
+				captcha = field3.getText();
+				username = field.getText().trim();
+				password = String.copyValueOf(field2.getPassword());
 
-				// TODO 验证用户
-				frame.dispose();
-				new MainFrame(user);
+				if(APIUtils.verifyCaptcha(captcha)) {
+					if (UserService.verify(username, password) == 0) {
+						frame.dispose();
+						new MainFrame(username);
+					} else {
+						JOptionPane.showMessageDialog(null, "账号或密码错误", "警告", JOptionPane.WARNING_MESSAGE);
+						field3.setText("");
+						refreshCaptchaImage();
 
-				//清空内存,防止密码泄露
-                Arrays.fill(password, '\0');
+						field2.setText("");
+						field2.requestFocus();
+					}
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "验证码错误", "警告", JOptionPane.WARNING_MESSAGE);
+					refreshCaptchaImage();
+					field3.setText("");
+					field3.requestFocus();
+				}
 			}
 		});
 

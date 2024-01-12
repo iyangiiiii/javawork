@@ -1,5 +1,6 @@
 package site.iyangiiiii.UI;
 
+import site.iyangiiiii.Service.UserService;
 import site.iyangiiiii.Utils.Global;
 
 import java.awt.Color;
@@ -25,7 +26,7 @@ public class RegisterFrame {
 	private JLabel jLabel6 = new JLabel("确认密码:");
 	private JLabel jLabel7 = new JLabel("                                       密码长度：6~16位，不能含有空格 ");
 
-	private String user;
+	private String username;
 	private String password;
 	private String password2;
 
@@ -140,10 +141,10 @@ public class RegisterFrame {
 		button.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				user = field.getText().trim();
+				username = field.getText().trim();
 				password = field4.getText().trim();
 				password2 = field5.getText().trim();
-				if (user.length() == 0) {
+				if (username.length() == 0) {
 					JOptionPane.showMessageDialog(null, "用户名不能为空", "警告", JOptionPane.WARNING_MESSAGE);
 					empty();
 				} else if (password.length() < 6 || password.length() > 12) {
@@ -153,13 +154,13 @@ public class RegisterFrame {
 					JOptionPane.showMessageDialog(null, "两次输入密码不相同", "警告", JOptionPane.WARNING_MESSAGE);
 					empty();
 				} else {
-//					if (UserService.adduser(user, password)) {
-//						JOptionPane.showMessageDialog(null, "注册成功");
-//						frame.dispose();
-//						new Land();
-//					} else {
-//						empty();
-//					}
+					if(UserService.createUser(username, password) != -1) {
+						JOptionPane.showMessageDialog(null, "注册成功");
+						frame.dispose();
+						new LoginFrame();
+					} else {
+						empty();
+					}
 
 				}
 			}
