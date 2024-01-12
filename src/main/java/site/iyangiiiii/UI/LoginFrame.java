@@ -1,6 +1,7 @@
 package site.iyangiiiii.UI;
 
 import org.springframework.stereotype.Component;
+import site.iyangiiiii.Entities.User;
 import site.iyangiiiii.Service.UserService;
 import site.iyangiiiii.Utils.APIUtils;
 import site.iyangiiiii.Utils.Global;
@@ -203,7 +204,10 @@ public class LoginFrame {
 				password = String.copyValueOf(field2.getPassword());
 
 				if(APIUtils.verifyCaptcha(captcha)) {
-					if (UserService.verify(username, password) == 0) {
+					User user = UserService.verify(username, password);
+					if (user != null) {
+						Global.curUser = user;
+
 						frame.dispose();
 						new MainFrame(username);
 					} else {

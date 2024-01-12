@@ -1,8 +1,12 @@
 package site.iyangiiiii.Utils;
 
+import site.iyangiiiii.Entities.User;
+
 import java.nio.file.Paths;
 
 public class Global {
+    public static User curUser = null;
+
     public static String RESOURCES_PATH = getAbsolutePath("src/main/resources/");
     public static String PACKAGE_PATH = getAbsolutePath("src/main/java/site/iyangiiiii/");
 

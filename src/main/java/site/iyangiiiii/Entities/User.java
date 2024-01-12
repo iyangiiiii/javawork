@@ -20,8 +20,6 @@ public class User {
     @Column(length = 50)
     String passwordSalt;
 
-    // 0代表普通用户
-    // 1代表管理员
     UserType userType;
 
     public User(String username, String passwordSha256, String passwordSalt, UserType userType) {
@@ -72,5 +70,9 @@ public class User {
 
     public void setUserType(UserType userType) {
         this.userType = userType;
+    }
+
+    public boolean isAdmin() {
+        return getUserType() == UserType.TYPE_ADMIN;
     }
 }

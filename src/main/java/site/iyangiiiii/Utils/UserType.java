@@ -1,8 +1,8 @@
 package site.iyangiiiii.Utils;
 
 public enum UserType {
-    TYPE_USER("Admin"),
-    TYPE_ADMIN("User"),
+    TYPE_USER("User"),
+    TYPE_ADMIN("Admin"),
     TYPE_SERVICE("Service");
     private final String type;
 

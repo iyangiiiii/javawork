@@ -69,23 +69,23 @@ public class UserService {
 	 * 验证用户账号密码的正确性
 	 * @param username 账号
 	 * @param password 密码
-	 * @return 成功返回0, 否则返回-1
+	 * @return 成功返回登录的用户实体, 否则返回null
 	 */
-	public static int verify(String username, String password) {
+	public static User verify(String username, String password) {
 		try {
 			User user = userService.userRepository.findUserByUsername(username);
 
-			if(user == null) return -1;
+			if(user == null) return null;
 
 			String passwordSalt = password + user.getPasswordSalt();
 			String passwordHash = HashUtils.calculateSHA256(passwordSalt);
-			if(!user.getUsername().equals(username)) return -1;
-			if(!user.getPasswordSha256().equals(passwordHash)) return -1;
+			if(!user.getUsername().equals(username)) return null;
+			if(!user.getPasswordSha256().equals(passwordHash)) return null;
 
-			return 0;
+			return user;
 		} catch (Exception e) {
 			logger.log(Level.SEVERE, "verify: ", e);
-			return -1;
+			return null;
 		}
 	}
 
