@@ -62,7 +62,7 @@ public class CommoditySearch {
 	public CommoditySearch() {
 		Color color = new Color(179, 206, 255);
 		// 改变背景图片
-		ImageIcon icon = new ImageIcon(Global.getImgPath("commoditysearch.png"));
+		ImageIcon icon = new ImageIcon(Global.getImgPath("commoditysearch.jpg"));
 		Image img = icon.getImage();
 		Image scaledImg = img.getScaledInstance(1500, 800, Image.SCALE_SMOOTH);
 		ImageIcon scaledIcon = new ImageIcon(scaledImg);

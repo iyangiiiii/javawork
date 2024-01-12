@@ -47,7 +47,7 @@ public class UserRatingInterface extends JPanel {
             ratingPanel.setOpaque(false);
         }
         // 创建用于显示评价的表格
-        String[] columnNames = {"用户名", "评价", "评分"};
+        String[] columnNames = {"用户名", "商品名", "评价", "评分"};
         tableModel = new DefaultTableModel(columnNames, 0);
 //        tableModel.setRowCount(0);
         JTable reviewTable = new JTable(tableModel);
@@ -57,9 +57,10 @@ public class UserRatingInterface extends JPanel {
         add(scrollPane, BorderLayout.CENTER);
 
         reviewTable.setFont(new Font("仿宋", Font.PLAIN, 20));
-        reviewTable.getColumnModel().getColumn(0).setMinWidth(20); // 第一列的宽度为200像素
-        reviewTable.getColumnModel().getColumn(1).setMinWidth(600); // 第二列的宽度为100像素
-        reviewTable.getColumnModel().getColumn(1).setMinWidth(20); // 第二列的宽度为100像素
+        reviewTable.getColumnModel().getColumn(0).setMinWidth(20);
+        reviewTable.getColumnModel().getColumn(1).setMinWidth(20);
+        reviewTable.getColumnModel().getColumn(2).setMinWidth(800);
+        reviewTable.getColumnModel().getColumn(2).setMinWidth(10);
 
         reviewTable.setOpaque(false);
         reviewTable.getTableHeader().setOpaque(false);
