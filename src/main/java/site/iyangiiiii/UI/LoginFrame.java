@@ -220,7 +220,7 @@ public class LoginFrame {
 				// TODO Auto-generated method stub
 				//frame.setVisible(false);
 				frame.dispose();
-				new Register();
+				new RegisterFrame();
 			}
 		});
 		CaptchaImage.addMouseListener(new java.awt.event.MouseAdapter() {

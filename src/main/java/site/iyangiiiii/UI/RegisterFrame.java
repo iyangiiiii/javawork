@@ -18,7 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-public class Register {
+public class RegisterFrame {
 
 	private JLabel jLabel2 = new JLabel("用 户 名：");
 	private JLabel jLabel5 = new JLabel(" 密  码：");
@@ -51,7 +51,7 @@ public class Register {
 
 	private JFrame frame = new JFrame("注册");
 
-	public Register() {
+	public RegisterFrame() {
 		frame.setSize(750, 550);
 		frame.setLayout(null);
 		frame.setLocationRelativeTo(null);
