@@ -3,9 +3,11 @@ package site.iyangiiiii.Service;
 import org.springframework.stereotype.Service;
 import site.iyangiiiii.DAO.UserRepository;
 import site.iyangiiiii.Entities.User;
+import site.iyangiiiii.Utils.HashUtils;
 import site.iyangiiiii.Utils.UserType;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -43,8 +45,15 @@ public class UserService {
 		try {
 			User user = new User();
 			user.setUsername(username);
-			user.setPasswordSha256(password);
 			user.setUserType(userType);
+
+			// 密码加盐
+			String salt = UUID.randomUUID().toString();
+			String passwordSalt = password + salt;
+			String passwordHash = HashUtils.calculateSHA256(passwordSalt);
+
+			user.setPasswordSha256(passwordHash);
+			user.setPasswordSalt(salt);
 
 			user = userService.userRepository.save(user);
 
@@ -65,8 +74,14 @@ public class UserService {
 	public static int verify(String username, String password) {
 		try {
 			User user = userService.userRepository.findUserByUsername(username);
+
+			if(user == null) return -1;
+
+			String passwordSalt = password + user.getPasswordSalt();
+			String passwordHash = HashUtils.calculateSHA256(passwordSalt);
 			if(!user.getUsername().equals(username)) return -1;
-			if(!user.getPasswordSha256().equals(password)) return -1;
+			if(!user.getPasswordSha256().equals(passwordHash)) return -1;
+
 			return 0;
 		} catch (Exception e) {
 			logger.log(Level.SEVERE, "verify: ", e);
