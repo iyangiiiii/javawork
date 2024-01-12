@@ -11,4 +11,6 @@ public interface OrderGoodsRepository extends JpaRepository<OrderGoods, Integer>
     OrderGoods findOrderGoodsByOgid(int ogid);
     List<OrderGoods> findOrderGoodsByOrders(Order oid);
     List<OrderGoods> findOrderGoodsByGoods(Goods gid);
+    List<OrderGoods> findOrderGoodsByGoodsIn(List<Goods> goodsList);
+    List<OrderGoods> findOrderGoodsByOrdersIn(List<Order> orderList);
 }

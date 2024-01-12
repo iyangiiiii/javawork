@@ -34,6 +34,10 @@ public class Goods {
         return gid;
     }
 
+    public void setGid(int gid) {
+        this.gid = gid;
+    }
+
     public String getFactory() {
         return factory;
     }

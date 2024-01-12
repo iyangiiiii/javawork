@@ -21,6 +21,10 @@ public class OrderGoods {
         this.goods = goods;
     }
 
+    public void setOgid(int ogid) {
+        this.ogid = ogid;
+    }
+
     public OrderGoods() {
     }
 

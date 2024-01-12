@@ -43,7 +43,7 @@ public class OrderService {
             return order;
         }
         catch (Exception e) {
-            logger.log(Level.SEVERE, "getAllGoods: ", e);
+            logger.log(Level.SEVERE, "OrderService: ", e);
             return null;
         }
     }
@@ -64,7 +64,7 @@ public class OrderService {
             return ret;
         }
         catch (Exception e) {
-            logger.log(Level.SEVERE, "getAllGoods: ", e);
+            logger.log(Level.SEVERE, "OrderService: ", e);
             return null;
         }
     }
@@ -79,7 +79,7 @@ public class OrderService {
             return orderService.orderRepository.findOrdersByStates(state);
         }
         catch (Exception e) {
-            logger.log(Level.SEVERE, "getAllGoods: ", e);
+            logger.log(Level.SEVERE, "OrderService: ", e);
             return null;
         }
     }
@@ -94,7 +94,7 @@ public class OrderService {
             return orderService.orderRepository.findOrdersBySaleDateBefore(date);
         }
         catch (Exception e) {
-            logger.log(Level.SEVERE, "getAllGoods: ", e);
+            logger.log(Level.SEVERE, "OrderService: ", e);
             return null;
         }
     }
@@ -109,7 +109,7 @@ public class OrderService {
             return orderService.orderRepository.findOrdersBySaleDateAfter(date);
         }
         catch (Exception e) {
-            logger.log(Level.SEVERE, "getAllGoods: ", e);
+            logger.log(Level.SEVERE, "OrderService: ", e);
             return null;
         }
     }
@@ -125,7 +125,50 @@ public class OrderService {
             return orderService.orderRepository.findOrdersBySaleDateBetween(lhs, rhs);
         }
         catch (Exception e) {
-            logger.log(Level.SEVERE, "getAllGoods: ", e);
+            logger.log(Level.SEVERE, "OrderService: ", e);
+            return null;
+        }
+    }
+
+    /**
+     * 查询所有含有某商品的所有订单
+     * @param gid 商品id
+     * @return 成功返回 符合要求的所有订单, 否则返回null
+     */
+    public static List<Order> findAllOrdersContainsGoods(int gid) {
+        try {
+            Goods goods = orderService.goodsRepository.findGoodsByGid(gid);
+            List<OrderGoods> res = orderService.orderGoodsRepository.findOrderGoodsByGoods(goods);
+            List<Order> ret = new ArrayList<>();
+            for(OrderGoods orderGoods : res) ret.add(orderGoods.getOrders());
+            return ret;
+        }
+        catch (Exception e) {
+            logger.log(Level.SEVERE, "OrderService: ", e);
+            return null;
+        }
+    }
+
+    /**
+     * 查询所有含有某些商品的所有订单
+     * @param gidList 商品id列表
+     * @return 成功返回 符合要求的所有订单, 否则返回null
+     */
+    public static List<Order> findAllOrdersContainsGoods(List<Integer> gidList) {
+        try {
+            List<Goods> goodsList = new ArrayList<>();
+            for(int i : gidList) {
+                Goods item = new Goods();
+                item.setGid(i);
+                goodsList.add(item);
+            }
+            List<OrderGoods> res = orderService.orderGoodsRepository.findOrderGoodsByGoodsIn(goodsList);
+            List<Order> ret = new ArrayList<>();
+            for(OrderGoods orderGoods : res) ret.add(orderGoods.getOrders());
+            return ret;
+        }
+        catch (Exception e) {
+            logger.log(Level.SEVERE, "OrderService: ", e);
             return null;
         }
     }

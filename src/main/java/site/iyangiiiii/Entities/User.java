@@ -31,6 +31,10 @@ public class User {
         this.userType = userType;
     }
 
+    public void setUid(int uid) {
+        this.uid = uid;
+    }
+
     public User() {
     }
 

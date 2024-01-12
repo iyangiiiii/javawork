@@ -47,6 +47,10 @@ public class Appraise {
         return aid;
     }
 
+    public void setAid(int aid) {
+        this.aid = aid;
+    }
+
     public User getUser() {
         return user;
     }
