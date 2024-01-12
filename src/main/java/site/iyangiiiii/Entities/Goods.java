@@ -14,16 +14,22 @@ public class Goods {
     String name;
     // 商品类型
     String variety;
+    // 价格
+    int price;
     // 库存
     Long inventory;
+    // 状态
+    String state;
     // 备注
     String remark;
 
-    public Goods(String factory, String name, String variety, Long inventory, String remark) {
+    public Goods(String factory, String name, String variety, int price, Long inventory, String state, String remark) {
         this.factory = factory;
         this.name = name;
         this.variety = variety;
+        this.price = price;
         this.inventory = inventory;
+        this.state = state;
         this.remark = remark;
     }
 
@@ -36,6 +42,22 @@ public class Goods {
 
     public void setGid(int gid) {
         this.gid = gid;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
     }
 
     public String getFactory() {

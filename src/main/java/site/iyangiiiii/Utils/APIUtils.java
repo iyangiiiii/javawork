@@ -3,12 +3,15 @@ package site.iyangiiiii.Utils;
 import site.iyangiiiii.API.CaptchaAPI;
 import site.iyangiiiii.Entities.Chat;
 import site.iyangiiiii.Entities.Goods;
+import site.iyangiiiii.Entities.Order;
 import site.iyangiiiii.Entities.User;
 import site.iyangiiiii.Service.ChatService;
 import site.iyangiiiii.Service.GoodsService;
+import site.iyangiiiii.Service.OrderService;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class APIUtils {
@@ -39,8 +42,8 @@ public class APIUtils {
      * @param variety 类别(字符串)
      * @return 如果成功 返回商品id, 否则返回-1
      */
-    public static int addGoods(String name, String factory, Long inventory, String remark, String variety) {
-        Goods goods = new Goods(factory, name, variety,inventory, remark);
+    public static int addGoods(String name, String factory, Long inventory, String remark, String variety, String state, int price) {
+        Goods goods = new Goods(factory, name, variety, price, inventory, state, remark);
         return GoodsService.addGoods(goods);
     }
 
@@ -89,12 +92,69 @@ public class APIUtils {
     public static List<Chat> getHistory(int lhs, int rhs) {
         return ChatService.getHistory(lhs, rhs);
     }
+
     /**
      * 订单查询 从数据库中展示数据并且通过一些标签查询订单
-     * @return 查询到的内容
+     * @param by 根据什么查询
+     * @param query 查询条件
+     * @return 如果成功返回 满足条件的数据, 否则返回null, 并设置错误
      */
-    public static int test5() {
-        return 1;
+    public static List<Order> findOrders(String by, String query) {
+        List<Integer> gidList = null;
+        List<Goods> goodsList = null;
+        List<Order> ret =new ArrayList<Order>();
+        switch (by){
+            case "按照编号查找":
+                Integer q = DataUtils.String2Integer(query);
+                if(q == null) {
+                    ErrorUtils.setLastError(1, "查询参数有误");
+                    return null;
+                }
+                ret.add(OrderService.findOrderByOid(q));
+                return ret;
+            case "按照类别查找":
+                goodsList = GoodsService.findGoodsByType(query);
+                if(goodsList == null){
+                    ErrorUtils.setLastError(1, "查询参数有误");
+                    return null;
+                }
+                gidList = new ArrayList<>();
+                for(Goods goods: goodsList) gidList.add(goods.getGid());
+                ret = OrderService.findAllOrdersContainsGoods(gidList);
+                return ret;
+            case "按照商品名查找":
+                goodsList = GoodsService.findGoodsByName(query);
+                if(goodsList == null){
+                    ErrorUtils.setLastError(1, "查询参数有误");
+                    return null;
+                }
+                gidList = new ArrayList<>();
+                for(Goods goods: goodsList) gidList.add(goods.getGid());
+                ret = OrderService.findAllOrdersContainsGoods(gidList);
+                return ret;
+            case "按照商品状态查找":
+                goodsList = GoodsService.findGoodsByState(query);
+                if(goodsList == null){
+                    ErrorUtils.setLastError(1, "查询参数有误");
+                    return null;
+                }
+                gidList = new ArrayList<>();
+                for(Goods goods: goodsList) gidList.add(goods.getGid());
+                ret = OrderService.findAllOrdersContainsGoods(gidList);
+                return ret;
+            case "按照厂家查找":
+                goodsList = GoodsService.findGoodsByFactory(query);
+                if(goodsList == null){
+                    ErrorUtils.setLastError(1, "查询参数有误");
+                    return null;
+                }
+                gidList = new ArrayList<>();
+                for(Goods goods: goodsList) gidList.add(goods.getGid());
+                ret = OrderService.findAllOrdersContainsGoods(gidList);
+                return ret;
+            default:
+                return null;
+        }
     }
     /**
      * 排行榜 从数据库中获取用于展示排行榜的数据

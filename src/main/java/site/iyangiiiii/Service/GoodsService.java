@@ -220,4 +220,14 @@ public class GoodsService {
             return null;
         }
     }
+
+    public static List<Goods> findGoodsByState(String state) {
+        try {
+            return goodsService.goodsRepository.findGoodsByState(state);
+        }
+        catch (Exception e) {
+            logger.log(Level.SEVERE, "GoodsService: ", e);
+            return null;
+        }
+    }
 }

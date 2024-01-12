@@ -13,4 +13,5 @@ public interface GoodsRepository extends JpaRepository<Goods, Integer> {
     List<Goods> findGoodsByGidNotNull();
     List<Goods> findGoodsByFactory(String factory);
     List<Goods> findGoodsByVariety(String variety);
+    List<Goods> findGoodsByState(String state);
 }
