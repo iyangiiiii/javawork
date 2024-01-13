@@ -21,6 +21,19 @@ public class ManageCommodity {
     public class AddCommodityPanel extends JPanel {
 
         // 标签
+
+        private JLabel jLabel_s = new JLabel("请选择查询方式：");
+        // 文本框
+        private JTextField field_s = new JTextField(25);
+        // 大小
+        private Dimension dimension_s = new Dimension(220, 30);
+        // 下拉框
+        private JComboBox<String> box_s = new JComboBox<String>();
+        // 按钮
+        private JButton button_s = new JButton("搜索");
+        private Font font_s = new Font("宋体", Font.BOLD, 20);
+
+
         private JLabel jLabel = new JLabel("添加商品");
         private JLabel jLabel2 = new JLabel("商品名：");
         private JLabel jLabel3 = new JLabel("厂  商：");
@@ -131,6 +144,7 @@ public class ManageCommodity {
 
         private void addComponents() {
             // 添加商品界面的其他组件
+            Color color = new Color(179, 206, 255);
 
             jLabel.setFont(font);
             jLabel.setBounds(195, 80, 400, 100);
@@ -154,6 +168,26 @@ public class ManageCommodity {
             jLabel7.setBounds(125, 400, 250, 30);
 
             // 下拉框
+            box_s.setSize(dimension_s);
+            box_s.addItem("按照商品名查找");
+            box_s.addItem("按照厂商查找");
+            box_s.addItem("按照库存查找");
+            box_s.addItem("按照类别查找");
+            box_s.addItem("按照装填查找");
+            box_s.addItem("按照价格查找");
+            box_s.setFont(font_s);
+            box_s.setBounds(550, 155, 200, 40);
+            box_s.setOpaque(false);
+
+            field_s.setFont(font3);
+            field_s.setBounds(800, 155, 250, 40);
+            field_s.setOpaque(false);
+
+            button_s.setFont(font2);
+            button_s.setBounds(1100, 155, 100, 40);
+            button_s.setForeground(Color.BLACK);
+            button_s.setBackground(color);
+            button_s.setOpaque(false);
 
 
             field4.setFont(font3);
@@ -201,6 +235,9 @@ public class ManageCommodity {
             add(field5);
             add(box);
             add(button);
+            add(box_s);
+            add(field_s);
+            add(button_s);
         }
     }
 
