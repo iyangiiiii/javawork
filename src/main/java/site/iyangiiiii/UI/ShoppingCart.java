@@ -92,25 +92,12 @@ public class ShoppingCart extends JPanel {
         buyButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                List<Goods> goodsList = new ArrayList<>();
-                Vector<Vector> data = cartTableModel.getDataVector();
-                for(Vector item: data) {
-                    String goodsName = (String) item.get(0);
-                    Goods goods = GoodsService.findGoodsByName(goodsName);
-                    goodsList.add(goods);
+                double rowCount = cartTableModel.getRowCount();
+                double total = 0.0;
+                for (int i = 0; i < rowCount; i++) {
+                    total += (double) cartTableModel.getValueAt(i, 1);
                 }
-                if(APIUtils.addOrder("未发货", goodsList) == 0) {
-                    double rowCount = cartTableModel.getRowCount();
-                    double total = 0.0;
-                    for (int i = 0; i < rowCount; i++) {
-                        total += (double) cartTableModel.getValueAt(i, 1);
-                    }
-                    // 清空购物车
-                    cartTableModel.setRowCount(0);
-                }
-                else {
-                    JOptionPane.showMessageDialog(ShoppingCart.this, "购买失败！");
-                }
+                showConfirmationDialog(total);
             }
         });
 
@@ -174,11 +161,20 @@ public class ShoppingCart extends JPanel {
         int option = JOptionPane.showConfirmDialog(ShoppingCart.this, message, "确认支付", JOptionPane.YES_NO_OPTION);
 
         if (option == JOptionPane.YES_OPTION) {
-            // 用户确认支付，可以在这里处理支付逻辑
-            JOptionPane.showMessageDialog(ShoppingCart.this, "支付成功！");
-            // 清空购物车
-            cartTableModel.setRowCount(0);
-            updateTotalPrice(); // 更新总价格显示
+            List<Goods> goodsList = new ArrayList<>();
+            Vector<Vector> data = cartTableModel.getDataVector();
+            for(Vector item: data) {
+                String goodsName = (String) item.get(0);
+                Goods goods = GoodsService.findGoodsByName(goodsName);
+                goodsList.add(goods);
+            }
+            if(APIUtils.addOrder("未发货", goodsList) == 0) {
+                updateTotalPrice(); // 更新总价格显示
+                cartTableModel.setRowCount(0);
+            }
+            else {
+                JOptionPane.showMessageDialog(ShoppingCart.this, "购买失败！");
+            }
         }
     }
     private void updateTotalPrice() {
