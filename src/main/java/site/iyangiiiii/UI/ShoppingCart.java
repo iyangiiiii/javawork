@@ -1,5 +1,10 @@
 package site.iyangiiiii.UI;
 
+import site.iyangiiiii.Entities.Goods;
+import site.iyangiiiii.Entities.Order;
+import site.iyangiiiii.Service.GoodsService;
+import site.iyangiiiii.Service.OrderService;
+import site.iyangiiiii.Utils.APIUtils;
 import site.iyangiiiii.Utils.Global;
 import javax.swing.*;
 import java.awt.*;
@@ -10,6 +15,10 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Vector;
 
 public class ShoppingCart extends JPanel {
     private DefaultListModel<Product> productList;
@@ -47,11 +56,21 @@ public class ShoppingCart extends JPanel {
         buyButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // 处理购买按钮的点击事件
-                // 在这里可以编写购买商品的逻辑
-                JOptionPane.showMessageDialog(ShoppingCart.this, "购买成功！");
-                // 清空购物车
-                cartTableModel.setRowCount(0);
+                List<Goods> goodsList = new ArrayList<>();
+                Vector<Vector> data = cartTableModel.getDataVector();
+                for(Vector item: data) {
+                    String goodsName = (String) item.get(0);
+                    Goods goods = GoodsService.findGoodsByName(goodsName);
+                    goodsList.add(goods);
+                }
+                if(APIUtils.addOrder("未发货", goodsList) == 0) {
+                    JOptionPane.showMessageDialog(ShoppingCart.this, "购买成功！");
+                    // 清空购物车
+                    cartTableModel.setRowCount(0);
+                }
+                else {
+                    JOptionPane.showMessageDialog(ShoppingCart.this, "购买失败！");
+                }
             }
         });
 

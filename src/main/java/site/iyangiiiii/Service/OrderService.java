@@ -10,6 +10,7 @@ import site.iyangiiiii.Entities.Goods;
 import site.iyangiiiii.Entities.Order;
 import site.iyangiiiii.Entities.OrderGoods;
 import site.iyangiiiii.Entities.User;
+import site.iyangiiiii.Utils.Global;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -220,6 +221,28 @@ public class OrderService {
         catch (Exception e) {
             logger.log(Level.SEVERE, "OrderService: ", e);
             return null;
+        }
+    }
+
+    /**
+     * 添加一个订单
+     * @param user 订单的发起者
+     * @param state 订单的状态
+     * @param date 订单创建的时间
+     * @return 成功返回 订单编号, 否则返回-1
+     */
+    public static int addOrder(User user, String state, java.util.Date date) {
+        try {
+            Order order = new Order();
+            order.setSaleDate(new java.sql.Date(new java.util.Date().getTime()));
+            order.setUser(Global.curUser);
+            order.setStates("未发货");
+            order = orderService.orderRepository.save(order);
+            return order.getOid();
+        }
+        catch (Exception e) {
+            logger.log(Level.SEVERE, "OrderService: ", e);
+            return -1;
         }
     }
 }

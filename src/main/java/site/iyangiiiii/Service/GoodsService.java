@@ -57,11 +57,11 @@ public class GoodsService {
     }
 
     /**
-     * 根据商品名查询商品(注意, 同一个商品名称可能会有多个商品名, 只有gid才是所有商品唯一的)
+     * 根据商品名查询商品
      * @param name 商品名
      * @return 成功返回 符合条件的商品, 否则返回 null
      */
-    public static List<Goods> findGoodsByName(String name) {
+    public static Goods findGoodsByName(String name) {
         try {
             return goodsService.goodsRepository.findGoodsByName(name);
         }

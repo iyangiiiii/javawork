@@ -356,5 +356,15 @@ public class APIUtils {
         }
         return new ArrayList<>(st);
     }
+
+    /**
+     * 添加一个订单
+     * @param state 订单状态
+     * @param goodsList 订单包含的商品
+     * @return 成功返回 0, 否则返回-1
+     */
+    public static int addOrder(String state, List<Goods> goodsList) {
+
+    }
 }
 
