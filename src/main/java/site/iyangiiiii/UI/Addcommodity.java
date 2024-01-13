@@ -9,9 +9,9 @@ import java.awt.*;
 public class Addcommodity {
 
     /**
-     * 添加图书界面
+     * 添加商品界面
      *
-     * @author K.X
+     * @author iyangiii
      */
     public class AddCommodityPanel extends JPanel {
 
@@ -21,10 +21,16 @@ public class Addcommodity {
         private JLabel jLabel3 = new JLabel("商品名：");
         private JLabel jLabel4 = new JLabel("厂  商：");
         private JLabel jLabel5 = new JLabel("库  存：");
+        private JLabel jLabel_d1 = new JLabel("删除商品");
+        private JLabel jLabel_d2 = new JLabel("商品编号：");
         // 文本框
         private JTextField field = new JTextField(20);
         private JTextField field2 = new JTextField(20);
         private JTextField field3 = new JTextField(20);
+        private JTextField field_d1 = new JTextField(22);
+        private JButton button_d1 = new JButton("确定");
+        private Font font_d1 = new Font("宋体", Font.BOLD, 40);
+        private Font font_d2 = new Font("宋体", Font.BOLD, 25);
         // 下拉框
         private JComboBox<String> box = new JComboBox<String>();
         // 按钮
@@ -44,6 +50,22 @@ public class Addcommodity {
         private void addComponents() {
             // 添加商品界面的其他组件
             // ...
+            jLabel_d1.setFont(font_d1);
+            jLabel_d2.setFont(font_d2);
+            jLabel_d1.setBounds(1100, 80, 400, 100);
+            jLabel_d2.setBounds(965, 200, 250, 30);
+            field_d1.setBounds(1100, 200, 200, 30);
+            button_d1.setBounds(1020, 270, 325, 35);
+            add(jLabel_d1);
+            add(jLabel_d2);
+            add(field_d1);
+            add(button_d1);
+
+            field_d1.setFont(font3);
+            button_d1.setFont(font2);
+
+            // 设置文本框透明
+            field_d1.setOpaque(false);
 
             jLabel.setFont(font);
             jLabel.setBounds(195, 80, 400, 100);
@@ -92,11 +114,6 @@ public class Addcommodity {
             add(field2);
             add(field3);
             add(button);
-        }
-
-        public void setModel(DefaultTableModel model) {
-            // 设置表格模型
-            // this.model = model;  // 这行可以省略，因为这里的模型并没有使用
         }
     }
 }
