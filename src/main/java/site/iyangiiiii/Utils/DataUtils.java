@@ -3,6 +3,8 @@ package site.iyangiiiii.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import site.iyangiiiii.Service.UserService;
 
+import java.util.List;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -23,5 +25,24 @@ public class DataUtils {
             logger.log(Level.SEVERE, "Fail to convert %s to integer.", e);
             return null;
         }
+    }
+
+    /**
+     * 将List<Vector<String>>类型转换为Object[][]类型
+     * @param listOfVectors
+     * @return
+     */
+    public static Object[][] convertListVectorToObjectArray(List<Vector<String>> listOfVectors) {
+        int numRows = listOfVectors.size();
+        int numCols = listOfVectors.isEmpty() ? 0 : listOfVectors.get(0).size();
+
+        Object[][] objectArray = new Object[numRows][numCols];
+
+        for (int i = 0; i < numRows; i++) {
+            Vector<String> vector = listOfVectors.get(i);
+            objectArray[i] = vector.toArray();
+        }
+
+        return objectArray;
     }
 }

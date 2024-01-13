@@ -183,9 +183,9 @@ public class APIUtils {
      * 商品id, 商品名, 销量, 好评率, 价格
      * @return 成功返回数据, 否则返回null
      */
-    public static String[][] getRanking() {
+    public static Object[][] getRanking() {
         List<RankingInfo> temp = new ArrayList<>();
-        List<String[]> ret = new ArrayList<>();
+        List<Vector<String>> ret = new ArrayList<>();
         List<Goods> goodsList = GoodsService.getAllSoldGoods();
         if (goodsList == null){
             ErrorUtils.setLastError(3,"获取所有商品失败.");
@@ -219,11 +219,7 @@ public class APIUtils {
             }
         });
 
-        for(RankingInfo rankingInfo: temp) {
-            ret.add((String[]) rankingInfo.toVector().toArray());
-        }
-
-        return (String[][]) ret.toArray();
+        return DataUtils.convertListVectorToObjectArray(ret);
     }
     /**
      * 排行榜 从数据库中获取用于展示排行榜的数据
