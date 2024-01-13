@@ -11,4 +11,5 @@ public interface ChatRepository extends JpaRepository<Chat, Integer> {
     List<Chat> findChatsByDest(User dest);
     List<Chat> findChatsByOrigin(User origin);
     List<Chat> findChatsByOriginAndDest(User origin, User dest);
+    List<Chat> findChatsByOriginOrDest(User lhs, User rhs);
 }

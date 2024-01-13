@@ -1,6 +1,7 @@
 package site.iyangiiiii.Utils;
 
 import site.iyangiiiii.API.CaptchaAPI;
+import site.iyangiiiii.Bean.ChatInfo;
 import site.iyangiiiii.Bean.RankingInfo;
 import site.iyangiiiii.Entities.*;
 import site.iyangiiiii.Service.AppraiseService;
@@ -104,14 +105,46 @@ public class APIUtils {
     public static Boolean isAdmin() {
         return Global.curUser.isAdmin();
     }
+
     /**
      * 客服沟通 获取聊天记录
      * @param lhs 左方
      * @param rhs 右方
      * @return 如果成功返回 双方的聊天记录(按照时间排序), 否则返回null
      */
-    public static List<Chat> getHistory(int lhs, int rhs) {
-        return ChatService.getHistory(lhs, rhs);
+    public static List<ChatInfo> getHistory(int lhs, int rhs) {
+        List<ChatInfo> ret = new ArrayList<>();
+        List<Chat> res = ChatService.getHistory(lhs, rhs);
+        for(Chat chat: res) {
+            ChatInfo chatInfo;
+            // 正向
+            if(lhs == chat.getOrigin().getUid())
+                chatInfo = new ChatInfo(chat.getOrigin(), chat.getDest(), 1, chat.getContent());
+            else
+                chatInfo = new ChatInfo(chat.getDest(), chat.getOrigin(), -1, chat.getContent());
+            ret.add(chatInfo);
+        }
+        return ret;
+    }
+
+    /**
+     * 客服沟通 获取聊天记录
+     * @param lhs 左方
+     * @return 如果成功返回 双方的聊天记录(按照时间排序), 否则返回null
+     */
+    public static List<ChatInfo> getHistory(int lhs) {
+        List<ChatInfo> ret = new ArrayList<>();
+        List<Chat> res = ChatService.getHistory(lhs);
+        for(Chat chat: res) {
+            ChatInfo chatInfo;
+            // 正向
+            if(lhs == chat.getOrigin().getUid())
+                chatInfo = new ChatInfo(chat.getOrigin(), chat.getDest(), 1, chat.getContent());
+            else
+                chatInfo = new ChatInfo(chat.getDest(), chat.getOrigin(), -1, chat.getContent());
+            ret.add(chatInfo);
+        }
+        return ret;
     }
 
     /**

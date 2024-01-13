@@ -1,12 +1,23 @@
 package site.iyangiiiii.UI;
+import site.iyangiiiii.Bean.ChatInfo;
+import site.iyangiiiii.Entities.Chat;
+import site.iyangiiiii.Service.ChatService;
+import site.iyangiiiii.Utils.APIUtils;
 import site.iyangiiiii.Utils.Global;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class ChatFrame {
+    protected static List<ChatInfo> curHistory = new ArrayList<>();
+    protected static DefaultTableModel model = new DefaultTableModel();
     public JPanel createChatPanel() {
         ImageIcon icon = new ImageIcon(Global.getImgPath("chatframe.jpg"));
         Image img = icon.getImage();
@@ -16,10 +27,8 @@ public class ChatFrame {
         ChatPanel panel = new ChatPanel(scaledIcon.getImage());
         panel.setLayout(new BorderLayout());
 
-        JTextArea chatArea = new JTextArea();
+        JTable chatArea = new JTable(model);
         chatArea.setOpaque(false);
-        chatArea.setEditable(false);
-        chatArea.setLineWrap(true);
         chatArea.setFont(new Font("宋体", Font.PLAIN, 20));
 
         JScrollPane scrollPane = new JScrollPane(chatArea);
@@ -39,20 +48,55 @@ public class ChatFrame {
         JButton sendButton = new JButton("Send");
         bottomPanel.add(sendButton, BorderLayout.EAST);
 
+        JTableHeader blankHeader = new JTableHeader();
+        blankHeader.setVisible(false);
+        chatArea.setTableHeader(blankHeader);
+
+        chatArea.setShowVerticalLines(false);
+        model.addColumn("1");
+        model.addColumn("2");
+        model.addColumn("3");
+
+        int tableWidth = 1500;
+        int sideWidth = (int) (tableWidth * 0.1);
+        int restWidth = tableWidth - sideWidth * 2;
+        chatArea.getColumnModel().getColumn(0).setPreferredWidth(sideWidth);
+        chatArea.getColumnModel().getColumn(1).setPreferredWidth(restWidth);
+        chatArea.getColumnModel().getColumn(2).setPreferredWidth(sideWidth);
+
+        DefaultTableCellRenderer customRenderer = new DefaultTableCellRenderer() {
+            @Override
+            public Component getTableCellRendererComponent(JTable table, Object value,
+                                                           boolean isSelected, boolean hasFocus,
+                                                           int row, int column) {
+                if(curHistory.get(row).getDirection() == 1)
+                    setHorizontalAlignment(SwingConstants.RIGHT);
+                else
+                    setHorizontalAlignment(SwingConstants.LEFT);
+
+                return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+            }
+        };
+
+        refresh();
+
+        chatArea.getColumnModel().getColumn(1).setCellRenderer(customRenderer);
+
         messageField.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                sendMessage(messageField, chatArea);
+//                sendMessage(messageField, chatArea);
             }
         });
 
         sendButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String message = messageField.getText();
-                chatArea.append("User1: " + message + "\n");
+                ChatService.addChat(1, message);
                 messageField.setText("");
+                refresh();
 
                 // 模拟延迟后的回复
-                simulateResponse(chatArea);
+//                simulateResponse(chatArea);
             }
         });
 
@@ -84,4 +128,11 @@ public class ChatFrame {
         }).start();
     }
 
+    protected void refresh(){
+        curHistory = APIUtils.getHistory(Global.curUser.getUid());
+        model.setRowCount(0);
+        for(ChatInfo chatInfo: curHistory) {
+            model.addRow(chatInfo.toVector());
+        }
+    }
 }

@@ -8,6 +8,7 @@ import site.iyangiiiii.DAO.OrderGoodsRepository;
 import site.iyangiiiii.DAO.UserRepository;
 import site.iyangiiiii.Entities.Chat;
 import site.iyangiiiii.Entities.User;
+import site.iyangiiiii.Utils.Global;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -51,6 +52,45 @@ public class ChatService {
         catch (Exception e) {
             logger.log(Level.SEVERE, "ChatService: ", e);
             return null;
+        }
+    }
+
+    /**
+     * 查找两方的聊天记录
+     * @param side 一方
+     * @return 成功返回双方的聊天记录, 失败返回null
+     */
+    public static List<Chat> getHistory(int side) {
+        try {
+            User user = new User();
+            user.setUid(side);
+            List<Chat> ret = new ArrayList<>();
+            ret = chatService.chatRepository.findChatsByOriginOrDest(user, user);
+
+            return ret;
+        }
+        catch (Exception e) {
+            logger.log(Level.SEVERE, "ChatService: ", e);
+            return null;
+        }
+    }
+
+    /**
+     * 添加一条聊天
+     * @param other 聊天的另一方
+     * @param content 聊天的内容
+     * @return 成功 返回cid, 否则返回-1
+     */
+    public static int addChat(int other, String content) {
+        try {
+            User lhs = Global.curUser, rhs = chatService.userRepository.findUserByUid(other);
+            Chat chat = new Chat(lhs, rhs, content);
+            chat = chatService.chatRepository.save(chat);
+            return chat.getCid();
+        }
+        catch (Exception e) {
+            logger.log(Level.SEVERE, "ChatService: ", e);
+            return -1;
         }
     }
 }
