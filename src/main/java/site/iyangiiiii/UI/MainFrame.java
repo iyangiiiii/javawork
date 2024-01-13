@@ -48,23 +48,24 @@ public class MainFrame extends JFrame{
 
 		jTabbedPane.setFont(font2);
 		jTabbedPane.add("主 界 面", jPanel);
-
+		ManageCommodity addCommodity = new ManageCommodity();
+		ManageCommodity.AddCommodityPanel acPanel = addCommodity.new AddCommodityPanel();
 		if (isadmin)
 		{
-			CommoditySearch search = new CommoditySearch();
-			jTabbedPane.add("订单管理",search.jLayeredPane);
-			ManageCommodity addCommodity = new ManageCommodity();
-			ManageCommodity.AddCommodityPanel acPanel = addCommodity.new AddCommodityPanel();
-			jTabbedPane.add("商品管理", acPanel);
+
 			ChatFrame chatFrame = new ChatFrame();
 			jTabbedPane.add("客户沟通", chatFrame.createChatPanel());
 		}
 		else {
-			ChatFrame chatFrame = new ChatFrame();
-			jTabbedPane.add("客服沟通", chatFrame.createChatPanel());
 			ShoppingCart shoppingPanel = new ShoppingCart();
 			jTabbedPane.add("商品选购", shoppingPanel);
+			ChatFrame chatFrame = new ChatFrame();
+			jTabbedPane.add("客服沟通", chatFrame.createChatPanel());
 		}
+		jTabbedPane.add("商品管理", acPanel);
+		CommoditySearch search = new CommoditySearch();
+		jTabbedPane.add("订单管理",search.jLayeredPane);
+
 		UserRatingInterface ratingPanel = new UserRatingInterface(Global.curUser.getUsername(), Global.curUser.isAdmin());
 		jTabbedPane.add("客户评价", ratingPanel);
 
