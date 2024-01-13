@@ -36,7 +36,7 @@ public class UserRatingInterface extends JPanel {
             ratingComboBox = new JComboBox<>(ratings);
             ratingPanel.add(ratingComboBox);
 
-            String[] goods = APIUtils.SoldGoods();
+            String[] goods = APIUtils.SoldGoods(Global.curUser.getUid());
             GoodsBox = new JComboBox<>(goods);
 
             JButton submitButton = new JButton("提交");
