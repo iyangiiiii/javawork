@@ -2,6 +2,9 @@ package site.iyangiiiii.Entities;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "goods")
 public class Goods implements Comparable<Goods> {
@@ -98,6 +101,17 @@ public class Goods implements Comparable<Goods> {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public Object[] toArray() {
+        List<String> ret = new ArrayList<>();
+        ret.add(getName());
+        ret.add(getFactory());
+        ret.add(String.valueOf(getInventory()));
+        ret.add(getVariety());
+        ret.add(getState());
+        ret.add(String.valueOf(getPrice()));
+        return ret.toArray();
     }
 
     @Override

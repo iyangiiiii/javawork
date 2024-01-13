@@ -48,7 +48,7 @@ public class ManageCommodity {
             // 设置布局为null，以便手动控制组件的位置
             setLayout(null);
             addComponents();
-            initTable();
+            refreshTable();
             // 添加背景图片
             ImageIcon backgroundIcon = new ImageIcon(Global.getImgPath("manage.jpg"));
             Image backgroundImg = backgroundIcon.getImage();
@@ -82,19 +82,17 @@ public class ManageCommodity {
                     } else {
                         JOptionPane.showMessageDialog(null, "添加商品失败：" + name);
                     }
+
+                    refreshTable();
                 }
             });
         }
-        private void initTable() {
+        private void refreshTable() {
             // 表头
             String[] columnNames = {"商品名", "厂商", "库存", "类别", "状态", "价格"};
 
             // 表格数据
-            Object[][] data = {
-                    {"商品1", "厂商1", 100, "类别1", "库存充足", 50.0},
-                    {"商品2", "厂商2", 50, "类别2", "库存不足", 30.0},
-                    // 可以根据需要添加更多商品信息的行
-            };
+            Object[][] data = APIUtils.getAllGoodsInfo();
             // 创建表格模型
             DefaultTableModel tableModel = new DefaultTableModel(data, columnNames);
 

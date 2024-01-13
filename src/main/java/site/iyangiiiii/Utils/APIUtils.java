@@ -314,8 +314,16 @@ public class APIUtils {
      * 商品管理 获取所有商品信息
      * @return 信息列表
      */
-    public static List<Goods> getAllGoodsInfo() {
-        return GoodsService.getAllGoods();
+    public static Object[][] getAllGoodsInfo() {
+        List<Goods> goodsList = GoodsService.getAllGoods();
+        int len;
+        if(goodsList == null) len = 0;
+        else len = goodsList.size();
+        Object[][] ret = new Object[len][6];
+        for(int i = 0; i < len; i++) {
+            ret[i] = goodsList.get(i).toArray();
+        }
+        return ret;
     }
     /**
      * 用户购买过的商品
