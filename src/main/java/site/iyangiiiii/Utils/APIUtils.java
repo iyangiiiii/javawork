@@ -343,5 +343,15 @@ public class APIUtils {
         for(int i = 0; i<len; i++) goodsList[i] = result.get(i).getName();
         return goodsList;
     }
+    /**
+     * 根据商品名获取商品价格
+     * @return 商品价格
+     */
+    public static double getprice()
+    {
+        return 1.0;
+    }
+
 }
+
 
