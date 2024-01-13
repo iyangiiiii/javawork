@@ -375,5 +375,14 @@ public class APIUtils {
         if(OrderService.addGoodsToOrder(oid, goodsList) == -1) return -1;
         return 0;
     }
+
+    /**
+     * 根据商品名获取商品价格
+     * @return 商品价格
+     */
+    public static double getprice()
+    {
+        return 1.0;
+    }
 }
 
