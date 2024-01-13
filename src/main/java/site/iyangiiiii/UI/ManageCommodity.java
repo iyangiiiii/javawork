@@ -7,6 +7,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.JTableHeader;
 
 public class ManageCommodity {
 
@@ -25,19 +28,15 @@ public class ManageCommodity {
         private JLabel jLabel5 = new JLabel("类  别：");
         private JLabel jLabel6 = new JLabel("状  态：");
         private JLabel jLabel7 = new JLabel("价  格：");
-        private JLabel jLabel_d1 = new JLabel("删除商品");
-        private JLabel jLabel_d2 = new JLabel("商品编号：");
         // 文本框
         private JTextField field = new JTextField(20);
         private JTextField field2 = new JTextField(20);
+        // 下拉框
+        private JComboBox<String> box = new JComboBox<String>();
         private JTextField field3 = new JTextField(20);
         private JTextField field4 = new JTextField(20);
         private JTextField field5 = new JTextField(20);
-        private JTextField field6 = new JTextField(20);
-        private JTextField field_d1 = new JTextField(22);
-        private JButton button_d1 = new JButton("确定");
-        private Font font_d1 = new Font("宋体", Font.BOLD, 40);
-        private Font font_d2 = new Font("宋体", Font.BOLD, 25);
+
         // 按钮
         private JButton button = new JButton("确定");
         // 字体
@@ -49,6 +48,7 @@ public class ManageCommodity {
             // 设置布局为null，以便手动控制组件的位置
             setLayout(null);
             addComponents();
+            initTable();
             // 添加背景图片
             ImageIcon backgroundIcon = new ImageIcon(Global.getImgPath("manage.jpg"));
             Image backgroundImg = backgroundIcon.getImage();
@@ -69,7 +69,7 @@ public class ManageCommodity {
                     String factory = field.getText();
                     String inv = field2.getText();
                     String variety = field3.getText();
-                    String state = field6.getText();
+                    String state = (String)box.getSelectedItem();
                     String pri = field5.getText();
                     Long inventory = Long.parseLong(inv);
                     int price = Integer.parseInt(pri);
@@ -84,48 +84,54 @@ public class ManageCommodity {
                     }
                 }
             });
+        }
+        private void initTable() {
+            // 表头
+            String[] columnNames = {"商品名", "厂商", "库存", "类别", "状态", "价格"};
 
-            // 为删除商品按钮添加事件监听器
-            button_d1.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    // 在这里添加删除商品的逻辑
-                    String productCode = field_d1.getText();
+            // 表格数据
+            Object[][] data = {
+                    {"商品1", "厂商1", 100, "类别1", "库存充足", 50.0},
+                    {"商品2", "厂商2", 50, "类别2", "库存不足", 30.0},
+                    // 可以根据需要添加更多商品信息的行
+            };
+            // 创建表格模型
+            DefaultTableModel tableModel = new DefaultTableModel(data, columnNames);
 
-                    // 调用删除商品的方法
-                    int gid = Integer.parseInt(productCode);
-                    int result = APIUtils.deleteGoods(gid);
+            // 创建表格
+            JTable table = new JTable(tableModel);
+            // 创建表格模型
+            JScrollPane scrollPane = new JScrollPane(table);
+            scrollPane.setBounds(500, 200, 900, 450);
 
-                    // 处理删除结果，可以根据实际情况进行修改
-                    if (result != -1) {
-                        JOptionPane.showMessageDialog(null, "成功删除商品：" + productCode);
-                    } else {
-                        JOptionPane.showMessageDialog(null, "删除商品失败：" + productCode);
-                    }
-                }
-            });
+            // 设置表格属性
+            table.setOpaque(false);
+            ((DefaultTableCellRenderer) table.getDefaultRenderer(Object.class)).setOpaque(false);
+
+            // 设置表头属性
+            JTableHeader head = table.getTableHeader();
+            head.setPreferredSize(new Dimension(head.getWidth(), 30));
+            head.setFont(new Font("宋体", Font.BOLD, 20));
+            head.setBackground(Color.CYAN);
+
+            // 设置表格行高度
+            table.setRowHeight(30);
+
+            // 设置表格行中字体大小
+            table.setFont(new Font("宋体", Font.ROMAN_BASELINE, 17));
+
+            // 设置表格内容居中
+            DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
+            renderer.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
+            table.setDefaultRenderer(Object.class, renderer);
+
+            // 将滚动窗格添加到面板中
+            add(scrollPane);
 
         }
 
         private void addComponents() {
             // 添加商品界面的其他组件
-            // ...
-            jLabel_d1.setFont(font_d1);
-            jLabel_d2.setFont(font_d2);
-            jLabel_d1.setBounds(1100, 80, 400, 100);
-            jLabel_d2.setBounds(965, 200, 250, 30);
-            field_d1.setBounds(1100, 200, 200, 30);
-            button_d1.setBounds(1020, 270, 325, 35);
-            add(jLabel_d1);
-            add(jLabel_d2);
-            add(field_d1);
-            add(button_d1);
-
-            field_d1.setFont(font3);
-            button_d1.setFont(font2);
-
-            // 设置文本框透明
-            field_d1.setOpaque(false);
 
             jLabel.setFont(font);
             jLabel.setBounds(195, 80, 400, 100);
@@ -148,6 +154,9 @@ public class ManageCommodity {
             jLabel7.setFont(font2);
             jLabel7.setBounds(125, 400, 250, 30);
 
+            // 下拉框
+
+
             field4.setFont(font3);
             field4.setBounds(245, 200, 200, 30);
             field4.setOpaque(false);
@@ -164,15 +173,16 @@ public class ManageCommodity {
             field3.setBounds(245, 320, 200, 30);
             field3.setOpaque(false);
 
-            field6.setFont(font3);
-            field6.setBounds(245, 360, 200, 30);
-            field6.setOpaque(false);
+            box.addItem("请选择状态");
+            box.addItem("库存充足");
+            box.addItem("库存不足");
+            box.setFont(font3);
+            box.setBounds(245, 360, 200, 30);
+            box.setOpaque(false);
 
             field5.setFont(font3);
             field5.setBounds(245, 400, 200, 30);
             field5.setOpaque(false);
-
-
 
             button.setFont(font2);
             button.setBounds(120, 505, 325, 35);
@@ -185,12 +195,12 @@ public class ManageCommodity {
             add(jLabel5);
             add(jLabel6);
             add(jLabel7);
+            add(field3);
             add(field);
             add(field2);
-            add(field3);
             add(field4);
             add(field5);
-            add(field6);
+            add(box);
             add(button);
         }
     }

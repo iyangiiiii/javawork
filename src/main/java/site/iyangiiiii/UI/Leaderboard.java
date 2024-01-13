@@ -6,6 +6,7 @@ import site.iyangiiiii.Utils.Global;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import javax.swing.table.JTableHeader;
 
 public class Leaderboard extends JPanel {
     private JTable leaderboardTable;
@@ -27,6 +28,12 @@ public class Leaderboard extends JPanel {
         Font tableFont = new Font("仿宋", Font.PLAIN, 24); // 字体、风格、字号
         leaderboardTable.setFont(tableFont);
 
+        JTableHeader head = leaderboardTable.getTableHeader();
+        // 设置表头字体大小
+        head.setFont(new Font("宋体", Font.BOLD, 20));
+        head.setForeground(Color.BLACK); // 设置表头文字颜色
+        head.setBackground(Color.CYAN);
+        head.setOpaque(true);
 
         // 设置行高度和列宽度
         int rowHeight = 40; // 行高度为40

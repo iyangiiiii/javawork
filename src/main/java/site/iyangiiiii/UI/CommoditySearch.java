@@ -31,13 +31,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
 public class CommoditySearch {
-	/*
-	 * 一个大标签
-	 * 
-	 * 一个下拉框 一个文本框 一个按钮
-	 * 
-	 * 一个表格
-	 */
+
 	// 分层窗格
 	public JLayeredPane jLayeredPane = new JLayeredPane();
 	// 标签
@@ -56,8 +50,6 @@ public class CommoditySearch {
 	private Font font2 = new Font("宋体", Font.BOLD, 20);
 	// 存储下拉选项
 	private String s;
-	private String commodity;
-	private int id;
 
 	public CommoditySearch() {
 		Color color = new Color(179, 206, 255);
@@ -78,10 +70,9 @@ public class CommoditySearch {
 		// 下拉框
 		box.setSize(dimension);
 		box.addItem("按照编号查找");
-		box.addItem("按照类别查找");
+		box.addItem("按照时间区间查找");
 		box.addItem("按照商品名查找");
 		box.addItem("按照商品状态查找");
-		box.addItem("按照厂家查找");
 		box.setFont(font2);
 		box.setBounds(350, 185, 200, 40);
 		// box.setBackground(Color.cyan);
@@ -93,7 +84,7 @@ public class CommoditySearch {
 		field.setBounds(600, 188, 250, 35);
 		field.setBackground(Color.WHITE);
 		field.setForeground(Color.BLACK);
-		field.setText("123");
+		field.setText("");
 		field.setOpaque(true);
 
 		// 按钮

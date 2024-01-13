@@ -7,6 +7,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 public class UserRatingInterface extends JPanel {
     private JTextField inputField;
@@ -51,6 +52,14 @@ public class UserRatingInterface extends JPanel {
         tableModel = new DefaultTableModel(columnNames, 0);
 //        tableModel.setRowCount(0);
         JTable reviewTable = new JTable(tableModel);
+
+        JTableHeader head = reviewTable.getTableHeader();
+        // 设置表头字体大小
+        head.setFont(new Font("宋体", Font.BOLD, 20));
+        head.setForeground(Color.BLACK); // 设置表头文字颜色
+        head.setBackground(Color.CYAN);
+        head.setOpaque(true);
+
         JScrollPane scrollPane = new JScrollPane(reviewTable);
         scrollPane.getViewport().setBackground(Color.WHITE); // 设置表格背景颜色为白色
         scrollPane.setBorder(BorderFactory.createEmptyBorder()); // 去除滚动面板的边框
