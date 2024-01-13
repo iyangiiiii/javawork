@@ -185,8 +185,8 @@ public class ManageCommodity {
 
             button_s.setFont(font2);
             button_s.setBounds(1100, 155, 100, 40);
-            button_s.setForeground(Color.BLACK);
-            button_s.setBackground(color);
+//            button_s.setForeground(Color.BLACK);
+//            button_s.setBackground(color);
             button_s.setOpaque(false);
 
 

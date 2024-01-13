@@ -49,9 +49,6 @@ public class MainFrame extends JFrame{
 		jTabbedPane.setFont(font2);
 		jTabbedPane.add("主 界 面", jPanel);
 
-		ShoppingCart shoppingPanel = new ShoppingCart();
-		jTabbedPane.add("商品选购", shoppingPanel);
-
 		if (isadmin)
 		{
 			CommoditySearch search = new CommoditySearch();
@@ -60,14 +57,16 @@ public class MainFrame extends JFrame{
 			ManageCommodity.AddCommodityPanel acPanel = addCommodity.new AddCommodityPanel();
 			jTabbedPane.add("商品管理", acPanel);
 			ChatFrame chatFrame = new ChatFrame();
-			jTabbedPane.add("用户沟通", chatFrame.createChatPanel());
+			jTabbedPane.add("客户沟通", chatFrame.createChatPanel());
 		}
 		else {
 			ChatFrame chatFrame = new ChatFrame();
 			jTabbedPane.add("客服沟通", chatFrame.createChatPanel());
+			ShoppingCart shoppingPanel = new ShoppingCart();
+			jTabbedPane.add("商品选购", shoppingPanel);
 		}
 		UserRatingInterface ratingPanel = new UserRatingInterface(Global.curUser.getUsername(), Global.curUser.isAdmin());
-		jTabbedPane.add("用户评价", ratingPanel);
+		jTabbedPane.add("客户评价", ratingPanel);
 
 		Leaderboard leaderboardFrame = new Leaderboard();
 		leaderboardFrame.setVisible(true);
