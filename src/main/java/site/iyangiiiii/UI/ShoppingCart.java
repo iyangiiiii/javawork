@@ -33,7 +33,7 @@ public class ShoppingCart extends JPanel {
 
         // 初始化商品列表和购物车列表的数据模型
         productList = new DefaultListModel<>();
-        productList.addElement(new Product("头皮按摩梳", Global.getImgPath("good1.jpg"), 180, 130, APIUtils.getprice()));
+        productList.addElement(new Product("爱心小熊粉粉乐园系列手提包", Global.getImgPath("good1.jpg"), 180, 130, APIUtils.getprice()));
         productList.addElement(new Product("迪士尼皮克斯开心烘焙店系列常规眼罩", Global.getImgPath("good2.jpg"),180, 130, APIUtils.getprice()));
         productList.addElement(new Product("萌兔口罩", Global.getImgPath("good3.jpg"),180,130, APIUtils.getprice()));
         productList.addElement(new Product("Sanrio Characters圆形擦手巾", Global.getImgPath("good4.jpg"),180,130, APIUtils.getprice()));
@@ -77,6 +77,7 @@ public class ShoppingCart extends JPanel {
                     if (selectedRow != -1) {
                         // 删除选中行
                         cartTableModel.removeRow(selectedRow);
+                        updateTotalPrice();
                     }
                 }
             }
