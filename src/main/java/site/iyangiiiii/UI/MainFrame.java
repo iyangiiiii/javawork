@@ -1,5 +1,6 @@
 package site.iyangiiiii.UI;
 
+import site.iyangiiiii.Utils.APIUtils;
 import site.iyangiiiii.Utils.Global;
 
 import java.awt.Container;
@@ -43,27 +44,32 @@ public class MainFrame extends JFrame{
 		jPanel.setLayout(null); // 请确保 jPanel 已正确初始化1
 		jPanel.add(label);
 
+		Boolean isadmin = APIUtils.isAdmin();
+
 		jTabbedPane.setFont(font2);
 		jTabbedPane.add("主 界 面", jPanel);
 
 		CommoditySearch search = new CommoditySearch();
 		jTabbedPane.add("订单管理",search.jLayeredPane);
 
-		ChatFrame chatFrame = new ChatFrame();
-		jTabbedPane.add("客服沟通", chatFrame.createChatPanel());
-
+		if (isadmin)
+		{
+			ChatFrame chatFrame = new ChatFrame();
+			jTabbedPane.add("用户沟通", chatFrame.createChatPanel());
+			Addcommodity addCommodity = new Addcommodity();
+			Addcommodity.AddCommodityPanel acPanel = addCommodity.new AddCommodityPanel();
+			jTabbedPane.add("商品管理", acPanel);
+		}
+		else {
+			ChatFrame chatFrame = new ChatFrame();
+			jTabbedPane.add("客服沟通", chatFrame.createChatPanel());
+		}
 		UserRatingInterface ratingPanel = new UserRatingInterface(Global.curUser.getUsername(), Global.curUser.isAdmin());
 		jTabbedPane.add("用户评价", ratingPanel);
 
 		Leaderboard leaderboardFrame = new Leaderboard();
 		leaderboardFrame.setVisible(true);
 		jTabbedPane.add("排行榜", leaderboardFrame);
-
-		Addcommodity addCommodity = new Addcommodity();
-		Addcommodity.AddCommodityPanel acPanel = addCommodity.new AddCommodityPanel();
-		jTabbedPane.add("商品管理", acPanel);
-
-		
 		con.add(jTabbedPane);
 		// 不可以改变窗体的大小
 		setResizable(false);
