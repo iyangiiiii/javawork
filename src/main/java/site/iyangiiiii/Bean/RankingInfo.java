@@ -23,7 +23,7 @@ public class RankingInfo {
 
     public Vector<String> toVector() {
         Vector<String> ret = new Vector<>();
-        ret.add(String.valueOf(goods.getGid()));
+//        ret.add(String.valueOf(goods.getGid()));
         ret.add(goods.getName());
         ret.add(salesVolume.toString());
         ret.add(applauseRate.toString());

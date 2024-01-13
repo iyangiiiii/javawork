@@ -1,10 +1,13 @@
 package site.iyangiiiii.UI;
 
+import site.iyangiiiii.Utils.APIUtils;
 import site.iyangiiiii.Utils.Global;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.util.List;
+import java.util.Vector;
 
 public class Leaderboard extends JPanel {
     private JTable leaderboardTable;
@@ -12,13 +15,14 @@ public class Leaderboard extends JPanel {
 
         // 创建表头和数据
         String[] columns = {"商品", "销量", "好评率", "价格"};
-        Object[][] data = {
-                {"商品1", 100, 800},
-                {"商品2", 90, 447},
-                {"商品3", 80, 123},
-                {"商品4", 70, 89},
-                {"商品5", 60, 98154}
-        };
+        Object[][] data = APIUtils.getRanking();
+//        Object[][] data = {
+//                {"商品1", 100, 800},
+//                {"商品2", 90, 447},
+//                {"商品3", 80, 123},
+//                {"商品4", 70, 89},
+//                {"商品5", 60, 98154}
+//        };
 
         setOpaque(false);
 
