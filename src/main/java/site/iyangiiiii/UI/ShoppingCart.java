@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class ShoppingCart extends JPanel {
+
     private DefaultListModel<Product> productList;
     private DefaultTableModel cartTableModel;
     private JTable cartTable;
@@ -53,8 +54,13 @@ public class ShoppingCart extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 // 处理购买按钮的点击事件
                 // 在这里可以编写购买商品的逻辑
-                JOptionPane.showMessageDialog(ShoppingCart.this, "购买成功！");
+                double rowCount = cartTableModel.getRowCount();
+                double total = 0.0;
+                for (int i = 0; i < rowCount; i++) {
+                    total += (double) cartTableModel.getValueAt(i, 1);
+                }
                 // 清空购物车
+                showConfirmationDialog(total);
                 cartTableModel.setRowCount(0);
             }
         });
@@ -114,6 +120,18 @@ public class ShoppingCart extends JPanel {
         add(mainPanel, BorderLayout.CENTER);
     }
 
+    private void showConfirmationDialog(double total) {
+        String message = "总价格为 " + total + "，是否确认支付？";
+        int option = JOptionPane.showConfirmDialog(ShoppingCart.this, message, "确认支付", JOptionPane.YES_NO_OPTION);
+
+        if (option == JOptionPane.YES_OPTION) {
+            // 用户确认支付，可以在这里处理支付逻辑
+            JOptionPane.showMessageDialog(ShoppingCart.this, "支付成功！");
+            // 清空购物车
+            cartTableModel.setRowCount(0);
+            updateTotalPrice(); // 更新总价格显示
+        }
+    }
     private void updateTotalPrice() {
         int rowCount = cartTableModel.getRowCount();
         double total = 0.0;
@@ -128,11 +146,11 @@ public class ShoppingCart extends JPanel {
         private String name;
         private BufferedImage originalImage;
         private BufferedImage resizedImage;
-        private double price;  // 新增价格字段
+        private double price;
 
         public Product(String name, String imagePath, int newWidth, int newHeight, double price) {
             this.name = name;
-            this.price = price;  // 初始化价格
+            this.price = price;
 
             try {
                 // 读取原始图片
