@@ -266,7 +266,13 @@ public class APIUtils {
      * @return 获取到的内容
      */
     public static String[][] getAllOrderInfo() {
-        List<Order> orderList = OrderService.getAllOrders();
+        List<Order> orderList;
+        if(Global.curUser.isAdmin()) {
+            orderList = OrderService.getAllOrders();
+        }
+        else {
+            orderList = OrderService.findOrdersByUid(Global.curUser.getUid());
+        }
         if(orderList == null) {
             return new String[0][0];
         }
