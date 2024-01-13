@@ -1,5 +1,9 @@
 package site.iyangiiiii.UI;
 
+import site.iyangiiiii.Entities.Goods;
+import site.iyangiiiii.Entities.Order;
+import site.iyangiiiii.Service.GoodsService;
+import site.iyangiiiii.Service.OrderService;
 import site.iyangiiiii.Utils.APIUtils;
 import site.iyangiiiii.Utils.Global;
 import javax.swing.*;
@@ -8,9 +12,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.table.DefaultTableModel;
 import javax.imageio.ImageIO;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Vector;
 
 public class ShoppingCart extends JPanel {
 
@@ -37,7 +47,13 @@ public class ShoppingCart extends JPanel {
         productList.addElement(new Product("芭比系列时尚宠物包",Global.getImgPath("good12.jpg"),180, 130, APIUtils.getprice()));
 
         // 初始化购物车表格模型
-        cartTableModel = new DefaultTableModel();
+        cartTableModel = new DefaultTableModel(){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                // 返回 false 表示所有单元格都不可编辑
+                return false;
+            }
+        };;
         cartTableModel.addColumn("商品名称");
         cartTableModel.addColumn("价格");
 
@@ -47,21 +63,41 @@ public class ShoppingCart extends JPanel {
         cartTable = new JTable(cartTableModel);
         JScrollPane cartScrollPane = new JScrollPane(cartTable);
 
+        cartTable.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                // 不需要实现
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                // 按下 Delete 键时触发
+                if (e.getKeyCode() == KeyEvent.VK_DELETE || e.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
+                    int selectedRow = cartTable.getSelectedRow();
+                    if (selectedRow != -1) {
+                        // 删除选中行
+                        cartTableModel.removeRow(selectedRow);
+                    }
+                }
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                // 不需要实现
+            }
+        });
+
         // 初始化购买按钮
         JButton buyButton = new JButton("购买");
         buyButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // 处理购买按钮的点击事件
-                // 在这里可以编写购买商品的逻辑
                 double rowCount = cartTableModel.getRowCount();
                 double total = 0.0;
                 for (int i = 0; i < rowCount; i++) {
                     total += (double) cartTableModel.getValueAt(i, 1);
                 }
-                // 清空购物车
                 showConfirmationDialog(total);
-                cartTableModel.setRowCount(0);
             }
         });
 
@@ -125,11 +161,20 @@ public class ShoppingCart extends JPanel {
         int option = JOptionPane.showConfirmDialog(ShoppingCart.this, message, "确认支付", JOptionPane.YES_NO_OPTION);
 
         if (option == JOptionPane.YES_OPTION) {
-            // 用户确认支付，可以在这里处理支付逻辑
-            JOptionPane.showMessageDialog(ShoppingCart.this, "支付成功！");
-            // 清空购物车
-            cartTableModel.setRowCount(0);
-            updateTotalPrice(); // 更新总价格显示
+            List<Goods> goodsList = new ArrayList<>();
+            Vector<Vector> data = cartTableModel.getDataVector();
+            for(Vector item: data) {
+                String goodsName = (String) item.get(0);
+                Goods goods = GoodsService.findGoodsByName(goodsName);
+                goodsList.add(goods);
+            }
+            if(APIUtils.addOrder("未发货", goodsList) == 0) {
+                updateTotalPrice(); // 更新总价格显示
+                cartTableModel.setRowCount(0);
+            }
+            else {
+                JOptionPane.showMessageDialog(ShoppingCart.this, "购买失败！");
+            }
         }
     }
     private void updateTotalPrice() {

@@ -1,11 +1,14 @@
 package site.iyangiiiii.UI;
 import site.iyangiiiii.Bean.ChatInfo;
 import site.iyangiiiii.Entities.Chat;
+import site.iyangiiiii.Entities.User;
 import site.iyangiiiii.Service.ChatService;
+import site.iyangiiiii.Service.UserService;
 import site.iyangiiiii.Utils.APIUtils;
 import site.iyangiiiii.Utils.Global;
 
 import javax.swing.*;
+import javax.swing.event.ListDataListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
@@ -18,6 +21,8 @@ import javax.swing.event.ListSelectionListener;
 
 
 public class ChatFrame {
+    private static User cur = null;
+    private DefaultListModel<String> listModel = new DefaultListModel<>();
     private List<String> objectList = new ArrayList<>();
     protected static List<ChatInfo> curHistory = new ArrayList<>();
     protected static DefaultTableModel model = new DefaultTableModel();
@@ -84,6 +89,7 @@ public class ChatFrame {
             }
         };
 
+        refreshUser();
         refresh();
 
         chatArea.getColumnModel().getColumn(1).setCellRenderer(customRenderer);
@@ -97,20 +103,17 @@ public class ChatFrame {
         sendButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String message = messageField.getText();
-                ChatService.addChat(1, message);
+                ChatService.addChat(cur.getUid(), message);
                 messageField.setText("");
-                refresh();
+                refreshUser();
 
                 // 模拟延迟后的回复
 //                simulateResponse(chatArea);
             }
         });
 
-        objectList.add("Object 1");
-        objectList.add("Object 2");
-        objectList.add("Object 3");
+        JList<String> objectListPanel = new JList<>(listModel);
 
-        JList<String> objectListPanel = new JList<>(objectList.toArray(new String[0]));
         objectListPanel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         objectListPanel.setOpaque(false);
         JScrollPane objectScrollPane = new JScrollPane(objectListPanel);
@@ -123,8 +126,10 @@ public class ChatFrame {
             public void valueChanged(ListSelectionEvent e) {
                 if (!e.getValueIsAdjusting()) {
                     // 获取用户选择的对象，并执行相应操作
-                    String selectedObject = objectListPanel.getSelectedValue();
+                    String username = objectListPanel.getSelectedValue();
                     model.setRowCount(0);
+                    cur = UserService.findUserByUsername(username);
+                    refresh();
                     // 实现切换到所选对象的聊天记录逻辑
                     // 这里可以添加你的逻辑代码
                 }
@@ -134,9 +139,18 @@ public class ChatFrame {
         return panel;
     }
 
+    protected void refreshUser() {
+        listModel.clear();
+        List<User> res = APIUtils.showChatUser(Global.curUser.getUid());
+        for(User user: res){
+            String username = user.getUsername();
+            listModel.addElement(username);
+        }
+    }
 
     protected void refresh(){
-        curHistory = APIUtils.getHistory(Global.curUser.getUid());
+        if(cur == null) curHistory = new ArrayList<>();
+        else curHistory = APIUtils.getHistory(Global.curUser.getUid(), cur.getUid());
         model.setRowCount(0);
         for(ChatInfo chatInfo: curHistory) {
             model.addRow(chatInfo.toVector());

@@ -102,4 +102,19 @@ public class UserService {
 			return null;
 		}
 	}
+
+	/**
+	 * 根据用户名寻找用户
+	 * @param username 用户名
+	 * @return 成功返回 用户名对应的用户, 失败返回null
+	 */
+	public static User findUserByUsername(String username) {
+		try{
+			return userService.userRepository.findUserByUsername(username);
+		}
+		catch (Exception e) {
+			logger.log(Level.SEVERE, "adduser", e);
+			return null;
+		}
+	}
 }

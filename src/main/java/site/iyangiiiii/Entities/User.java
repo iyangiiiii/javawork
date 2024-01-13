@@ -6,7 +6,7 @@ import site.iyangiiiii.Utils.UserType;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class User implements Comparable<User> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int uid;
@@ -74,5 +74,10 @@ public class User {
 
     public boolean isAdmin() {
         return getUserType() == UserType.TYPE_ADMIN;
+    }
+
+    @Override
+    public int compareTo(User o) {
+        return Integer.compare(getUid(), o.getUid());
     }
 }
