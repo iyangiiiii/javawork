@@ -6,6 +6,7 @@ import site.iyangiiiii.DAO.AppraiseRepository;
 import site.iyangiiiii.DAO.OrderRepository;
 import site.iyangiiiii.Entities.Appraise;
 import site.iyangiiiii.Entities.Goods;
+import site.iyangiiiii.Entities.User;
 
 import java.util.List;
 import java.util.logging.Level;
@@ -37,7 +38,29 @@ public class AppraiseService {
         }
         catch (Exception e) {
             logger.log(Level.SEVERE, "AppraiseService: ", e);
+            return null;
         }
-        return null;
+    }
+
+    public static List<Appraise> findAllApplause() {
+        try {
+            return appraiseService.appraiseRepository.findAppraisesByAidNotNull();
+        }
+        catch (Exception e) {
+            logger.log(Level.SEVERE, "AppraiseService: ", e);
+            return null;
+        }
+    }
+
+    public static List<Appraise> findApplauseListByUser(int uid) {
+        try {
+            User user = new User();
+            user.setUid(uid);
+            return appraiseService.appraiseRepository.findAppraisesByUser(user);
+        }
+        catch (Exception e) {
+            logger.log(Level.SEVERE, "AppraiseService: ", e);
+            return null;
+        }
     }
 }

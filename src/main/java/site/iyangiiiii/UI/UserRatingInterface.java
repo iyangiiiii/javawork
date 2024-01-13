@@ -62,7 +62,9 @@ public class UserRatingInterface extends JPanel {
 //        tableModel.setRowCount(0);
         JTable reviewTable = new JTable(tableModel);
 
-
+        for(Object[] item: APIUtils.getAppraise()) {
+            tableModel.addRow(item);
+        }
 
         JTableHeader head = reviewTable.getTableHeader();
         // 设置表头字体大小
