@@ -6,10 +6,10 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 
-public class Addcommodity {
+public class ManageCommodity {
 
     /**
-     * 添加商品界面
+     * 商品管理界面
      *
      * @author iyangiii
      */
@@ -115,5 +115,6 @@ public class Addcommodity {
             add(field3);
             add(button);
         }
+
     }
 }

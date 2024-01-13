@@ -57,8 +57,8 @@ public class MainFrame extends JFrame{
 		{
 			ChatFrame chatFrame = new ChatFrame();
 			jTabbedPane.add("用户沟通", chatFrame.createChatPanel());
-			Addcommodity addCommodity = new Addcommodity();
-			Addcommodity.AddCommodityPanel acPanel = addCommodity.new AddCommodityPanel();
+			ManageCommodity addCommodity = new ManageCommodity();
+			ManageCommodity.AddCommodityPanel acPanel = addCommodity.new AddCommodityPanel();
 			jTabbedPane.add("商品管理", acPanel);
 		}
 		else {
