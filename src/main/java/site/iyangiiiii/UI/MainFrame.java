@@ -3,20 +3,21 @@ package site.iyangiiiii.UI;
 import site.iyangiiiii.Utils.APIUtils;
 import site.iyangiiiii.Utils.Global;
 
-import java.awt.Container;
-import java.awt.Font;
-import java.awt.Image;
-import javax.swing.ImageIcon;
-import java.awt.BorderLayout;
-/**
- * 主界面
- * @author K.X
- * 
- * */
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
+import java.awt.Container;
+import java.awt.Font;
+import java.awt.Image;
+import javax.swing.ImageIcon;
+import javax.swing.JSplitPane;
+/**
+ * 主界面
+ * @author iyangiii
+ * 
+ * */
+
 
 public class MainFrame extends JFrame{
 	/*
