@@ -12,6 +12,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.table.DefaultTableModel;
 import javax.imageio.ImageIO;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -43,13 +45,42 @@ public class ShoppingCart extends JPanel {
         productList.addElement(new Product("芭比系列时尚宠物包",Global.getImgPath("good12.jpg"),180, 130));
 
         // 初始化购物车表格模型
-        cartTableModel = new DefaultTableModel();
+        cartTableModel = new DefaultTableModel(){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                // 返回 false 表示所有单元格都不可编辑
+                return false;
+            }
+        };;
         cartTableModel.addColumn("商品名称");
-
 
         // 初始化购物车表格
         cartTable = new JTable(cartTableModel);
         JScrollPane cartScrollPane = new JScrollPane(cartTable);
+
+        cartTable.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                // 不需要实现
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                // 按下 Delete 键时触发
+                if (e.getKeyCode() == KeyEvent.VK_DELETE || e.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
+                    int selectedRow = cartTable.getSelectedRow();
+                    if (selectedRow != -1) {
+                        // 删除选中行
+                        cartTableModel.removeRow(selectedRow);
+                    }
+                }
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                // 不需要实现
+            }
+        });
 
         // 初始化购买按钮
         JButton buyButton = new JButton("购买");

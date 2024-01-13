@@ -245,4 +245,45 @@ public class OrderService {
             return -1;
         }
     }
+
+    /**
+     * 添加一个订单
+     * @param order 订单
+     * @return 成功返回 订单编号, 否则返回-1
+     */
+    public static int addOrder(Order order) {
+        try {
+            order = orderService.orderRepository.save(order);
+            return order.getOid();
+        }
+        catch (Exception e) {
+            logger.log(Level.SEVERE, "OrderService: ", e);
+            return -1;
+        }
+    }
+
+    /**
+     * 在订单中添加新的商品
+     * @param goodsList 商品列表
+     * @return 成功返回 0, 否则返回-1
+     */
+    public static int addGoodsToOrder(int oid, List<Goods> goodsList) {
+        try {
+            List<OrderGoods> data = new ArrayList<>();
+            Order order = new Order();
+            order.setOid(oid);
+            for(Goods goods: goodsList) {
+                OrderGoods orderGoods = new OrderGoods();
+                orderGoods.setOrders(order);
+                orderGoods.setGoods(goods);
+                data.add(orderGoods);
+            }
+            orderService.orderGoodsRepository.saveAll(data);
+            return 0;
+        }
+        catch (Exception e) {
+            logger.log(Level.SEVERE, "OrderService: ", e);
+            return -1;
+        }
+    }
 }

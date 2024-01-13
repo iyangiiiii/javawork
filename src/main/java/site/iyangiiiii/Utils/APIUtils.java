@@ -8,6 +8,7 @@ import site.iyangiiiii.Service.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.sql.Date;
 import java.util.*;
 import java.util.List;
 import java.util.logging.Level;
@@ -175,14 +176,12 @@ public class APIUtils {
                 ret = OrderService.findAllOrdersContainsGoods(gidList);
                 return ret;
             case "按照商品名查找":
-                goodsList = GoodsService.findGoodsByName(query);
-                if(goodsList == null){
+                Goods good = GoodsService.findGoodsByName(query);
+                if(good == null){
                     ErrorUtils.setLastError(1, "查询参数有误");
                     return null;
                 }
-                gidList = new ArrayList<>();
-                for(Goods goods: goodsList) gidList.add(goods.getGid());
-                ret = OrderService.findAllOrdersContainsGoods(gidList);
+                ret = OrderService.findAllOrdersContainsGoods(good.getGid());
                 return ret;
             case "按照商品状态查找":
                 goodsList = GoodsService.findGoodsByState(query);
@@ -364,7 +363,17 @@ public class APIUtils {
      * @return 成功返回 0, 否则返回-1
      */
     public static int addOrder(String state, List<Goods> goodsList) {
-
+        Order order = new Order();
+        order.setStates(state);
+        order.setUser(Global.curUser);
+        order.setSaleDate(new Date(new java.util.Date().getTime()));
+        int oid = OrderService.addOrder(order);
+        if(oid == -1){
+            ErrorUtils.setLastError(11, "新建订单错误");
+            return -1;
+        }
+        if(OrderService.addGoodsToOrder(oid, goodsList) == -1) return -1;
+        return 0;
     }
 }
 
