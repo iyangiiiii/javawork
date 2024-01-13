@@ -137,11 +137,8 @@ public class CommoditySearch {
 		jLayeredPane.add(field, 100, 4);
 		jLayeredPane.add(button, 100, 5);
 		jLayeredPane.add(pane, 100, 6);
-
-		// TODO 在这里添加商品
-		List<Goods> goodsList = GoodsService.getAllGoods();
-		for(Goods goods: goodsList) {
-
+		for(String[] strings: APIUtils.getAllOrderInfo()) {
+			model.addRow(strings);
 		}
 	}
 

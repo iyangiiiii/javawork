@@ -164,25 +164,25 @@ public class ManageCommodity {
 
             jLabel.setFont(font);
             jLabel.setBounds(195, 80, 400, 100);
+            if (APIUtils.isAdmin()) {
+                jLabel2.setFont(font2);
+                jLabel2.setBounds(125, 200, 250, 30);
 
-            jLabel2.setFont(font2);
-            jLabel2.setBounds(125, 200, 250, 30);
+                jLabel3.setFont(font2);
+                jLabel3.setBounds(125, 240, 250, 30);
 
-            jLabel3.setFont(font2);
-            jLabel3.setBounds(125, 240, 250, 30);
+                jLabel4.setFont(font2);
+                jLabel4.setBounds(125, 280, 250, 30);
 
-            jLabel4.setFont(font2);
-            jLabel4.setBounds(125, 280, 250, 30);
+                jLabel5.setFont(font2);
+                jLabel5.setBounds(125, 320, 250, 30);
 
-            jLabel5.setFont(font2);
-            jLabel5.setBounds(125, 320, 250, 30);
+                jLabel6.setFont(font2);
+                jLabel6.setBounds(125, 360, 250, 30);
 
-            jLabel6.setFont(font2);
-            jLabel6.setBounds(125, 360, 250, 30);
-
-            jLabel7.setFont(font2);
-            jLabel7.setBounds(125, 400, 250, 30);
-
+                jLabel7.setFont(font2);
+                jLabel7.setBounds(125, 400, 250, 30);
+            }
             // 下拉框
             box_s.setSize(dimension_s);
             box_s.addItem("查找所有商品");
@@ -200,56 +200,57 @@ public class ManageCommodity {
 
             button_s.setFont(font2);
             button_s.setBounds(1100, 155, 100, 40);
-            button_s.setForeground(Color.BLACK);
-            button_s.setBackground(color);
+//            button_s.setForeground(Color.BLACK);
+//            button_s.setBackground(color);
             button_s.setOpaque(false);
 
+            if (APIUtils.isAdmin()) {
+                field4.setFont(font3);
+                field4.setBounds(245, 200, 200, 30);
+                field4.setOpaque(false);
 
-            field4.setFont(font3);
-            field4.setBounds(245, 200, 200, 30);
-            field4.setOpaque(false);
+                field.setFont(font3);
+                field.setBounds(245, 240, 200, 30);
+                field.setOpaque(false);
 
-            field.setFont(font3);
-            field.setBounds(245, 240, 200, 30);
-            field.setOpaque(false);
+                field2.setFont(font3);
+                field2.setBounds(245, 280, 200, 30);
+                field2.setOpaque(false);
 
-            field2.setFont(font3);
-            field2.setBounds(245, 280, 200, 30);
-            field2.setOpaque(false);
+                field3.setFont(font3);
+                field3.setBounds(245, 320, 200, 30);
+                field3.setOpaque(false);
 
-            field3.setFont(font3);
-            field3.setBounds(245, 320, 200, 30);
-            field3.setOpaque(false);
+                box.addItem("请选择状态");
+                box.addItem("库存充足");
+                box.addItem("库存不足");
+                box.setFont(font3);
+                box.setBounds(245, 360, 200, 30);
+                box.setOpaque(false);
 
-            box.addItem("请选择状态");
-            box.addItem("库存充足");
-            box.addItem("库存不足");
-            box.setFont(font3);
-            box.setBounds(245, 360, 200, 30);
-            box.setOpaque(false);
+                field5.setFont(font3);
+                field5.setBounds(245, 400, 200, 30);
+                field5.setOpaque(false);
 
-            field5.setFont(font3);
-            field5.setBounds(245, 400, 200, 30);
-            field5.setOpaque(false);
+                button.setFont(font2);
+                button.setBounds(120, 505, 325, 35);
+                button.setOpaque(false);
 
-            button.setFont(font2);
-            button.setBounds(120, 505, 325, 35);
-            button.setOpaque(false);
-
-            add(jLabel);
-            add(jLabel2);
-            add(jLabel3);
-            add(jLabel4);
-            add(jLabel5);
-            add(jLabel6);
-            add(jLabel7);
-            add(field3);
-            add(field);
-            add(field2);
-            add(field4);
-            add(field5);
-            add(box);
-            add(button);
+                add(jLabel);
+                add(jLabel2);
+                add(jLabel3);
+                add(jLabel4);
+                add(jLabel5);
+                add(jLabel6);
+                add(jLabel7);
+                add(field3);
+                add(field);
+                add(field2);
+                add(field4);
+                add(field5);
+                add(box);
+                add(button);
+            }
             add(box_s);
             add(field_s);
             add(button_s);
