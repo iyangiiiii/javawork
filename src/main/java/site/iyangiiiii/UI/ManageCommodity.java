@@ -86,6 +86,7 @@ public class ManageCommodity {
             });
         }
         private void initTable() {
+            Color color = new Color(179, 206, 255);
             // 表头
             String[] columnNames = {"商品名", "厂商", "库存", "类别", "状态", "价格"};
 
@@ -112,13 +113,13 @@ public class ManageCommodity {
             JTableHeader head = table.getTableHeader();
             head.setPreferredSize(new Dimension(head.getWidth(), 30));
             head.setFont(new Font("宋体", Font.BOLD, 20));
-            head.setBackground(Color.CYAN);
+            head.setBackground(color);
 
             // 设置表格行高度
             table.setRowHeight(30);
 
             // 设置表格行中字体大小
-            table.setFont(new Font("宋体", Font.ROMAN_BASELINE, 17));
+            table.setFont(new Font("宋体", Font.PLAIN, 17));
 
             // 设置表格内容居中
             DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();

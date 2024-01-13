@@ -19,6 +19,8 @@ public class ChatFrame {
     protected static List<ChatInfo> curHistory = new ArrayList<>();
     protected static DefaultTableModel model = new DefaultTableModel();
     public JPanel createChatPanel() {
+        Color color = new Color(179, 206, 255);
+
         ImageIcon icon = new ImageIcon(Global.getImgPath("chatframe.jpg"));
         Image img = icon.getImage();
         Image scaledImg = img.getScaledInstance(1500, 695, Image.SCALE_SMOOTH);
