@@ -8,10 +8,8 @@ import site.iyangiiiii.Service.*;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.Comparator;
+import java.util.*;
 import java.util.List;
-import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -342,6 +340,21 @@ public class APIUtils {
         String[] goodsList = new String[len];
         for(int i = 0; i<len; i++) goodsList[i] = result.get(i).getName();
         return goodsList;
+    }
+
+    /**
+     * 查询所有与某个用户聊过天的用户
+     * @param uid 用户id
+     * @return 成功返回 符合条件的用户, 否则返回null
+     */
+    public static List<User> showChatUser(int uid) {
+        Set<User> st = new TreeSet<>();
+        List<ChatInfo> chatInfos = getHistory(uid);
+        for(ChatInfo chatInfo: chatInfos) {
+            if(chatInfo.getDirection()==1) st.add(chatInfo.getRhs());
+            else st.add(chatInfo.getLhs());
+        }
+        return new ArrayList<>(st);
     }
 }
 

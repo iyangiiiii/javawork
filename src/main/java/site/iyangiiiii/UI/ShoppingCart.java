@@ -7,15 +7,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.table.DefaultTableModel;
 
-public class ShoppingCart extends JFrame {
+public class ShoppingCart extends JPanel {
     private DefaultListModel<Product> productList;
     private JList<Product> productListView;
     private DefaultTableModel cartTableModel;
     private JTable cartTable;
 
     public ShoppingCart() {
-        super("商品选购界面");
-
         // 初始化商品列表和购物车列表的数据模型
         productList = new DefaultListModel<>();
         productList.addElement(new Product("商品1", Global.getImgPath("test.png")));
@@ -103,22 +101,11 @@ public class ShoppingCart extends JFrame {
 
         // 设置布局
         setLayout(new BorderLayout());
-        add(mainPanel, BorderLayout.CENTER);
+        add(mainPanel, BorderLayout.EAST);
 
         // 设置窗口属性
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1500, 800);
-        setLocationRelativeTo(null);
     }
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new ShoppingCart().setVisible(true);
-            }
-        });
-    }
-
 
     // Product 类表示每个商品，包含商品名称和图像路径
     private static class Product {

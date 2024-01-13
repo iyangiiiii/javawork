@@ -1,7 +1,9 @@
 package site.iyangiiiii.DAO;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import site.iyangiiiii.Entities.Chat;
+import site.iyangiiiii.Entities.Order;
 import site.iyangiiiii.Entities.User;
 
 import java.util.List;
