@@ -80,6 +80,7 @@ public class APIUtils {
         return GoodsService.deleteGoods(goods);
     }
 
+
     /**
      * 商品出库 数据库库存-1
      * @param gid 商品id
@@ -312,4 +313,12 @@ public class APIUtils {
         }
         return ret;
     }
+    /**
+     * 商品管理 获取所有商品信息
+     * @return 信息列表
+     */
+    public static int test() {
+        return 1;
+    }
 }
+
