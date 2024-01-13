@@ -87,7 +87,7 @@ public class UserRatingInterface extends JPanel {
         }
     }
     private void addReviewToTable(String username, String comment, String rating) {
-        Object[] rowData = {username, comment, rating};
+        Object[] rowData = {username,"",  comment, rating};
         tableModel.addRow(rowData);
     }
 }
