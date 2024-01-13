@@ -265,6 +265,8 @@ public class APIUtils {
             }
         });
 
+        for(RankingInfo rankingInfo: temp) ret.add(rankingInfo.toVector());
+
          return DataUtils.convertListVectorToObjectArray(ret);
     }
     /**
