@@ -106,6 +106,23 @@ public class OrderService {
     }
 
     /**
+     * 根据状态查询订单
+     * @param state 状态字符串
+     * @return 成功返回 符合要求的所有订单, 否则返回null
+     */
+    public static List<Order> findOrderByState(String state, int uid) {
+        try {
+            User user = new User();
+            user.setUid(uid);
+            return orderService.orderRepository.findOrdersByStatesAndUser(state, user);
+        }
+        catch (Exception e) {
+            logger.log(Level.SEVERE, "OrderService: ", e);
+            return null;
+        }
+    }
+
+    /**
      * 查询在某个日期之前的所有订单
      * @param date 截止日期
      * @return 成功返回 符合要求的所有订单, 否则返回null

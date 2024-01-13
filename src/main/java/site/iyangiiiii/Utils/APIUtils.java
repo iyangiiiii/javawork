@@ -163,7 +163,8 @@ public class APIUtils {
                     ErrorUtils.setLastError(1, "查询参数有误");
                     return null;
                 }
-                ret.add(OrderService.findOrderByOid(q));
+                Order tmp = OrderService.findOrderByOid(q);
+                if(tmp.getUser().getUid() == Global.curUser.getUid() || isAdmin()) ret.add(tmp);
                 return ret;
             case "按照类别查找":
                 goodsList = GoodsService.findGoodsByType(query);
@@ -194,7 +195,8 @@ public class APIUtils {
                 ret = OrderService.findAllOrdersContainsGoods(gidList);
                 return ret;
             case "按照订单状态查找":
-                orderList = OrderService.findOrderByState(query);
+                if(isAdmin()) orderList = OrderService.findOrderByState(query);
+                else orderList = OrderService.findOrderByState(query, Global.curUser.getUid());
                 if(orderList == null){
                     ErrorUtils.setLastError(1, "查询参数有误");
                     return null;
@@ -352,6 +354,25 @@ public class APIUtils {
     }
 
     /**
+     * 用户购买过的商品
+     * @return 商品列表 最大只有2
+     */
+    public static String[][] SoldGoodsInfo(int uid) {
+        List<Order> res = OrderService.findOrdersByUid(uid);
+        if(res == null) {
+            ErrorUtils.setLastError(1, "查询参数有误");
+            return null;
+        }
+        List<Goods> result = GoodsService.getAllGoodsInOrders(res);
+        int len;
+        if(result == null) len = 0;
+        else len = result.size();
+        String[][] goodsList = new String[len][6];
+        for(int i = 0; i<len; i++) goodsList[i] = (String[]) result.get(i).toArray();
+        return goodsList;
+    }
+
+    /**
      * 查询所有与某个用户聊过天的用户
      * @param uid 用户id
      * @return 成功返回 符合条件的用户, 否则返回null
@@ -398,7 +419,8 @@ public class APIUtils {
         List<Goods> goodsList;
         switch (By) {
             case "查找所有商品":
-                return getAllGoodsInfo();
+                if(isAdmin()) return getAllGoodsInfo();
+                else return SoldGoodsInfo(Global.curUser.getUid());
             case "按照商品名查找":
                 goods = GoodsService.findGoodsByName(query);
                 if(goods == null) {

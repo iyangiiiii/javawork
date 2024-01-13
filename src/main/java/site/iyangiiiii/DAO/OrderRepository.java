@@ -12,6 +12,7 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
     Order findOrderByOid(int oid);
     List<Order> findOrdersByOidIn(List<Integer> oidList);
     List<Order> findOrdersByStates(String state);
+    List<Order> findOrdersByStatesAndUser(String state, User user);
     List<Order> findOrdersBySaleDateBefore(Date beforeDate);
     List<Order> findOrdersBySaleDateAfter(Date beforeDate);
     List<Order> findOrdersBySaleDateBetween(Date lDate, Date rDate);
