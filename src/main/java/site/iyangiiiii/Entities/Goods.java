@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "goods")
-public class Goods {
+public class Goods implements Comparable<Goods> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int gid;
@@ -98,5 +98,10 @@ public class Goods {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    @Override
+    public int compareTo(Goods o) {
+        return Integer.compare(getGid(), o.getGid());
     }
 }

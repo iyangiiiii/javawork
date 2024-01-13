@@ -4,10 +4,7 @@ import site.iyangiiiii.API.CaptchaAPI;
 import site.iyangiiiii.Bean.ChatInfo;
 import site.iyangiiiii.Bean.RankingInfo;
 import site.iyangiiiii.Entities.*;
-import site.iyangiiiii.Service.AppraiseService;
-import site.iyangiiiii.Service.ChatService;
-import site.iyangiiiii.Service.GoodsService;
-import site.iyangiiiii.Service.OrderService;
+import site.iyangiiiii.Service.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -317,15 +314,26 @@ public class APIUtils {
      * 商品管理 获取所有商品信息
      * @return 信息列表
      */
-    public static int test() {
-        return 1;
+    public static List<Goods> getAllGoodsInfo() {
+        return GoodsService.getAllGoods();
     }
     /**
      * 用户购买过的商品
      * @return 商品列表 最大只有2
      */
-    public static String[] SoldGoods() {
-        return new String[0];
+    public static String[] SoldGoods(int uid) {
+        List<Order> res = OrderService.findOrdersByUid(uid);
+        if(res == null) {
+            ErrorUtils.setLastError(1, "查询参数有误");
+            return null;
+        }
+        List<Goods> result = GoodsService.getAllGoodsInOrders(res);
+        int len;
+        if(result == null) len = 0;
+        else len = result.size();
+        String[] goodsList = new String[len];
+        for(int i = 0; i<len; i++) goodsList[i] = result.get(i).getName();
+        return goodsList;
     }
 }
 
