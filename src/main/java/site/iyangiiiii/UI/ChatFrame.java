@@ -13,9 +13,12 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 
 public class ChatFrame {
+    private List<String> objectList = new ArrayList<>();
     protected static List<ChatInfo> curHistory = new ArrayList<>();
     protected static DefaultTableModel model = new DefaultTableModel();
     public JPanel createChatPanel() {
@@ -103,33 +106,34 @@ public class ChatFrame {
             }
         });
 
-        return panel;
-    }
-    private void sendMessage(JTextField messageField, JTextArea chatArea) {
-        String message = messageField.getText();
-        chatArea.append("User1: " + message + "\n");
-        messageField.setText("");
+        objectList.add("Object 1");
+        objectList.add("Object 2");
+        objectList.add("Object 3");
 
-        // 模拟延迟后的回复
-        simulateResponse(chatArea);
-    }
-    private void simulateResponse(JTextArea chatArea) {
-        // 模拟延迟
-        new Thread(new Runnable() {
-            public void run() {
-                try {
-                    Thread.sleep(1000);
-                    SwingUtilities.invokeLater(new Runnable() {
-                        public void run() {
-                            chatArea.append("User2: Hello, I'm User2!\n");
-                        }
-                    });
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+        JList<String> objectListPanel = new JList<>(objectList.toArray(new String[0]));
+        objectListPanel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        objectListPanel.setOpaque(false);
+        JScrollPane objectScrollPane = new JScrollPane(objectListPanel);
+        objectScrollPane.setPreferredSize(new Dimension(150, panel.getHeight())); // 调整宽度
+        objectScrollPane.setOpaque(false);
+        panel.add(objectScrollPane, BorderLayout.WEST);
+
+        // 2. 添加对象列表选择监听器
+        objectListPanel.addListSelectionListener(new ListSelectionListener() {
+            public void valueChanged(ListSelectionEvent e) {
+                if (!e.getValueIsAdjusting()) {
+                    // 获取用户选择的对象，并执行相应操作
+                    String selectedObject = objectListPanel.getSelectedValue();
+                    model.setRowCount(0);
+                    // 实现切换到所选对象的聊天记录逻辑
+                    // 这里可以添加你的逻辑代码
                 }
             }
-        }).start();
+        });
+
+        return panel;
     }
+
 
     protected void refresh(){
         curHistory = APIUtils.getHistory(Global.curUser.getUid());
