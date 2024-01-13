@@ -52,7 +52,6 @@ public class MainFrame extends JFrame{
 		ManageCommodity.AddCommodityPanel acPanel = addCommodity.new AddCommodityPanel();
 		if (isadmin)
 		{
-
 			ChatFrame chatFrame = new ChatFrame();
 			jTabbedPane.add("客户沟通", chatFrame.createChatPanel());
 		}

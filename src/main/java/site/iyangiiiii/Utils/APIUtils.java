@@ -245,7 +245,11 @@ public class APIUtils {
             }
             info.setGoods(item);
             info.setSalesVolume(orderList.size());
-            info.setSalesVolume(appraiseList.size());
+
+            int k = 0;
+            for(Appraise i: appraiseList) if(i.getStars()>=4) k++;
+            if(k == 0) info.setApplauseRate(0.0);
+            else info.setApplauseRate(1.0*k/appraiseList.size());
 
             temp.add(info);
         }
@@ -259,7 +263,7 @@ public class APIUtils {
             }
         });
 
-        return DataUtils.convertListVectorToObjectArray(ret);
+         return DataUtils.convertListVectorToObjectArray(ret);
     }
     /**
      * 订单展示 展示所有订单 内容为 编号 商品名 时间 状态
