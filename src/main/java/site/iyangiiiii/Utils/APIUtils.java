@@ -123,7 +123,9 @@ public class APIUtils {
      */
     public static List<Order> findOrders(String by, String query) {
         List<Integer> gidList = null;
+        List<Integer> oidList = null;
         List<Goods> goodsList = null;
+        List<Order> orderList = null;
         List<Order> ret =new ArrayList<Order>();
         switch (by){
             case "按照编号查找":
@@ -163,6 +165,16 @@ public class APIUtils {
                 gidList = new ArrayList<>();
                 for(Goods goods: goodsList) gidList.add(goods.getGid());
                 ret = OrderService.findAllOrdersContainsGoods(gidList);
+                return ret;
+            case "按照订单状态查找":
+                orderList = OrderService.findOrderByState(query);
+                if(orderList == null){
+                    ErrorUtils.setLastError(1, "查询参数有误");
+                    return null;
+                }
+                oidList = new ArrayList<>();
+                for(Order order: orderList) oidList.add(order.getOid());
+                ret = OrderService.findOrderByOid(oidList);
                 return ret;
             case "按照厂家查找":
                 goodsList = GoodsService.findGoodsByFactory(query);

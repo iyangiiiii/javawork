@@ -49,6 +49,22 @@ public class OrderService {
     }
 
     /**
+     * 根据订单id查询订单
+     * @param oid 订单id列表
+     * @return 成功返回订单信息, 否则返回null
+     */
+    public static List<Order> findOrderByOid(List<Integer> oid) {
+        try {
+            List<Order> order = orderService.orderRepository.findOrdersByOidIn(oid);
+            return order;
+        }
+        catch (Exception e) {
+            logger.log(Level.SEVERE, "OrderService: ", e);
+            return null;
+        }
+    }
+
+    /**
      * 查询某件商品的所有订单
      * @param gid 商品id
      * @return 成功返回 该商品的所有订单, 否则返回null

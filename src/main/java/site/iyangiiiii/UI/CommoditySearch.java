@@ -73,7 +73,7 @@ public class CommoditySearch {
 		box.addItem("按照编号查找");
 		box.addItem("按照时间区间查找");
 		box.addItem("按照商品名查找");
-		box.addItem("按照商品状态查找");
+		box.addItem("按照订单状态查找");
 		box.setFont(font2);
 		box.setBounds(350, 185, 200, 40);
 		// box.setBackground(Color.cyan);
@@ -169,9 +169,8 @@ public class CommoditySearch {
 				model.setRowCount(0);
 				String[][] datas =  APIUtils.getOrderInfo(APIUtils.findOrders(s, field.getText().trim()));
 				for(String[] item: datas) {
-					model.addColumn(item);
+					model.addRow(item);
 				}
-				model.setRowCount(datas.length);
 //				if (s.equals("按照编号查找")) {
 //					commodity = field.getText().trim();
 //					id = Integer.parseInt(commodity);
