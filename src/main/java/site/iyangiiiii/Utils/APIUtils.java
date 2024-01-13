@@ -225,8 +225,36 @@ public class APIUtils {
      * 订单展示 展示所有订单 内容为 编号 商品名 时间 状态
      * @return 获取到的内容
      */
-    public static int test7() {
-        return 1;
+    public static String[][] getAllOrderInfo() {
+        List<Order> orderList = OrderService.getAllOrders();
+        if(orderList == null) {
+            return new String[0][0];
+        }
+        int p = 0;
+        String[][] ret = new String[orderList.size()][4];
+        for(Order order: orderList) {
+            StringBuilder goodsStr = new StringBuilder();
+            List<Goods> goodsList = GoodsService.findAllGoodsInOrder(order.getOid());
+
+            int len;
+            if((goodsList != null) && (!goodsList.isEmpty())) {
+                len = goodsList.size();
+                goodsStr.append(goodsList.get(0).getName());
+            }
+            else len = 0;
+            for(int i = 1; i < len; i++) {
+                goodsStr.append(",").append(goodsList.get(i).getName());
+            }
+
+            String[] item = {
+                    String.valueOf(order.getOid()),
+                    goodsStr.toString(),
+                    order.getSaleDate().toString(),
+                    order.getStates()
+            };
+            ret[p++] = item;
+        }
+        return ret;
     }
 
 }
