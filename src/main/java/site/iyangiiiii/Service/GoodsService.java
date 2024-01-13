@@ -9,8 +9,7 @@ import site.iyangiiiii.Entities.Order;
 import site.iyangiiiii.Entities.OrderGoods;
 import site.iyangiiiii.Utils.Pair;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -243,6 +242,27 @@ public class GoodsService {
     public static List<Goods> getAllSoldGoods() {
         try {
             return goodsService.orderGoodsRepository.findAllDistinctGoods();
+        }
+        catch (Exception e) {
+            logger.log(Level.SEVERE, "GoodsService: ", e);
+            return null;
+        }
+    }
+
+    /**
+     * 获取所有在订单列表中的货物
+     * @param orderList 订单列表
+     * @return 成功返回 符合要求的所有商品, 否则返回null
+     */
+    public static List<Goods> getAllGoodsInOrders(List<Order> orderList) {
+        try {
+            Set<Goods> st = new TreeSet<>();
+            List<OrderGoods> res = goodsService.orderGoodsRepository.findOrderGoodsByOrdersIn(orderList);
+            for(OrderGoods orderGoods: res) {
+                st.add(orderGoods.getGoods());
+            }
+
+            return new ArrayList<>(st);
         }
         catch (Exception e) {
             logger.log(Level.SEVERE, "GoodsService: ", e);

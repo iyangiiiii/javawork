@@ -5,9 +5,11 @@ import org.springframework.stereotype.Service;
 import site.iyangiiiii.DAO.GoodsRepository;
 import site.iyangiiiii.DAO.OrderGoodsRepository;
 import site.iyangiiiii.DAO.OrderRepository;
+import site.iyangiiiii.DAO.UserRepository;
 import site.iyangiiiii.Entities.Goods;
 import site.iyangiiiii.Entities.Order;
 import site.iyangiiiii.Entities.OrderGoods;
+import site.iyangiiiii.Entities.User;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -18,16 +20,18 @@ import java.util.logging.Logger;
 @Service
 public class OrderService {
     public static Logger logger = Logger.getLogger("OrderService");
+    protected UserRepository userRepository;
     protected OrderRepository orderRepository;
     protected GoodsRepository goodsRepository;
     protected OrderGoodsRepository orderGoodsRepository;
     protected static OrderService orderService;
 
     @Autowired
-    protected OrderService(OrderRepository repository, GoodsRepository repository1, OrderGoodsRepository repository2) {
+    protected OrderService(OrderRepository repository, GoodsRepository repository1, OrderGoodsRepository repository2, UserRepository userRepository) {
         this.orderRepository = repository;
         this.goodsRepository = repository1;
         this.orderGoodsRepository = repository2;
+        this.userRepository = userRepository;
 
         orderService = this;
     }
@@ -196,6 +200,22 @@ public class OrderService {
     public static List<Order> getAllOrders() {
         try {
             return orderService.orderGoodsRepository.findAllDistinctOrders();
+        }
+        catch (Exception e) {
+            logger.log(Level.SEVERE, "OrderService: ", e);
+            return null;
+        }
+    }
+
+    /**
+     * 通过用户id查找订单
+     * @param uid 用户id
+     * @return 成功返回 用户所有订单, 否则返回null
+     */
+    public static List<Order> findOrdersByUid(int uid) {
+        try {
+            User user = new User(); user.setUid(uid);
+            return orderService.orderRepository.findOrdersByUser(user);
         }
         catch (Exception e) {
             logger.log(Level.SEVERE, "OrderService: ", e);

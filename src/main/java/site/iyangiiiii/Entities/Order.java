@@ -86,4 +86,17 @@ public class Order {
                 getStates()
         };
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Order order)) return false;
+
+        return getOid() == order.getOid();
+    }
+
+    @Override
+    public int hashCode() {
+        return getOid();
+    }
 }

@@ -15,4 +15,5 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
     List<Order> findOrdersBySaleDateBefore(Date beforeDate);
     List<Order> findOrdersBySaleDateAfter(Date beforeDate);
     List<Order> findOrdersBySaleDateBetween(Date lDate, Date rDate);
+    List<Order> findOrdersByUser(User user);
 }
