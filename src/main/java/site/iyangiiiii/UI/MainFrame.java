@@ -49,8 +49,8 @@ public class MainFrame extends JFrame{
 		jTabbedPane.setFont(font2);
 		jTabbedPane.add("主 界 面", jPanel);
 
-//		ShoppingCart shoppingPanel = new ShoppingCart();
-//		jTabbedPane.add("商品选购", shoppingPanel);
+		ShoppingCart shoppingPanel = new ShoppingCart();
+		jTabbedPane.add("商品选购", shoppingPanel);
 
 		if (isadmin)
 		{

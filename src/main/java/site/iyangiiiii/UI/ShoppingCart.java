@@ -7,14 +7,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.table.DefaultTableModel;
 
-public class ShoppingCart extends JFrame {
+public class ShoppingCart extends JPanel {
     private DefaultListModel<Product> productList;
-    private JList<Product> productListView;
     private DefaultTableModel cartTableModel;
     private JTable cartTable;
 
     public ShoppingCart() {
-        super("商品选购界面");
 
         // 初始化商品列表和购物车列表的数据模型
         productList = new DefaultListModel<>();
@@ -75,40 +73,39 @@ public class ShoppingCart extends JFrame {
             gridPanel.add(productButton);
         }
 
-        // 使用GridBagLayout进行布局
+// 使用GridBagLayout进行布局
         JPanel mainPanel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
 
-
-        // 将商品网格布局放在中间
-        gbc.gridx = 1;
+// 将商品网格布局放在中间
+        gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.gridheight = 2;
         gbc.insets = new Insets(10, 10, 10, 10);
         mainPanel.add(gridPanel, gbc);
 
-        // 将购买按钮放在中间下方
+// 将购买按钮放在中间下方
         gbc.gridx = 1;
-        gbc.gridy = 2;
-        gbc.gridwidth = 2;
+        gbc.gridy = 3;
+        gbc.gridwidth = 1;
+        gbc.weightx = 0.5;
+        gbc.weighty = 1.0;
         gbc.insets = new Insets(10, 50, 10, 50);
         mainPanel.add(buyButton, gbc);
 
-        // 将购物车表格放在右下角
-        gbc.gridx = 2;
+// 将购物车表格放在右下角
+        gbc.gridx = 1;
         gbc.gridy = 0;
         gbc.gridheight = 3;
+        gbc.weightx = 1.0;
+        gbc.weighty = 1.0;
+        gbc.fill = GridBagConstraints.BOTH;  // 添加这一行
         gbc.insets = new Insets(10, 10, 10, 10);
         mainPanel.add(cartScrollPane, gbc);
 
-        // 设置布局
+// 设置布局
         setLayout(new BorderLayout());
         add(mainPanel, BorderLayout.CENTER);
-
-        // 设置窗口属性
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1500, 800);
-        setLocationRelativeTo(null);
     }
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
