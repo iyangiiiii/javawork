@@ -225,8 +225,46 @@ public class APIUtils {
      * 订单展示 展示所有订单 内容为 编号 商品名 时间 状态
      * @return 获取到的内容
      */
-    public static int test7() {
-        return 1;
+    public static String[][] getAllOrderInfo() {
+        List<Order> orderList = OrderService.getAllOrders();
+        if(orderList == null) {
+            return new String[0][0];
+        }
+        int p = 0;
+        String[][] ret = new String[orderList.size()][4];
+        for(Order order: orderList) {
+            ret[p++] = order.toArray();
+        }
+        return ret;
     }
 
+    /**
+     * 将Order转换为Array
+     * @param order 需要转换的订单
+     * @return 转换后的Array
+     */
+    public static String[][] getOrderInfo(Order order) {
+        if(order == null) {
+            return new String[0][0];
+        }
+        String[][] ret = new String[1][4];
+        ret[0] = order.toArray();
+        return ret;
+    }
+
+    /**
+     * 将Order转换为Array
+     * @param orders 需要转换的订单列表
+     * @return 转换后的Array
+     */
+    public static String[][] getOrderInfo(List<Order> orders) {
+        if(orders == null || orders.isEmpty()) {
+            return new String[0][0];
+        }
+        String[][] ret = new String[orders.size()][4];
+        for(int i = 0; i<orders.size();i++) {
+            ret[i] = orders.get(i).toArray();
+        }
+        return ret;
+    }
 }
