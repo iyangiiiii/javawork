@@ -471,5 +471,21 @@ public class APIUtils {
 
         return goods.getPrice();
     }
+
+    public static Object[][] getAppraise() {
+        List<Appraise> res;
+        if(isAdmin()) res = AppraiseService.findAllApplause();
+        else res = AppraiseService.findApplauseListByUser(Global.curUser.getUid());
+
+        int len;
+        if(res == null) len = 0;
+        else len = res.size();
+
+        Object[][] ret = new Object[len][4];
+        for(int i = 0;i<len;i++) {
+            ret[i] = res.get(i).toArray();
+        }
+        return ret;
+    }
 }
 

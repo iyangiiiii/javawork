@@ -2,6 +2,9 @@ package site.iyangiiiii.Entities;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "appraises")
 public class Appraise {
@@ -73,5 +76,14 @@ public class Appraise {
 
     public void setStars(int stars) {
         this.stars = stars;
+    }
+
+    public Object[] toArray() {
+        List<String> ret = new ArrayList<>();
+        ret.add(getUser().getUsername());
+        ret.add(getGoods().getName());
+        ret.add(content);
+        ret.add(stars+"星");
+        return ret.toArray();
     }
 }
