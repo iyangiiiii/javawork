@@ -62,6 +62,8 @@ public class UserRatingInterface extends JPanel {
 //        tableModel.setRowCount(0);
         JTable reviewTable = new JTable(tableModel);
 
+
+
         JTableHeader head = reviewTable.getTableHeader();
         // 设置表头字体大小
         head.setFont(new Font("宋体", Font.BOLD, 20));
