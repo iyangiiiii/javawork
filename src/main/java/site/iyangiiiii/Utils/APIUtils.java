@@ -320,5 +320,12 @@ public class APIUtils {
     public static int test() {
         return 1;
     }
+    /**
+     * 用户购买过的商品
+     * @return 商品列表 最大只有2
+     */
+    public static String[] SoldGoods() {
+        return new String[0];
+    }
 }
 

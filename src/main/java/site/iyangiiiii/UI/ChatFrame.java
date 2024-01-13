@@ -28,8 +28,9 @@ public class ChatFrame {
         panel.setLayout(new BorderLayout());
 
         JTable chatArea = new JTable(model);
+        chatArea.setRowHeight(30);
         chatArea.setOpaque(false);
-        chatArea.setFont(new Font("宋体", Font.PLAIN, 20));
+        chatArea.setFont(new Font("宋体", Font.PLAIN, 25));
 
         JScrollPane scrollPane = new JScrollPane(chatArea);
         scrollPane.setOpaque(false);

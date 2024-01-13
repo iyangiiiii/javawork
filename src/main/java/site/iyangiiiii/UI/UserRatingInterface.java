@@ -1,5 +1,6 @@
 package site.iyangiiiii.UI;
 
+import site.iyangiiiii.Utils.APIUtils;
 import site.iyangiiiii.Utils.Global;
 
 import javax.swing.*;
@@ -12,6 +13,8 @@ import javax.swing.table.JTableHeader;
 public class UserRatingInterface extends JPanel {
     private JTextField inputField;
     private JComboBox<String> ratingComboBox;
+
+    private JComboBox<String> GoodsBox;
     private DefaultTableModel tableModel;
     private Image backgroundImage;
     public UserRatingInterface(String username, Boolean admin) {
@@ -32,6 +35,9 @@ public class UserRatingInterface extends JPanel {
             String[] ratings = {"1星", "2星", "3星", "4星", "5星"};
             ratingComboBox = new JComboBox<>(ratings);
             ratingPanel.add(ratingComboBox);
+
+            String[] goods = APIUtils.SoldGoods();
+            GoodsBox = new JComboBox<>(goods);
 
             JButton submitButton = new JButton("提交");
             submitButton.addActionListener(new ActionListener() {
