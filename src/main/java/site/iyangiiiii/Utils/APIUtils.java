@@ -377,12 +377,67 @@ public class APIUtils {
     }
 
     /**
+     * 商品查询 从数据库中展示数据并且通过一些标签查询商品
+     * @param By 根据什么查询
+     * @param query 查询条件
+     * @return 如果成功返回 满足条件的数据, 否则返回null, 并设置错误
+     */
+    public static Object[][] getGoodsData(String By, String query) {
+        Goods goods;
+        Object[][] ret;
+        List<Goods> goodsList;
+        switch (By) {
+            case "查找所有商品":
+                return getAllGoodsInfo();
+            case "按照商品名查找":
+                goods = GoodsService.findGoodsByName(query);
+                if(goods == null) {
+                    ErrorUtils.setLastError(1, "查询参数有误");
+                    return null;
+                }
+                ret = new Object[1][6];
+                ret[0] = goods.toArray();
+                return ret;
+            case "按照厂商查找":
+                goodsList = GoodsService.findGoodsByFactory(query);
+                if(goodsList == null) {
+                    ErrorUtils.setLastError(1, "查询参数有误");
+                    return null;
+                }
+                ret = new Object[goodsList.size()][6];
+                for(int i = 0;i<goodsList.size();i++) ret[i] = goodsList.get(i).toArray();
+                return ret;
+            case "按照类别查找":
+                goodsList = GoodsService.findGoodsByType(query);
+                if(goodsList == null) {
+                    ErrorUtils.setLastError(1, "查询参数有误");
+                    return null;
+                }
+                ret = new Object[goodsList.size()][6];
+                for(int i = 0;i<goodsList.size();i++) ret[i] = goodsList.get(i).toArray();
+                return ret;
+            case "按照状态查找":
+                goodsList = GoodsService.findGoodsByState(query);
+                if(goodsList == null) {
+                    ErrorUtils.setLastError(1, "查询参数有误");
+                    return null;
+                }
+                ret = new Object[goodsList.size()][6];
+                for(int i = 0;i<goodsList.size();i++) ret[i] = goodsList.get(i).toArray();
+                return ret;
+            default:
+                return null;
+        }
+    }
+
+    /**
      * 根据商品名获取商品价格
      * @return 商品价格
      */
-    public static double getprice()
-    {
-        return 1.0;
+    public static double getprice(String name) {
+        Goods goods = GoodsService.findGoodsByName(name);
+
+        return goods.getPrice();
     }
 }
 

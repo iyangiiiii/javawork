@@ -181,6 +181,7 @@ public class ChatFrame {
                         String value = (String) objectTablePanel.getValueAt(selectedRow, selectedColumn);
                         cur = UserService.findUserByUsername(value);
                         refreshUser();
+                        refresh();
                     }
                 }
             }

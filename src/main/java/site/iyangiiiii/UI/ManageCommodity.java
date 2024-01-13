@@ -57,61 +57,22 @@ public class ManageCommodity {
         private Font font2 = new Font("宋体", Font.BOLD, 25);
         private Font font3 = new Font("宋体", Font.BOLD, 20);
 
+        private DefaultTableModel tableModel;
+        JTable table;
+
         public AddCommodityPanel() {
             // 设置布局为null，以便手动控制组件的位置
             setLayout(null);
             addComponents();
-            refreshTable();
-            // 添加背景图片
-            ImageIcon backgroundIcon = new ImageIcon(Global.getImgPath("manage.jpg"));
-            Image backgroundImg = backgroundIcon.getImage();
-            Image scaledBackgroundImg = backgroundImg.getScaledInstance(1500, 800, Image.SCALE_SMOOTH);
-            ImageIcon scaledBackgroundIcon = new ImageIcon(scaledBackgroundImg);
-
-            JLabel backgroundLabel = new JLabel(scaledBackgroundIcon);
-            backgroundLabel.setBounds(0, 0, 1500, 800);
-            add(backgroundLabel);
-
-            // 添加组件
-
-            button.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    // 在这里添加添加商品的逻辑
-                    String name = field4.getText();
-                    String factory = field.getText();
-                    String inv = field2.getText();
-                    String variety = field3.getText();
-                    String state = (String)box.getSelectedItem();
-                    String pri = field5.getText();
-                    Long inventory = Long.parseLong(inv);
-                    int price = Integer.parseInt(pri);
-                    // 调用添加商品的方法
-                    int result = APIUtils.addGoods(name, factory, inventory,null, variety,state,price);
-
-                    // 处理添加结果，可以根据实际情况进行修改
-                    if (result != -1) {
-                        JOptionPane.showMessageDialog(null, "成功添加商品：" + name);
-                    } else {
-                        JOptionPane.showMessageDialog(null, "添加商品失败：" + name);
-                    }
-
-                    refreshTable();
-                }
-            });
-        }
-        private void refreshTable() {
+            //*************************************************************
             Color color = new Color(179, 206, 255);
             // 表头
             String[] columnNames = {"商品名", "厂商", "库存", "类别", "状态", "价格"};
-
-            // 表格数据
-            Object[][] data = APIUtils.getAllGoodsInfo();
             // 创建表格模型
-            DefaultTableModel tableModel = new DefaultTableModel(data, columnNames);
+            tableModel = new DefaultTableModel(APIUtils.getAllGoodsInfo(), columnNames);
 
             // 创建表格
-            JTable table = new JTable(tableModel);
+            table = new JTable(tableModel);
             // 创建表格模型
             JScrollPane scrollPane = new JScrollPane(table);
             scrollPane.setBounds(500, 200, 900, 450);
@@ -139,7 +100,62 @@ public class ManageCommodity {
 
             // 将滚动窗格添加到面板中
             add(scrollPane);
+            //***************************
+            // 添加背景图片
+            ImageIcon backgroundIcon = new ImageIcon(Global.getImgPath("manage.jpg"));
+            Image backgroundImg = backgroundIcon.getImage();
+            Image scaledBackgroundImg = backgroundImg.getScaledInstance(1500, 800, Image.SCALE_SMOOTH);
+            ImageIcon scaledBackgroundIcon = new ImageIcon(scaledBackgroundImg);
 
+            JLabel backgroundLabel = new JLabel(scaledBackgroundIcon);
+            backgroundLabel.setBounds(0, 0, 1500, 800);
+            add(backgroundLabel);
+
+            // 添加组件
+
+            button_s.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    refreshTable(APIUtils.getGoodsData((String) box_s.getSelectedItem(), field_s.getText()));
+                }
+            });
+
+            button.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    // 在这里添加添加商品的逻辑
+                    String name = field4.getText();
+                    String factory = field.getText();
+                    String inv = field2.getText();
+                    String variety = field3.getText();
+                    String state = (String)box.getSelectedItem();
+                    String pri = field5.getText();
+                    Long inventory = Long.parseLong(inv);
+                    int price = Integer.parseInt(pri);
+                    // 调用添加商品的方法
+                    int result = APIUtils.addGoods(name, factory, inventory,null, variety,state,price);
+
+                    // 处理添加结果，可以根据实际情况进行修改
+                    if (result != -1) {
+                        JOptionPane.showMessageDialog(null, "成功添加商品：" + name);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "添加商品失败：" + name);
+                    }
+
+                    refreshTable();
+                }
+            });
+        }
+
+        private void refreshTable() {
+            refreshTable(APIUtils.getAllGoodsInfo());
+        }
+
+        private void refreshTable(Object[][] data) {
+            tableModel.setRowCount(0);
+            for(Object[] obj: data) {
+                tableModel.addRow(obj);
+            }
         }
 
         private void addComponents() {
@@ -169,12 +185,11 @@ public class ManageCommodity {
 
             // 下拉框
             box_s.setSize(dimension_s);
+            box_s.addItem("查找所有商品");
             box_s.addItem("按照商品名查找");
             box_s.addItem("按照厂商查找");
-            box_s.addItem("按照库存查找");
             box_s.addItem("按照类别查找");
-            box_s.addItem("按照装填查找");
-            box_s.addItem("按照价格查找");
+            box_s.addItem("按照状态查找");
             box_s.setFont(font_s);
             box_s.setBounds(550, 155, 200, 40);
             box_s.setOpaque(false);
