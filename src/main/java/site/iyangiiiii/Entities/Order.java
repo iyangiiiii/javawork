@@ -1,8 +1,10 @@
 package site.iyangiiiii.Entities;
 
 import jakarta.persistence.*;
+import site.iyangiiiii.Service.GoodsService;
 
 import java.sql.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "orders")
@@ -61,5 +63,27 @@ public class Order {
 
     public void setSaleDate(Date saleDate) {
         this.saleDate = saleDate;
+    }
+
+    public String[] toArray() {
+        StringBuilder goodsStr = new StringBuilder();
+        List<Goods> goodsList = GoodsService.findAllGoodsInOrder(getOid());
+
+        int len;
+        if((goodsList != null) && (!goodsList.isEmpty())) {
+            len = goodsList.size();
+            goodsStr.append(goodsList.get(0).getName());
+        }
+        else len = 0;
+        for(int i = 1; i < len; i++) {
+            goodsStr.append(",").append(goodsList.get(i).getName());
+        }
+
+        return new String[]{
+                String.valueOf(getOid()),
+                goodsStr.toString(),
+                getSaleDate().toString(),
+                getStates()
+        };
     }
 }

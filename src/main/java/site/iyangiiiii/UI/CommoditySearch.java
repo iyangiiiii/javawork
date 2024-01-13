@@ -8,6 +8,7 @@ package site.iyangiiiii.UI;
 
 import site.iyangiiiii.Entities.Goods;
 import site.iyangiiiii.Service.GoodsService;
+import site.iyangiiiii.Utils.APIUtils;
 import site.iyangiiiii.Utils.Global;
 
 import java.awt.*;
@@ -166,6 +167,11 @@ public class CommoditySearch {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				model.setRowCount(0);
+				String[][] datas =  APIUtils.getOrderInfo(APIUtils.findOrders(s, field.getText().trim()));
+				for(String[] item: datas) {
+					model.addColumn(item);
+				}
+				model.setRowCount(datas.length);
 //				if (s.equals("按照编号查找")) {
 //					commodity = field.getText().trim();
 //					id = Integer.parseInt(commodity);
