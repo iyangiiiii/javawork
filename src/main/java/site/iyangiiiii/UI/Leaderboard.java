@@ -6,8 +6,6 @@ import site.iyangiiiii.Utils.Global;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.util.List;
-import java.util.Vector;
 
 public class Leaderboard extends JPanel {
     private JTable leaderboardTable;

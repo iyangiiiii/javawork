@@ -42,7 +42,7 @@ public class MainFrame extends JFrame{
 
 		JLabel label = new JLabel(scaledIcon);
 		label.setBounds(0, 0, 1500, 800);
-		jPanel.setLayout(null); // 请确保 jPanel 已正确初始化1
+		jPanel.setLayout(null);
 		jPanel.add(label);
 
 		Boolean isadmin = APIUtils.isAdmin();
@@ -50,16 +50,15 @@ public class MainFrame extends JFrame{
 		jTabbedPane.setFont(font2);
 		jTabbedPane.add("主 界 面", jPanel);
 
-		CommoditySearch search = new CommoditySearch();
-		jTabbedPane.add("订单管理",search.jLayeredPane);
-
 		if (isadmin)
 		{
-			ChatFrame chatFrame = new ChatFrame();
-			jTabbedPane.add("用户沟通", chatFrame.createChatPanel());
+			CommoditySearch search = new CommoditySearch();
+			jTabbedPane.add("订单管理",search.jLayeredPane);
 			ManageCommodity addCommodity = new ManageCommodity();
 			ManageCommodity.AddCommodityPanel acPanel = addCommodity.new AddCommodityPanel();
 			jTabbedPane.add("商品管理", acPanel);
+			ChatFrame chatFrame = new ChatFrame();
+			jTabbedPane.add("用户沟通", chatFrame.createChatPanel());
 		}
 		else {
 			ChatFrame chatFrame = new ChatFrame();

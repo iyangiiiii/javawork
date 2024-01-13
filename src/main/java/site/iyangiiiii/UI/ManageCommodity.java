@@ -1,6 +1,7 @@
 package site.iyangiiiii.UI;
 
 import site.iyangiiiii.Utils.APIUtils;
+import site.iyangiiiii.Utils.Global;
 
 import javax.swing.*;
 import java.awt.*;
@@ -47,8 +48,19 @@ public class ManageCommodity {
         public AddCommodityPanel() {
             // 设置布局为null，以便手动控制组件的位置
             setLayout(null);
-            // 添加组件
             addComponents();
+            // 添加背景图片
+            ImageIcon backgroundIcon = new ImageIcon(Global.getImgPath("manage.jpg"));
+            Image backgroundImg = backgroundIcon.getImage();
+            Image scaledBackgroundImg = backgroundImg.getScaledInstance(1500, 800, Image.SCALE_SMOOTH);
+            ImageIcon scaledBackgroundIcon = new ImageIcon(scaledBackgroundImg);
+
+            JLabel backgroundLabel = new JLabel(scaledBackgroundIcon);
+            backgroundLabel.setBounds(0, 0, 1500, 800);
+            add(backgroundLabel);
+
+            // 添加组件
+
             button.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -92,6 +104,7 @@ public class ManageCommodity {
                     }
                 }
             });
+
         }
 
         private void addComponents() {
@@ -181,4 +194,5 @@ public class ManageCommodity {
             add(button);
         }
     }
+
 }

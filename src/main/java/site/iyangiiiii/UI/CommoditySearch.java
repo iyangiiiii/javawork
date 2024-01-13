@@ -105,9 +105,8 @@ public class CommoditySearch {
 
 		// 表格
 		model.addColumn("编号", new Vector<Integer>());
-		model.addColumn("类别", new Vector<Integer>());
 		model.addColumn("商品名", new Vector<Integer>());
-		model.addColumn("厂家", new Vector<Integer>());
+		model.addColumn("时间", new Vector<Integer>());
 		model.addColumn("状态", new Vector<Integer>());
 		JTable jTable = new JTable(model) {
 			@Override
