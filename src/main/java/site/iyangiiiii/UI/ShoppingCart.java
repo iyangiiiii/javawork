@@ -53,7 +53,7 @@ public class ShoppingCart extends JPanel {
                 // 返回 false 表示所有单元格都不可编辑
                 return false;
             }
-        };;
+        };
         cartTableModel.addColumn("商品名称");
         cartTableModel.addColumn("价格");
 

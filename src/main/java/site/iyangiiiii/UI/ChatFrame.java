@@ -1,6 +1,5 @@
 package site.iyangiiiii.UI;
 import site.iyangiiiii.Bean.ChatInfo;
-import site.iyangiiiii.Entities.Chat;
 import site.iyangiiiii.Entities.User;
 import site.iyangiiiii.Service.ChatService;
 import site.iyangiiiii.Service.UserService;
@@ -8,7 +7,8 @@ import site.iyangiiiii.Utils.APIUtils;
 import site.iyangiiiii.Utils.Global;
 
 import javax.swing.*;
-import javax.swing.event.ListDataListener;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
@@ -16,18 +16,27 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
+import java.util.Vector;
 
 
 public class ChatFrame {
     private static User cur = null;
-    private DefaultListModel<String> listModel = new DefaultListModel<>();
+    private DefaultTableModel tableModel;
     private List<String> objectList = new ArrayList<>();
     protected static List<ChatInfo> curHistory = new ArrayList<>();
     protected static DefaultTableModel model = new DefaultTableModel();
     public JPanel createChatPanel() {
         Color color = new Color(179, 206, 255);
+
+        tableModel = new DefaultTableModel(){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                // 返回 false 表示所有单元格都不可编辑
+                return row == 0 && column ==0;
+            }
+        };;
+
+        tableModel.addColumn("");
 
         ImageIcon icon = new ImageIcon(Global.getImgPath("chatframe.jpg"));
         Image img = icon.getImage();
@@ -62,6 +71,7 @@ public class ChatFrame {
         JTableHeader blankHeader = new JTableHeader();
         blankHeader.setVisible(false);
         chatArea.setTableHeader(blankHeader);
+
 
         chatArea.setShowVerticalLines(false);
         model.addColumn("1");
@@ -112,39 +122,85 @@ public class ChatFrame {
             }
         });
 
-        JList<String> objectListPanel = new JList<>(listModel);
+        JTable objectTablePanel = new JTable(tableModel);
 
-        objectListPanel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        objectListPanel.setOpaque(false);
-        JScrollPane objectScrollPane = new JScrollPane(objectListPanel);
+        objectTablePanel.setTableHeader(blankHeader);
+
+        objectTablePanel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        objectTablePanel.setOpaque(false);
+        JScrollPane objectScrollPane = new JScrollPane(objectTablePanel);
         objectScrollPane.setPreferredSize(new Dimension(150, panel.getHeight())); // 调整宽度
         objectScrollPane.setOpaque(false);
         panel.add(objectScrollPane, BorderLayout.WEST);
 
-        // 2. 添加对象列表选择监听器
-        objectListPanel.addListSelectionListener(new ListSelectionListener() {
+        objectTablePanel.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                // 不需要实现
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                // 按下 Delete 键时触发
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    int selectedRow = objectTablePanel.getSelectedRow();
+                    int selectedColumn = objectTablePanel.getSelectedColumn();
+                    if (selectedRow == 0 && selectedColumn == 0) {
+                        Vector<String> tp = new Vector<>();
+                        String value = (String) objectTablePanel.getValueAt(selectedRow, selectedColumn);
+                        User user = UserService.findUserByUsername(value);
+                        if(user != null) {
+                            boolean is_ok = true;
+                            for (int row = 1; row < objectTablePanel.getRowCount(); row++) {
+                                String str = (String) objectTablePanel.getValueAt(row, selectedColumn);
+                                if(str.equals(value)) is_ok = false;
+                            }
+                            if(is_ok) {
+                                tp.add(value);
+                                tableModel.addRow(tp);
+                            }
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                // 不需要实现
+            }
+        });
+
+        objectTablePanel.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
             public void valueChanged(ListSelectionEvent e) {
                 if (!e.getValueIsAdjusting()) {
-                    // 获取用户选择的对象，并执行相应操作
-                    String username = objectListPanel.getSelectedValue();
-                    model.setRowCount(0);
-                    cur = UserService.findUserByUsername(username);
-                    refresh();
-                    // 实现切换到所选对象的聊天记录逻辑
-                    // 这里可以添加你的逻辑代码
+                    int selectedRow = objectTablePanel.getSelectedRow();
+                    int selectedColumn = objectTablePanel.getSelectedColumn();
+
+                    if (selectedRow > 0 || selectedColumn > 0) {
+                        String value = (String) objectTablePanel.getValueAt(selectedRow, selectedColumn);
+                        cur = UserService.findUserByUsername(value);
+                        refreshUser();
+                    }
                 }
             }
         });
+
+        // 2. 添加对象列表选择监听器
 
         return panel;
     }
 
     protected void refreshUser() {
-        listModel.clear();
-        List<User> res = APIUtils.showChatUser(Global.curUser.getUid());
-        for(User user: res){
-            String username = user.getUsername();
-            listModel.addElement(username);
+        tableModel.setRowCount(0);
+        Vector<String> temp = new Vector<>();
+        tableModel.addRow(temp);
+        temp.add("输入用户名");
+        List<User> userList = APIUtils.showChatUser(Global.curUser.getUid());
+        for(User user: userList) {
+            Vector<String> tem = new Vector<>();
+            tem.add(user.getUsername());
+            tableModel.addRow(tem);
         }
     }
 
