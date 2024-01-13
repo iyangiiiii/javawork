@@ -11,7 +11,7 @@ import javax.swing.table.JTableHeader;
 public class Leaderboard extends JPanel {
     private JTable leaderboardTable;
     public Leaderboard() {
-
+        Color color = new Color(179, 206, 255);
         // 创建表头和数据
         String[] columns = {"商品", "销量", "好评率", "价格"};
         Object[][] data = APIUtils.getRanking();
@@ -32,7 +32,7 @@ public class Leaderboard extends JPanel {
         // 设置表头字体大小
         head.setFont(new Font("宋体", Font.BOLD, 20));
         head.setForeground(Color.BLACK); // 设置表头文字颜色
-        head.setBackground(Color.CYAN);
+        head.setBackground(color);
         head.setOpaque(true);
 
         // 设置行高度和列宽度

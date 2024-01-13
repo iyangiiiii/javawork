@@ -116,12 +116,12 @@ public class CommoditySearch {
 		head.setPreferredSize(new Dimension(head.getWidth(), 30));
 		// 设置表头字体大小
 		head.setFont(new Font("宋体", Font.BOLD, 20));
-		// head.setForeground(Color.cyan);
+
 		head.setBackground(color);
 		// 设置表格的行宽
 		jTable.setRowHeight(30);
 		// 设置表格行中字体大小
-		jTable.setFont(new Font("宋体", Font.ROMAN_BASELINE, 17));
+		jTable.setFont(new Font("宋体", Font.PLAIN, 17));
 		/* 设置表格中的内容居中 */
 		DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
 		renderer.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);

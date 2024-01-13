@@ -18,6 +18,7 @@ public class UserRatingInterface extends JPanel {
     private DefaultTableModel tableModel;
     private Image backgroundImage;
     public UserRatingInterface(String username, Boolean admin) {
+        Color color = new Color(179, 206, 255);
 
         ImageIcon backgroundIcon = new ImageIcon(Global.getImgPath("comment.jpg"));
         backgroundImage = backgroundIcon.getImage(); // 将图标转换为图像
@@ -38,6 +39,7 @@ public class UserRatingInterface extends JPanel {
 
             String[] goods = APIUtils.SoldGoods(Global.curUser.getUid());
             GoodsBox = new JComboBox<>(goods);
+            ratingPanel.add(GoodsBox);
 
             JButton submitButton = new JButton("提交");
             submitButton.addActionListener(new ActionListener() {
@@ -64,7 +66,7 @@ public class UserRatingInterface extends JPanel {
         // 设置表头字体大小
         head.setFont(new Font("宋体", Font.BOLD, 20));
         head.setForeground(Color.BLACK); // 设置表头文字颜色
-        head.setBackground(Color.CYAN);
+        head.setBackground(color);
         head.setOpaque(true);
 
         JScrollPane scrollPane = new JScrollPane(reviewTable);
