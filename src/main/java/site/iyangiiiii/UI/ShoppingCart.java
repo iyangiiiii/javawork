@@ -33,18 +33,18 @@ public class ShoppingCart extends JPanel {
 
         // 初始化商品列表和购物车列表的数据模型
         productList = new DefaultListModel<>();
-        productList.addElement(new Product("爱心小熊粉粉乐园系列手提包", Global.getImgPath("good1.jpg"), 180, 130, APIUtils.getprice()));
-        productList.addElement(new Product("迪士尼皮克斯开心烘焙店系列常规眼罩", Global.getImgPath("good2.jpg"),180, 130, APIUtils.getprice()));
-        productList.addElement(new Product("萌兔口罩", Global.getImgPath("good3.jpg"),180,130, APIUtils.getprice()));
-        productList.addElement(new Product("Sanrio Characters圆形擦手巾", Global.getImgPath("good4.jpg"),180,130, APIUtils.getprice()));
-        productList.addElement(new Product("Sanrio Characters暖贴", Global.getImgPath("good5.jpg"),180,130, APIUtils.getprice()));
-        productList.addElement(new Product("Sanrio characters大号趣味扑克牌", Global.getImgPath("good6.jpg"),180,130, APIUtils.getprice()));
-        productList.addElement(new Product("Sanrio Characters蒸汽眼罩", Global.getImgPath("good7.jpg"),180,130, APIUtils.getprice()));
-        productList.addElement(new Product("迪士尼奇奇蒂蒂系列DIY装饰长挂件 (中国结款)", Global.getImgPath("good8.jpg"),180,130, APIUtils.getprice()));
-        productList.addElement(new Product("游园周末香薰膏", Global.getImgPath("good9.jpg"),180,130, APIUtils.getprice()));
-        productList.addElement(new Product("迪士尼毛毛季系列绒绒便携气囊梳",Global.getImgPath( "good10.jpg"),180, 130, APIUtils.getprice()));
-        productList.addElement(new Product("芭比系列小香风果冻包",Global.getImgPath( "good11.jpg"), 180, 130, APIUtils.getprice()));
-        productList.addElement(new Product("芭比系列时尚宠物包",Global.getImgPath("good12.jpg"),180, 130, APIUtils.getprice()));
+        productList.addElement(new Product("爱心小熊粉粉乐园系列手提包", Global.getImgPath("good1.jpg"), 180, 130, APIUtils.getprice("爱心小熊粉粉乐园系列手提包")));
+        productList.addElement(new Product("迪士尼皮克斯开心烘焙店系列常规眼罩", Global.getImgPath("good2.jpg"),180, 130, APIUtils.getprice("迪士尼皮克斯开心烘焙店系列常规眼罩")));
+        productList.addElement(new Product("萌兔口罩", Global.getImgPath("good3.jpg"),180,130, APIUtils.getprice("萌兔口罩")));
+        productList.addElement(new Product("Sanrio Characters圆形擦手巾", Global.getImgPath("good4.jpg"),180,130, APIUtils.getprice("Sanrio Characters圆形擦手巾")));
+        productList.addElement(new Product("Sanrio Characters暖贴", Global.getImgPath("good5.jpg"),180,130, APIUtils.getprice("Sanrio Characters暖贴")));
+        productList.addElement(new Product("Sanrio characters大号趣味扑克牌", Global.getImgPath("good6.jpg"),180,130, APIUtils.getprice("Sanrio characters大号趣味扑克牌")));
+        productList.addElement(new Product("Sanrio Characters蒸汽眼罩", Global.getImgPath("good7.jpg"),180,130, APIUtils.getprice("Sanrio Characters蒸汽眼罩")));
+        productList.addElement(new Product("迪士尼奇奇蒂蒂系列DIY装饰长挂件 (中国结款)", Global.getImgPath("good8.jpg"),180,130, APIUtils.getprice("迪士尼奇奇蒂蒂系列DIY装饰长挂件 (中国结款)")));
+        productList.addElement(new Product("游园周末香薰膏", Global.getImgPath("good9.jpg"),180,130, APIUtils.getprice("游园周末香薰膏")));
+        productList.addElement(new Product("迪士尼毛毛季系列绒绒便携气囊梳",Global.getImgPath( "good10.jpg"),180, 130, APIUtils.getprice("迪士尼毛毛季系列绒绒便携气囊梳")));
+        productList.addElement(new Product("芭比系列小香风果冻包",Global.getImgPath( "good11.jpg"), 180, 130, APIUtils.getprice("芭比系列小香风果冻包")));
+        productList.addElement(new Product("芭比系列时尚宠物包",Global.getImgPath("good12.jpg"),180, 130, APIUtils.getprice("芭比系列时尚宠物包")));
 
         // 初始化购物车表格模型
         cartTableModel = new DefaultTableModel(){
