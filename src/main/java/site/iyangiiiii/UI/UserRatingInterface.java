@@ -45,7 +45,8 @@ public class UserRatingInterface extends JPanel {
                 public void actionPerformed(ActionEvent e) {
                     String comment = inputField.getText();
                     String selectedRating = (String) ratingComboBox.getSelectedItem();
-                    addReviewToTable(username, comment, selectedRating);
+                    String goods = (String) GoodsBox.getSelectedItem();
+                    addReviewToTable(username, goods, comment, selectedRating);
                 }
             });
             ratingPanel.add(submitButton);
@@ -92,8 +93,8 @@ public class UserRatingInterface extends JPanel {
             g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
         }
     }
-    private void addReviewToTable(String username, String comment, String rating) {
-        Object[] rowData = {username,"",  comment, rating};
+    private void addReviewToTable(String username, String goods, String comment, String rating) {
+        Object[] rowData = {username, goods,  comment, rating};
         tableModel.addRow(rowData);
     }
 }
