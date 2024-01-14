@@ -515,8 +515,7 @@ public class APIUtils {
      */
     public static Object[][] getAppraise() {
         List<Appraise> res;
-        if(isAdmin()) res = AppraiseService.findAllApplause();
-        else res = AppraiseService.findApplauseListByUser(Global.curUser.getUid());
+        res = AppraiseService.findAllApplause();
 
         int len;
         if(res == null) len = 0;

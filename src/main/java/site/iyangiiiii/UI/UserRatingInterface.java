@@ -27,8 +27,9 @@ public class UserRatingInterface extends JPanel {
         setOpaque(false); // 设置当前面板为透明
 
         JPanel ratingPanel = new JPanel();
-        ratingPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-        if(!admin) {
+        ratingPanel.setLayout(new BoxLayout(ratingPanel, BoxLayout.X_AXIS));
+
+        if (!admin) {
             inputField = new JTextField("", 100);
             inputField.setPreferredSize(new Dimension(200, 30));
             ratingPanel.add(inputField);
@@ -39,7 +40,6 @@ public class UserRatingInterface extends JPanel {
 
             String[] goods = APIUtils.SoldGoods(Global.curUser.getUid());
             GoodsBox = new JComboBox<>(goods);
-            ratingPanel.add(GoodsBox);
 
             JButton submitButton = new JButton("提交");
             submitButton.addActionListener(new ActionListener() {
@@ -47,10 +47,12 @@ public class UserRatingInterface extends JPanel {
                 public void actionPerformed(ActionEvent e) {
                     String comment = inputField.getText();
                     String selectedRating = (String) ratingComboBox.getSelectedItem();
-                    String goods = (String) GoodsBox.getSelectedItem();
-                    addReviewToTable(username, goods, comment, selectedRating);
+                    String selectedGoods = (String) GoodsBox.getSelectedItem();
+                    addReviewToTable(username, selectedGoods, comment, selectedRating);
                 }
             });
+
+            ratingPanel.add(GoodsBox);
             ratingPanel.add(submitButton);
 
             add(ratingPanel, BorderLayout.SOUTH);

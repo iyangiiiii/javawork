@@ -119,7 +119,6 @@ public class ShoppingCart extends JPanel {
                     Product selectedProduct = productList.getElementAt(index);
                     if (selectedProduct != null) {
                         cartTableModel.addRow(new Object[]{selectedProduct.getName(), selectedProduct.getPrice()});
-                        updateTotalPrice();
                     }
                 }
             });
@@ -172,8 +171,8 @@ public class ShoppingCart extends JPanel {
             }
 
             if(APIUtils.addOrder("未发货", goodsList) == 0) {
-                updateTotalPrice(); // 更新总价格显示
                 cartTableModel.setRowCount(0);
+                updateTotalPrice(); // 更新总价格显示
             }
             else {
                 JOptionPane.showMessageDialog(ShoppingCart.this, "购买失败！");

@@ -247,6 +247,9 @@ public class ManageCommodity {
                 add(field5);
                 add(box);
                 add(button);
+                add(box_s);
+                add(field_s);
+                add(button_s);
             }
             else {
                 box_s.setSize(dimension_s);
