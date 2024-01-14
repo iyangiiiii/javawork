@@ -14,9 +14,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.List;
-import java.util.Vector;
 
 
 public class ChatFrame {
@@ -25,6 +24,7 @@ public class ChatFrame {
     private List<String> objectList = new ArrayList<>();
     protected static List<ChatInfo> curHistory = new ArrayList<>();
     protected static DefaultTableModel model = new DefaultTableModel();
+    protected List<String> cachedUser = new ArrayList<>();
     public JPanel createChatPanel() {
         Color color = new Color(179, 206, 255);
 
@@ -156,6 +156,7 @@ public class ChatFrame {
                                 if(str.equals(value)) is_ok = false;
                             }
                             if(is_ok) {
+                                cachedUser.add(value);
                                 tp.add(value);
                                 tableModel.addRow(tp);
                                 tableModel.setValueAt("",0,0);
@@ -174,7 +175,7 @@ public class ChatFrame {
         objectTablePanel.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
-                if (e.getValueIsAdjusting()) {
+                if (!e.getValueIsAdjusting()) {
                     int selectedRow = objectTablePanel.getSelectedRow();
                     int selectedColumn = objectTablePanel.getSelectedColumn();
 
@@ -197,13 +198,26 @@ public class ChatFrame {
         tableModel.setRowCount(0);
         Vector<String> temp = new Vector<>();
         tableModel.addRow(temp);
-        temp.add("输入用户名");
         List<User> userList = APIUtils.showChatUser(Global.curUser.getUid());
+        Set<String> st = new HashSet<>();
         for(User user: userList) {
             Vector<String> tem = new Vector<>();
             tem.add(user.getUsername());
+            st.add(user.getUsername());
             tableModel.addRow(tem);
         }
+        List<String> newCachedUser = new ArrayList<>();
+        for(String user: cachedUser) {
+            if(!st.contains(user)) {
+                Vector<String> tem = new Vector<>();
+                tem.add(user);
+                tableModel.addRow(tem);
+                st.add(user);
+                newCachedUser.add(user);
+            }
+        }
+
+        if(cachedUser.size() != newCachedUser.size()) cachedUser = newCachedUser;
     }
 
     protected void refresh(){

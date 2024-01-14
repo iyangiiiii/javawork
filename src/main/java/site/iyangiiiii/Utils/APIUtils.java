@@ -26,7 +26,7 @@ public class APIUtils {
     }
     @Async
     public void AsyncInit(Object args) {
-        getCachedRanking();
+        CachedRanking();
     }
 
     /**
@@ -250,7 +250,7 @@ public class APIUtils {
      * 商品id, 商品名, 销量, 好评率, 价格
      * @return 成功返回数据, 否则返回null
      */
-    public static Object[][] getCachedRanking() {
+    public static Object[][] CachedRanking() {
         List<RankingInfo> temp = new ArrayList<>();
         List<Vector<String>> ret = new ArrayList<>();
         List<Goods> goodsList = GoodsService.getAllSoldGoods();
@@ -431,6 +431,16 @@ public class APIUtils {
             return -1;
         }
         if(OrderService.addGoodsToOrder(oid, goodsList) == -1) return -1;
+        Map<Integer, Integer> mp = new TreeMap<>();
+        for(Goods goods: goodsList) {
+            int gid = goods.getGid();
+            mp.put(gid, mp.getOrDefault(gid, 0) + 1);
+        }
+        List<Pair<Integer, Integer>> orderInfo = new ArrayList<>();
+        for (Map.Entry<Integer, Integer> entry : mp.entrySet()) {
+            orderInfo.add(new Pair<>(entry.getKey(), entry.getValue()));
+        }
+        GoodsService.subGoods(orderInfo);
         return 0;
     }
 
@@ -499,6 +509,10 @@ public class APIUtils {
         return goods.getPrice();
     }
 
+    /**
+     * 获取所有评论
+     * @return 所有评论
+     */
     public static Object[][] getAppraise() {
         List<Appraise> res;
         if(isAdmin()) res = AppraiseService.findAllApplause();
