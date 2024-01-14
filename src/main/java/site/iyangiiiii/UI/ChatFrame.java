@@ -116,6 +116,7 @@ public class ChatFrame {
                 ChatService.addChat(cur.getUid(), message);
                 messageField.setText("");
                 refreshUser();
+                refresh();
 
                 // 模拟延迟后的回复
 //                simulateResponse(chatArea);

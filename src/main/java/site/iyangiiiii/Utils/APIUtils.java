@@ -408,8 +408,8 @@ public class APIUtils {
         Set<User> st = new TreeSet<>();
         List<ChatInfo> chatInfos = getHistory(uid);
         for(ChatInfo chatInfo: chatInfos) {
-            if(chatInfo.getDirection()==1) st.add(chatInfo.getRhs());
-            else st.add(chatInfo.getLhs());
+            if(chatInfo.getLhs().getUid() != uid) st.add(chatInfo.getLhs());
+            if(chatInfo.getRhs().getUid() != uid) st.add(chatInfo.getRhs());
         }
         return new ArrayList<>(st);
     }
