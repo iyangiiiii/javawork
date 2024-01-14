@@ -16,7 +16,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
 import java.util.List;
-
+import javax.swing.table.TableColumnModel;
 
 public class ChatFrame {
     private static User cur = null;
@@ -125,9 +125,15 @@ public class ChatFrame {
         JTable objectTablePanel = new JTable(tableModel);
 
         objectTablePanel.setTableHeader(blankHeader);
-
+        objectTablePanel.setFont(new Font("宋体", Font.PLAIN, 20)); // 设置字体大小
         objectTablePanel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         objectTablePanel.setOpaque(false);
+        TableColumnModel objectColumnModel = objectTablePanel.getColumnModel();
+        objectTablePanel.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        int objectColumnIndex = 0; // 你需要调整的列的索引
+        int objectNewWidth = 300; // 你想要设置的新宽度
+        objectColumnModel.getColumn(objectColumnIndex).setPreferredWidth(objectNewWidth);
+
         JScrollPane objectScrollPane = new JScrollPane(objectTablePanel);
         objectScrollPane.setPreferredSize(new Dimension(150, panel.getHeight())); // 调整宽度
         objectScrollPane.setOpaque(false);
