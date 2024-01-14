@@ -56,7 +56,7 @@ public class ChatInfo {
             ret.add(lhs.getUsername());
         }
         else {
-            ret.add(lhs.getUsername());
+            ret.add(rhs.getUsername());
             ret.add(content);
             ret.add("");
         }
