@@ -20,9 +20,6 @@ public class ManageCommodity {
      */
     public class AddCommodityPanel extends JPanel {
 
-        // 标签
-
-        private JLabel jLabel_s = new JLabel("请选择查询方式：");
         // 文本框
         private JTextField field_s = new JTextField(25);
         // 大小
@@ -74,8 +71,10 @@ public class ManageCommodity {
             // 创建表格
             table = new JTable(tableModel);
             // 创建表格模型
+
             JScrollPane scrollPane = new JScrollPane(table);
-            scrollPane.setBounds(500, 200, 900, 450);
+            if (APIUtils.isAdmin()) scrollPane.setBounds(500, 200, 900, 450);
+            else scrollPane.setBounds(300,200,900,450);
 
             // 设置表格属性
             table.setOpaque(false);
@@ -182,29 +181,27 @@ public class ManageCommodity {
 
                 jLabel7.setFont(font2);
                 jLabel7.setBounds(125, 400, 250, 30);
-            }
             // 下拉框
-            box_s.setSize(dimension_s);
-            box_s.addItem("查找所有商品");
-            box_s.addItem("按照商品名查找");
-            box_s.addItem("按照厂商查找");
-            box_s.addItem("按照类别查找");
-            box_s.addItem("按照状态查找");
-            box_s.setFont(font_s);
-            box_s.setBounds(550, 155, 200, 40);
-            box_s.setOpaque(false);
+                box_s.setSize(dimension_s);
+                box_s.addItem("查找所有商品");
+                box_s.addItem("按照商品名查找");
+                box_s.addItem("按照厂商查找");
+                box_s.addItem("按照类别查找");
+                box_s.addItem("按照状态查找");
+                box_s.setFont(font_s);
+                box_s.setBounds(550, 155, 200, 40);
+                box_s.setOpaque(false);
 
-            field_s.setFont(font3);
-            field_s.setBounds(800, 155, 250, 40);
-            field_s.setOpaque(false);
+                field_s.setFont(font3);
+                field_s.setBounds(800, 155, 250, 40);
+                field_s.setOpaque(false);
 
-            button_s.setFont(font2);
-            button_s.setBounds(1100, 155, 100, 40);
-//            button_s.setForeground(Color.BLACK);
-//            button_s.setBackground(color);
-            button_s.setOpaque(false);
+                button_s.setFont(font2);
+                button_s.setBounds(1100, 155, 100, 40);
+    //            button_s.setForeground(Color.BLACK);
+    //            button_s.setBackground(color);
+                button_s.setOpaque(false);
 
-            if (APIUtils.isAdmin()) {
                 field4.setFont(font3);
                 field4.setBounds(245, 200, 200, 30);
                 field4.setOpaque(false);
@@ -251,9 +248,30 @@ public class ManageCommodity {
                 add(box);
                 add(button);
             }
-            add(box_s);
-            add(field_s);
-            add(button_s);
+            else {
+                box_s.setSize(dimension_s);
+                box_s.addItem("查找所有商品");
+                box_s.addItem("按照商品名查找");
+                box_s.addItem("按照厂商查找");
+                box_s.addItem("按照类别查找");
+                box_s.addItem("按照状态查找");
+                box_s.setFont(font_s);
+                box_s.setBounds(350, 155, 200, 40);
+                box_s.setOpaque(false);
+
+                field_s.setFont(font3);
+                field_s.setBounds(600, 155, 250, 40);
+                field_s.setOpaque(false);
+
+                button_s.setFont(font2);
+                button_s.setBounds(900, 155, 100, 40);
+//            button_s.setForeground(Color.BLACK);
+//            button_s.setBackground(color);
+                button_s.setOpaque(false);
+                add(box_s);
+                add(field_s);
+                add(button_s);
+            }
         }
     }
 
