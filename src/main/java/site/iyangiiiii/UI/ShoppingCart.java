@@ -99,6 +99,7 @@ public class ShoppingCart extends JPanel {
                     total += (double) cartTableModel.getValueAt(i, 1);
                 }
                 showConfirmationDialog(total);
+                updateTotalPrice();
             }
         });
 
@@ -169,6 +170,7 @@ public class ShoppingCart extends JPanel {
                 Goods goods = GoodsService.findGoodsByName(goodsName);
                 goodsList.add(goods);
             }
+
             if(APIUtils.addOrder("未发货", goodsList) == 0) {
                 updateTotalPrice(); // 更新总价格显示
                 cartTableModel.setRowCount(0);
