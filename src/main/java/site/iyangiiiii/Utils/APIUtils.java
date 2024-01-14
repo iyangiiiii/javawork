@@ -1,5 +1,7 @@
 package site.iyangiiiii.Utils;
 
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.stereotype.Service;
 import site.iyangiiiii.API.CaptchaAPI;
 import site.iyangiiiii.Bean.ChatInfo;
 import site.iyangiiiii.Bean.RankingInfo;
@@ -14,8 +16,19 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+@Service
 public class APIUtils {
     protected static Logger logger = Logger.getLogger("APIUtils");
+    protected static APIUtils apiUtils;
+    APIUtils() {
+        AsyncInit(null);
+        apiUtils = this;
+    }
+    @Async
+    public void AsyncInit(Object args) {
+        getCachedRanking();
+    }
+
     /**
      * 获取验证码图案
      * @return 成功返回 验证码图案, 否则返回null
@@ -219,6 +232,7 @@ public class APIUtils {
                 return null;
         }
     }
+
     /**
      * 获取排行榜的数据
      * 有若干条数据, 每一条数据格式如下:
@@ -226,6 +240,17 @@ public class APIUtils {
      * @return 成功返回数据, 否则返回null
      */
     public static Object[][] getRanking() {
+        while (Global.cachedRanking == null);
+        return Global.cachedRanking;
+    }
+
+    /**
+     * 获取排行榜的数据
+     * 有若干条数据, 每一条数据格式如下:
+     * 商品id, 商品名, 销量, 好评率, 价格
+     * @return 成功返回数据, 否则返回null
+     */
+    public static Object[][] getCachedRanking() {
         List<RankingInfo> temp = new ArrayList<>();
         List<Vector<String>> ret = new ArrayList<>();
         List<Goods> goodsList = GoodsService.getAllSoldGoods();
@@ -267,7 +292,7 @@ public class APIUtils {
 
         for(RankingInfo rankingInfo: temp) ret.add(rankingInfo.toVector());
 
-         return DataUtils.convertListVectorToObjectArray(ret);
+        return Global.cachedRanking = DataUtils.convertListVectorToObjectArray(ret);
     }
     /**
      * 订单展示 展示所有订单 内容为 编号 商品名 时间 状态

@@ -83,7 +83,8 @@ public class ChatService {
      */
     public static int addChat(int other, String content) {
         try {
-            User lhs = Global.curUser, rhs = chatService.userRepository.findUserByUid(other);
+            User lhs = Global.curUser, rhs = new User();
+            rhs.setUid(other);
             Chat chat = new Chat(lhs, rhs, content);
             chat = chatService.chatRepository.save(chat);
             return chat.getCid();

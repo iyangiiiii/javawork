@@ -158,6 +158,7 @@ public class ChatFrame {
                             if(is_ok) {
                                 tp.add(value);
                                 tableModel.addRow(tp);
+                                tableModel.setValueAt("",0,0);
                             }
                         }
                     }
@@ -173,7 +174,7 @@ public class ChatFrame {
         objectTablePanel.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
-                if (!e.getValueIsAdjusting()) {
+                if (e.getValueIsAdjusting()) {
                     int selectedRow = objectTablePanel.getSelectedRow();
                     int selectedColumn = objectTablePanel.getSelectedColumn();
 

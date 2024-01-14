@@ -76,7 +76,8 @@ public class OrderService {
      */
     public static List<Order> findOrderByGid(int gid) {
         try {
-            Goods goods = orderService.goodsRepository.findGoodsByGid(gid);
+            Goods goods = new Goods();
+            goods.setGid(gid);
             List<OrderGoods> orderGoodsList = orderService.orderGoodsRepository.findOrderGoodsByGoods(goods);
             List<Order> ret = new ArrayList<>();
             for(OrderGoods orderGoods: orderGoodsList) {
@@ -175,7 +176,8 @@ public class OrderService {
      */
     public static List<Order> findAllOrdersContainsGoods(int gid) {
         try {
-            Goods goods = orderService.goodsRepository.findGoodsByGid(gid);
+            Goods goods = new Goods();
+            goods.setGid(gid);
             List<OrderGoods> res = orderService.orderGoodsRepository.findOrderGoodsByGoods(goods);
             List<Order> ret = new ArrayList<>();
             for(OrderGoods orderGoods : res) ret.add(orderGoods.getOrders());

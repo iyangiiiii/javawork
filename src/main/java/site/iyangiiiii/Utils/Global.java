@@ -5,6 +5,8 @@ import site.iyangiiiii.Entities.User;
 import java.nio.file.Paths;
 
 public class Global {
+    public static Object[][] cachedRanking = null;
+
     public static User curUser = null;
 
     public static String RESOURCES_PATH = getAbsolutePath("src/main/resources/");
